@@ -1,0 +1,97 @@
+mat-form-field {
+  margin-right: 1rem;
+  width: 18rem;
+}
+
+mat-card {
+  background-color: white;
+}
+
+mat-card-header {
+  margin-bottom: 1rem;
+}
+
+.container {
+  display: flex;
+  padding: 20px;
+  background-color: #f7f7f6;
+}
+
+.left {
+  display: flex;
+  flex-direction: column;
+  flex: 1.5;
+  padding-right: 20px;
+}
+
+.right {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.left-margin-1 {
+  margin-left: 1rem;
+}
+
+.input-card {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.row {
+  display: flex;
+}
+
+.calculated-text-color {
+  color: blue !important;
+}
+
+.button-color {
+  background-color: #d6a846 !important;
+}
+
+.spacing-field-half {
+  display: flex;
+  flex: 0.5;
+}
+
+.spacing-field-one {
+  display: flex;
+  flex: 1;
+}
+
+.figures-card {
+  flex: 1;
+  margin-top: 3rem;
+}
+
+.button-wrapper {
+  display: flex;
+  margin: 1rem;
+}
+
+
+.grid-container {
+  display: grid;
+  grid-template-columns: 300px 1fr; // Fixed width for first column, flexible for second column
+  gap: 15px; // Space between the grid items
+  align-items: center; // Vertically center align the items within the grid cells
+  margin-bottom: 3rem;
+  font-size: 1rem;
+}
+
+.figure-title {
+  margin-bottom: 2rem;
+  font-weight: 400;
+}
+
+.highlighted-profit {
+  color: green;
+  font-weight: bold;
+}
+
+.highlighted-cash-left-in {
+  color: rgb(221, 148, 46);
+  font-weight: bold;
+}

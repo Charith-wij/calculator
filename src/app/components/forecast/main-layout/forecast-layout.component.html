@@ -1,0 +1,16 @@
+<div class="main-layout">
+    <button mat-raised-button (click)="openAddAssetDialog()">Add Asset</button>
+    <div class="columns-container">
+        <div class="left-column">
+            <div class="grid-container">
+                <app-asset-grid [dataSource]="assets"></app-asset-grid>
+            </div>
+            <div class="asset-groups-container">
+                <app-asset-groups [currentGroupsAssets]="assets"></app-asset-groups>
+            </div>
+        </div>
+        <div class="right-column">
+            <app-summary-details></app-summary-details>
+        </div>
+    </div>
+</div>

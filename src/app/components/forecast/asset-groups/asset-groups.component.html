@@ -1,0 +1,16 @@
+<mat-form-field>
+    <mat-label>Save with name</mat-label>
+    <input matInput [formControl]="saveNameControl" #saveName>
+</mat-form-field>
+<button mat-raised-button class="margin-bottom" (click)="saveData(saveName.value)">Save</button>
+
+<mat-list>
+    <h3 mat-subheader>Saved Asset Groups</h3>
+    <mat-divider></mat-divider>
+    <mat-list-item *ngFor="let name of savedStateNames; let i = index" (click)="loadData(name)" class="clickable-item">
+        <span>{{i + 1}}. {{ name }}</span>
+        <button mat-icon-button matSuffix (click)="removeGroup(name)">
+            <mat-icon>delete</mat-icon>
+          </button>
+    </mat-list-item>
+</mat-list>

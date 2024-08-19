@@ -1,0 +1,59 @@
+<h2 mat-dialog-title>Add Asset</h2>
+<mat-dialog-content [formGroup]="assetForm" class="dialog-content">
+    <mat-form-field>
+        <mat-label>Planned Deal Completion Date</mat-label>
+        <input matInput [matDatepicker]="picker" formControlName="completionDate">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>Asset Type</mat-label>
+        <mat-select formControlName="assetType" (selectionChange)="onAssetTypeChange($event)">
+            <mat-option value="flip">FLIP</mat-option>
+            <mat-option value="btl">BTL</mat-option>
+            <mat-option value="hmo">HMO</mat-option>
+        </mat-select>
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>Purchase Price</mat-label>
+        <input matInput formControlName="purchasePrice">
+    </mat-form-field>
+
+    <mat-form-field>
+        <mat-label>End Value</mat-label>
+        <input matInput formControlName="propertyValue">
+    </mat-form-field>
+
+    <div *ngIf="assetType === 'flip'">
+        <mat-form-field>
+            <mat-label>Profit From Deal</mat-label>
+            <input matInput formControlName="profitAtExit">
+        </mat-form-field>
+    </div>
+
+    <div *ngIf="assetType === 'btl' || assetType === 'hmo'">
+        <mat-form-field>
+            <mat-label>Rental Profit PCM</mat-label>
+            <input matInput formControlName="cashflowPerMonth">
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Mortgage</mat-label>
+            <input matInput formControlName="mortgage">
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Equity</mat-label>
+            <input matInput formControlName="equity">
+        </mat-form-field>
+        <mat-form-field>
+            <mat-label>Cash Left In The Deal</mat-label>
+            <input matInput formControlName="cashLeftIn">
+        </mat-form-field>
+    </div>
+
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-button (click)="onNoClick()">Cancel</button>
+    <button mat-button (click)="onAddClick()" [mat-dialog-close]="assetForm.value" [disabled]="!assetForm.valid">Add</button>
+</mat-dialog-actions>

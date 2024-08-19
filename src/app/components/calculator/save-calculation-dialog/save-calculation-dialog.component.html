@@ -1,0 +1,27 @@
+<h2 mat-dialog-title>Save Calculation</h2>
+<mat-dialog-content [formGroup]="saveCalculationForm" class="dialog-content">
+    <mat-form-field>
+        <mat-label>Address</mat-label>
+        <input matInput formControlName="address">
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Guide Price</mat-label>
+        <input matInput formControlName="guidePrice">
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Rightmove Link</mat-label>
+        <input matInput formControlName="rightmoveLink">
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Auction Site Link</mat-label>
+        <input matInput formControlName="auctionSiteLink">
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Notes</mat-label>
+        <textarea matInput formControlName="notes"></textarea>
+    </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-button (click)="onNoClick()">Cancel</button>
+    <button mat-button (click)="onSaveClick()" [mat-dialog-close]="saveCalculationForm.value" [disabled]="!saveCalculationForm.valid">Save</button>
+</mat-dialog-actions>

@@ -1,0 +1,18 @@
+.clickable-item {
+    display: flex;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.clickable-item:hover {
+    background-color: rgba(0, 0, 0, 0.04);
+    cursor: pointer;
+}
+
+mat-form-field {
+    margin-right: 1rem;
+}
+
+.margin-bottom {
+    margin-bottom: 1rem;
+}

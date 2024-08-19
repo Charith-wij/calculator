@@ -1,0 +1,27 @@
+.main-layout {
+    padding: 20px;
+}
+
+.columns-container {
+    display: flex;
+    margin-top: 1rem;
+}
+
+.left-column {
+    display: flex;
+    flex-direction: column;
+    flex: 3;
+    padding-right: 20px;
+}
+
+.right-column {
+    flex: 1;
+}
+
+.grid-container {
+    flex: 0 0 80%; /* Takes up 80% of the container's height */
+}
+
+.asset-groups-container {
+    flex: 0 0 20%; /* Takes up 20% of the container's height */
+}

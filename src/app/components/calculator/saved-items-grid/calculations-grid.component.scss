@@ -1,0 +1,13 @@
+.container {
+    display: flex;
+    padding: 1rem;
+    background-color: #f7f7f6;
+}
+
+.hover-row {
+    cursor: pointer;
+  
+    &:hover {
+      background-color: #f7f7f6;
+    }
+  }

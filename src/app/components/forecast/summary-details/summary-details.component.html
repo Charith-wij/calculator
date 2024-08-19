@@ -1,0 +1,28 @@
+<div class="input-field">
+    <mat-form-field>
+        <mat-label>Initial Bank Balance</mat-label>
+        <input matInput [formControl]="bankBalanceControl" />
+    </mat-form-field>
+</div>
+<div class="input-field">
+    <mat-form-field>
+        <mat-label>Initial Monthly Cashflow</mat-label>
+        <input matInput [formControl]="cashflowControl" />
+    </mat-form-field>
+</div>
+<div class="stat">
+    <div class="label">Bank Balance</div>
+    <div class="value">{{ stateService.getBankBalance() | async | currency: 'GBP'}}</div>
+</div>
+<div class="stat">
+    <div class="label">Monthly Cashflow</div>
+    <div class="value">{{ stateService.getCashflow() | async | currency: 'GBP'}}</div>
+</div>
+<div class="stat grey">
+    <div class="label">Total Equity</div>
+    <div class="value">{{ stateService.getEquity() | async | currency: 'GBP'}}</div>
+</div>
+<div class="stat grey">
+    <div class="label">Total Mortgage</div>
+    <div class="value">{{ stateService.getMortgage() | async | currency: 'GBP'}}</div>
+</div>
