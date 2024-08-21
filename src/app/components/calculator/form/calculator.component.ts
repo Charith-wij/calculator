@@ -42,6 +42,13 @@ export class CalculatorComponent implements OnInit, OnDestroy {
           this.propertyAddress = formData.metaData.address;
         }
       }));
+      this.subscriptions.add(
+        this.propertyForm.statusChanges.subscribe((status: string) => {
+          if (status === 'VALID') {
+            this.calculateFigures();
+          }  
+        })
+      );
     // this.floorAreaService.getFloorArea('le9 8fe', '15', 'byron street').subscribe(data => console.log(data));
   }
 
