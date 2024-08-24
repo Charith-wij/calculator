@@ -209,71 +209,102 @@
                         </div>
                     </div>
                 </mat-card-content>
-                <div class="button-wrapper">
-                    <button mat-raised-button class="button-color" type="submit" [disabled]="propertyForm.invalid">CALCULATE</button>
-                    <button mat-raised-button class="button-color left-margin-1" (click)="saveCalculation()">SAVE CALCULATION</button>
-                </div>
+               
             </mat-card>
         </div>
 
         <!-- Calculation Results -->
         <div class="right">
-            <ng-container *ngIf="calculatorStateModel?.calculatedResultFigures as results">
-                <mat-card class="input-card figures-card">
+            <mat-card class="input-card figures-card">
+                <ng-container *ngIf="propertyForm.invalid">
                     <mat-card-content>
-                        <mat-card-title class="figure-title">Exit Option - BTL</mat-card-title>
-                        <div class="grid-container">
-                            <div class="">Total Investment Costs:</div>
-                            <div class="">{{ results.exitOptionBTL.totalInvestmentCosts | currency: 'GBP'}}</div>
-
-                            <div class="">Monthly Cashflow:</div>
-                            <div class="">{{ results.exitOptionBTL.monthlyCashflow | currency: 'GBP'}}</div>
-
-                            <div class="">Gross Yield: </div>
-                            <div class="">{{ results.exitOptionBTL.grossYield}}%</div>
-
-                            <div class=""> Net Yield:</div>
-                            <div class="">{{ results.exitOptionBTL.netYield }}%</div>
-
-                            <div class="">Return On Investment:</div>
-                            <div class="">{{ results.exitOptionBTL.returnOnInvestment }}%</div>
-                        </div>
-
-                        <mat-card-title class="figure-title">Exit Option - BRR Refinance</mat-card-title>
-                        <div class="grid-container">
-                            <div class="">Refinanced Monthly Cashflow:</div>
-                            <div class="">{{ results.exitOptionBRR.refinancedMonthlyCashflow | currency: 'GBP'}}</div>
-
-                            <div class="">Cash Out From Refinancing:</div>
-                            <div class="">{{ results.exitOptionBRR.cashOutFromRefinancing | currency: 'GBP'}}</div>
-
-                            <div class="highlighted-cash-left-in">Money Left In Deal: </div>
-                            <div class="highlighted-cash-left-in">{{ results.exitOptionBRR.moneyLeftInDeal | currency: 'GBP'}}</div>
-
-                            <div class=""> Months Before No Money Left In:</div>
-                            <div class="">{{ results.exitOptionBRR.monthsBeforeNoMoneyLeft }}</div>
-
-                            <div class="">Return On Investment:</div>
-                            <div class="">{{ results.exitOptionBRR.returnOnInvestment }}%</div>
-                        </div>
-
-                        <mat-card-title class="figure-title">Exit Option - BTS</mat-card-title>
-                        <div class="grid-container">
-                            <div class="">Total Investment Costs:</div>
-                            <div class="">{{ results.exitOptionBTS.totalInvestmentCosts | currency: 'GBP'}}</div>
-
-                            <div class="">Total Selling Costs:</div>
-                            <div class="">{{ results.exitOptionBTS.totalSellingCosts | currency: 'GBP'}}</div>
-
-                            <div class="highlighted-profit">Profit From Deal: </div>
-                            <div class="highlighted-profit">{{ results.exitOptionBTS.profitFromDeal | currency: 'GBP'}}</div>
-
-                            <div class=""> Return On Investment:</div>
-                            <div class="">{{ results.exitOptionBTS.returnOnInvestment }}%</div>
-                        </div>
+                        Fill in the details to see the figures..
                     </mat-card-content>
-                </mat-card>
-            </ng-container>
+                </ng-container>
+                <ng-container *ngIf="calculatorStateModel?.calculatedResultFigures as results">
+                    <ng-container *ngIf="propertyForm.valid">
+                        <mat-card-content>
+                            <mat-card-title class="figure-title">Exit Option - BTL</mat-card-title>
+                            <div class="grid-container">
+                                <div>Total Investment Costs:</div>
+                                <div>{{ results.exitOptionBTL.totalInvestmentCosts | currency: 'GBP'}}</div>
+        
+                                <div>Monthly Cashflow:</div>
+                                <div>{{ results.exitOptionBTL.monthlyCashflow | currency: 'GBP'}}</div>
+        
+                                <div>Gross Yield: </div>
+                                <div>{{ results.exitOptionBTL.grossYield}}%</div>
+        
+                                <div> Net Yield:</div>
+                                <div>{{ results.exitOptionBTL.netYield }}%</div>
+        
+                                <div>Return On Investment:</div>
+                                <div>{{ results.exitOptionBTL.returnOnInvestment }}%</div>
+                            </div>
+        
+                            <mat-card-title class="figure-title">Exit Option - BRR Refinance</mat-card-title>
+                            <div class="grid-container">
+                                <div>Refinanced Monthly Cashflow:</div>
+                                <div>{{ results.exitOptionBRR.refinancedMonthlyCashflow | currency: 'GBP'}}</div>
+        
+                                <div>Cash Out From Refinancing:</div>
+                                <div>{{ results.exitOptionBRR.cashOutFromRefinancing | currency: 'GBP'}}</div>
+        
+                                <div class="highlighted-cash-left-in">Money Left In Deal: </div>
+                                <div class="highlighted-cash-left-in">{{ results.exitOptionBRR.moneyLeftInDeal | currency:
+                                    'GBP'}}</div>
+        
+                                <div> Months Before No Money Left In:</div>
+                                <div>{{ results.exitOptionBRR.monthsBeforeNoMoneyLeft }}</div>
+        
+                                <div>Return On Investment:</div>
+                                <div>{{ results.exitOptionBRR.returnOnInvestment }}%</div>
+                            </div>
+        
+                            <mat-card-title class="figure-title">Exit Option - BTS</mat-card-title>
+                            <div class="grid-container">
+                                <div>Total Investment Costs:</div>
+                                <div>{{ results.exitOptionBTS.totalInvestmentCosts | currency: 'GBP'}}</div>
+        
+                                <div>Total Selling Costs:</div>
+                                <div>{{ results.exitOptionBTS.totalSellingCosts | currency: 'GBP'}}</div>
+        
+                                <div class="highlighted-profit">Profit From Deal: </div>
+                                <div class="highlighted-profit">{{ results.exitOptionBTS.profitFromDeal | currency: 'GBP'}}
+                                </div>
+        
+                                <div> Return On Investment:</div>
+                                <div>{{ results.exitOptionBTS.returnOnInvestment }}%</div>
+                            </div>
+                        </mat-card-content>
+                    </ng-container>
+                </ng-container>
+                <hr>
+                <ng-container *ngIf="calculatorStateModel?.currentCalculatorFormData?.metaData as metaData">
+                    <div class="meta-data-grid">
+                        <div>Guide Price</div>
+                        <div>
+                            {{metaData.guidePrice}}
+                        </div>
+                        <div>Rightmove Link</div>
+                        <div>
+                            <a [href]="metaData.rightmoveLink" target="_blank">{{metaData.rightmoveLink}}</a>
+                        </div>
+                        <div>Auction Link</div>
+                        <div>
+                            <a [href]="metaData.auctionSiteLink" target="_blank">{{metaData.auctionSiteLink}}</a>
+                        </div>
+                        <div>Notes</div>
+                        <div>
+                            {{metaData.notes}}
+                        </div>
+                    </div>
+                </ng-container>
+
+                <div class="button-wrapper">
+                    <button mat-raised-button class="button-color left-margin-1" (click)="saveCalculation()">SAVE CALCULATION</button>
+                </div>
+            </mat-card>
         </div>
     </div>
 </form>

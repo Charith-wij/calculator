@@ -236,8 +236,8 @@ export class CalculatorComponent implements OnInit, OnDestroy {
         refinancedMonthlyCashflow: Number(refinancingCashflow.toFixed(2)),
         cashOutFromRefinancing: Number(cashOutFromRefinancing.toFixed(2)),
         moneyLeftInDeal: Number(moneyLeftInDeal.toFixed(2)),
-        monthsBeforeNoMoneyLeft: Number(Number(monthsBeforeNoMoneyLeft).toFixed(1)),
-        returnOnInvestment: Number(Number(returnOnInvestment).toFixed(2))
+        monthsBeforeNoMoneyLeft: !Number.isNaN(Number(monthsBeforeNoMoneyLeft)) ? Number(Number(monthsBeforeNoMoneyLeft).toFixed(1)) : monthsBeforeNoMoneyLeft,
+        returnOnInvestment: !Number.isNaN(Number(returnOnInvestment)) ? Number(Number(returnOnInvestment).toFixed(2)) : returnOnInvestment
       },
       exitOptionBTS: {
         totalInvestmentCosts: Number(totalInvestmentCosts.toFixed(2)),
