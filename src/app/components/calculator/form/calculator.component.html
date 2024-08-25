@@ -9,7 +9,7 @@
                 </mat-card-header>
                 <mat-card-content>
                     <div formGroupName="purchaseInformation">
-                        <div class="row">
+                        <div class="field-row">
                             <mat-form-field appearance="fill">
                                 <mat-label>Purchase Price</mat-label>
                                 <input matInput formControlName="purchasePrice" type="number" required>
@@ -26,7 +26,7 @@
                             </mat-form-field>
                         </div>
                         <!-- <div class="row "> Calculated </div> -->
-                        <div class="row">
+                        <div class="field-row">
                             <mat-form-field appearance="fill">
                                 <mat-label class="calculated-text-color">Stamp Duty (BTL Res rate)</mat-label>
                                 <input class="calculated-text-color" matInput readonly="true"
@@ -44,7 +44,7 @@
                 </mat-card-header>
                 <mat-card-content>
                     <div formGroupName="borrowingInformation">
-                        <div class="row">
+                        <div class="field-row">
                             <mat-form-field appearance="fill">
                                 <mat-label>Deposit (%)</mat-label>
                                 <input matInput formControlName="depositPercentage" type="number" required>
@@ -63,8 +63,8 @@
                                 <input matInput formControlName="mortgageInterestRate" type="number" required>
                             </mat-form-field>
                         </div>
-                        <!-- <div class="row"> Calculated </div> -->
-                        <div class="row">
+                        <!-- <div class="field-row"> Calculated </div> -->
+                        <div class="field-row">
                             <mat-form-field appearance="fill">
                                 <mat-label class="calculated-text-color">Mortgage (%)</mat-label>
                                 <input class="calculated-text-color" matInput readonly="true"
@@ -102,7 +102,7 @@
                 </mat-card-header>
                 <mat-card-content>
                     <div formGroupName="BTLInformation">
-                        <div class="row">
+                        <div class="field-row">
                             <mat-form-field appearance="fill">
                                 <mat-label>Monthly Rent</mat-label>
                                 <input matInput formControlName="monthlyRent" type="number" required>
@@ -116,8 +116,8 @@
                                 <input matInput formControlName="monthlyRunningCosts" type="number" required>
                             </mat-form-field>
                         </div>
-                        <!-- <div class="row">Clculated</div> -->
-                        <div class="row">
+                        <!-- <div class="field-row">Clculated</div> -->
+                        <div class="field-row">
                             <mat-form-field appearance="fill">
                                 <mat-label class="calculated-text-color">Letting Agents Fee Amount</mat-label>
                                 <input class="calculated-text-color" matInput readonly="true"
@@ -135,7 +135,7 @@
                 </mat-card-header>
                 <mat-card-content>
                     <div formGroupName="BRRInformation">
-                        <div class="row">
+                        <div class="field-row">
                             <mat-form-field>
                                 <mat-label>New Market Value</mat-label>
                                 <input matInput formControlName="newMarketValue" type="number" required>
@@ -153,8 +153,8 @@
                                 <input matInput formControlName="refinancingInterestRate" type="number" required>
                             </mat-form-field>
                         </div>
-                        <!-- <div class="row"> Calculated</div> -->
-                        <div class="row">
+                        <!-- <div class="field-row"> Calculated</div> -->
+                        <div class="field-row">
                             <mat-form-field>
                                 <mat-label class="calculated-text-color">Refinanced LTV Amount</mat-label>
                                 <input class="calculated-text-color" matInput readonly="true"
@@ -183,7 +183,7 @@
                 </mat-card-header>
                 <mat-card-content>
                     <div formGroupName="BTSInformation">
-                        <div class="row">
+                        <div class="field-row">
                             <mat-form-field>
                                 <mat-label>Sale Price</mat-label>
                                 <!-- <span matPrefix>£</span> -->
@@ -199,8 +199,8 @@
                                 <input matInput formControlName="estateAgentFee" type="number" required>
                             </mat-form-field>
                         </div>
-                        <!-- <div class="row"> Calculated</div> -->
-                        <div class="row">
+                        <!-- <div class="field-row"> Calculated</div> -->
+                        <div class="field-row">
                             <mat-form-field>
                                 <mat-label class="calculated-text-color">Estate Agent Fee Amount</mat-label>
                                 <input class="calculated-text-color" matInput readonly="true"
