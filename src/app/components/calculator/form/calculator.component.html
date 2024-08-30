@@ -1,6 +1,6 @@
 <form [formGroup]="propertyForm" (ngSubmit)="calculateFigures()">
-    <div class="calculator-container">
-        <div class="left">
+    <div class="calculator-container row">
+        <div class="col-8 left">
             <h2> Property : {{propertyAddress}}</h2>
             <!-- Purchase Information Card -->
             <mat-card class="input-card">
@@ -214,7 +214,7 @@
         </div>
 
         <!-- Calculation Results -->
-        <div class="right">
+        <div class="col-4 right">
             <mat-card class="input-card figures-card">
                 <ng-container *ngIf="propertyForm.invalid">
                     <mat-card-content>
