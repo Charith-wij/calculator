@@ -258,8 +258,8 @@ export class CalculatorComponent implements OnInit, OnDestroy {
     this.subscriptions.add(dialogRef.afterClosed().subscribe(result => {
       if (result) {
         savedFigureItem.formData.metaData = result;
-        this.calculatorStateService.saveCalculation(savedFigureItem);
         this.localStorageService.saveItem('savedCalculations', savedFigureItem);
+        this.calculatorStateService.saveCalculation(savedFigureItem);
         this.propertyForm.reset();
       }
     }));

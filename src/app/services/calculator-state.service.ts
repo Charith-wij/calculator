@@ -15,10 +15,6 @@ export class CalculatorStateService {
   
   constructor(private store: Store, private readonly localStorageService: LocalStorageService) {}
 
-  // initialiseState() {
-  //   this.localStorageService.
-  // }
-
   // Method to set the property form
   setPropertyForm(propertyForm: CalculatorForm) {
     this.store.dispatch(new SetPropertyForm(propertyForm));
@@ -54,6 +50,4 @@ export class CalculatorStateService {
   getSavedCalculationByAddress(address: string): SavedFiguresItem | null {
     return this.store.selectSnapshot(CalculatorState.getSavedCalculationByAddress(address));
   }
-
-  
 }

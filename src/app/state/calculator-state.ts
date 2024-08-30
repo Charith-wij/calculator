@@ -57,9 +57,19 @@ export class CalculatorState {
   @Action(SaveCalculation)
   saveCalculation(ctx: StateContext<CalculatorStateModel>, action: SaveCalculation) {
     const state = ctx.getState();
+    const index = state.savedCalculationsList.findIndex(item => item.formData.metaData.address.toLowerCase() === action.payload.formData.metaData.address.toLowerCase());
+    let newSavedCalculationsList = state.savedCalculationsList;
+
+    if (index !== -1) {
+      // Item with the same id exists, replace it
+      newSavedCalculationsList[index] = action.payload;
+    } else {
+      // Item doesn't exist, push it to the array
+      newSavedCalculationsList = [...newSavedCalculationsList, action.payload];
+    }
     ctx.setState({
       ...state,
-      savedCalculationsList: [...state.savedCalculationsList, action.payload]
+      savedCalculationsList: newSavedCalculationsList
     });
   }
 

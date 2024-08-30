@@ -17,8 +17,12 @@ export class LocalStorageService {
     // Check if item already exists, if not, add it
     if (!this.isDuplicate(existingItems, value)) {
       existingItems.push(value);
-      localStorage.setItem(key, JSON.stringify(existingItems));
     }
+    else {
+      const index = existingItems.findIndex(item => item.formData.metaData.address.toLowerCase() === value.formData.metaData.address.toLowerCase());
+      existingItems[index] = value;
+    }
+    localStorage.setItem(key, JSON.stringify(existingItems));
   }
 
   // Function to retrieve items from local storage
@@ -43,7 +47,7 @@ export class LocalStorageService {
 
   // Function to check for duplicates
   private isDuplicate(existingItems: any[], value: any): boolean {
-    return existingItems.some(item => item === value);
+    return existingItems.some(item => item.formData.metaData.address?.toLowerCase() === value.formData.metaData.address?.toLowerCase());
   }
 
 }
