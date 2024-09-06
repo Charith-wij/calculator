@@ -1,10 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
-
-import { CalculatorForm, MetaData } from '../../../models/calculator/calculator-form.model';
-import { CalculatorStateService } from '../../../services/calculator-state.service';
 import { Subscription } from 'rxjs';
+import { Store } from '@ngxs/store';
+
+import { MetaData } from '../../../models/calculator/calculator-form.model';
+import { CalculatorState } from '../../../state/calculator-state';
 
 @Component({
   selector: 'app-save-calculation-dialog',
@@ -17,7 +18,7 @@ export class SaveCalculationDialogComponent implements OnInit, OnDestroy {
 
   constructor(public dialogRef: MatDialogRef<SaveCalculationDialogComponent>,
     private fb: FormBuilder,
-    private readonly calculatorStateService: CalculatorStateService) {
+    private store: Store) {
       this.saveCalculationForm = this.fb.group({
         address: ['', Validators.required],
         guidePrice: ['', Validators.required],
@@ -32,8 +33,9 @@ export class SaveCalculationDialogComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.subscriptions.add(this.calculatorStateService.getCurrentPropertyForm()
-      .subscribe((formData: CalculatorForm)=> {
+    this.subscriptions.add(this.store.select(CalculatorState.getActiveItem)
+      .subscribe((savedItem) => {
+        const formData = savedItem?.formData;
         if (typeof formData === 'object' && Object.keys(formData).length > 0) {
           this.saveCalculationForm.setValue(formData.metaData);
         }

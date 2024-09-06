@@ -1,6 +1,6 @@
 import { CalculatedFigures, CalculatorForm } from "./calculator-form.model";
 
-export interface SavedFiguresItem {
+export interface SavedItem {
     formData: CalculatorForm;
-    calculatdFigures: CalculatedFigures;
+    figures: CalculatedFigures;
 }

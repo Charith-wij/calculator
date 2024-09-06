@@ -1,84 +1,94 @@
 import { State, Action, StateContext, Selector } from '@ngxs/store';
 
-import { CalculatedFigures, CalculatorForm } from '../models/calculator/calculator-form.model';
 import { CalculatorStateModel } from '../models/calculator/calculator-state.model';
-import { CalculateFigures, SaveCalculation, SetPropertyForm, SetSavedCalculations } from '../actions/calculator.actions';
-import { SavedFiguresItem } from '../models/calculator/saved-figures-item.model';
+import { LoadItem, LoadSavedItemsFromLocalStorage, SaveItem } from '../actions/calculator.actions';
+import { SavedItem } from '../models/calculator/saved-figures-item.model';
+import { LocalStorageService } from '../services/local-storage-service';
+import { Injectable } from '@angular/core';
 
+@Injectable()
 @State<CalculatorStateModel>({
   name: 'calculator',
   defaults: {
-    currentCalculatorFormData: {} as CalculatorForm, // TODO - I think we just need the activeSavedItemId
-    calculatedResultFigures: {} as CalculatedFigures, // TODO - Check if we need this, we might just need the saved items list and the activeId
-    savedCalculationsList: [] as SavedFiguresItem[]
+    activeItemId: null,
+    savedItems: []
   }
 })
 export class CalculatorState {
 
-  @Selector()
-  static getPropertyForm(state: CalculatorStateModel) {
-    return state.currentCalculatorFormData;
+  constructor(private readonly localstorageService: LocalStorageService) {
   }
 
   @Selector()
-  static getCalculatedFigures(state: CalculatorStateModel) {
-    return state.calculatedResultFigures;
+  static getSavedItems(state: CalculatorStateModel) {
+    return state.savedItems;
   }
 
   @Selector()
-  static getSavedCalculations(state: CalculatorStateModel) {
-    return state.savedCalculationsList;
+  static getActiveItem(state: CalculatorStateModel) {
+    return state.savedItems.find(item => item.formData.metaData.address.toLowerCase() === state.activeItemId?.toLowerCase());
   }
 
-  static getSavedCalculationByAddress(address: string): (state: CalculatorStateModel) => SavedFiguresItem | null {
-    return (state: any) => {
-      return state.calculator.savedCalculationsList.find((item: SavedFiguresItem) => item.formData.metaData?.address === address) || null;
+  @Action(SaveItem)
+  saveItem(ctx: StateContext<CalculatorStateModel>, action: SaveItem) {
+    const state = ctx.getState();
+    const newItem: SavedItem = {
+      formData: action.payload.formData,
+      figures: action.payload.figures,
     };
-  }
 
-  @Action(SetSavedCalculations)
-  setSavedCalculations(ctx: StateContext<CalculatorStateModel>, action: SetSavedCalculations) {
-    const state = ctx.getState();
-    ctx.setState({
-      ...state,
-      savedCalculationsList: action.payload
-    });
-  }
+    // Check for existence of the item by ID
+    const existingItemIndex = state.savedItems.findIndex(item => item.formData.metaData.address?.toLowerCase() === newItem.formData.metaData.address?.toLowerCase());
 
-  @Action(SetPropertyForm)
-  setPropertyForm(ctx: StateContext<CalculatorStateModel>, action: SetPropertyForm) {
-    const state = ctx.getState();
-    ctx.setState({
-      ...state,
-      currentCalculatorFormData: action.payload
-    });
-  }
+    let updatedItemsList: SavedItem[];
 
-  @Action(SaveCalculation)
-  saveCalculation(ctx: StateContext<CalculatorStateModel>, action: SaveCalculation) {
-    const state = ctx.getState();
-    const index = state.savedCalculationsList.findIndex(item => item.formData.metaData.address.toLowerCase() === action.payload.formData.metaData.address.toLowerCase());
-    let newSavedCalculationsList = state.savedCalculationsList;
-
-    if (index !== -1) {
-      // Item with the same id exists, replace it
-      newSavedCalculationsList[index] = action.payload;
+    if (existingItemIndex > -1) {
+      // Update existing item
+      const existingItem = state.savedItems[existingItemIndex];
+      existingItem.formData = newItem.formData; // Update form data
+      existingItem.figures = newItem.figures;   // Update figures
+      updatedItemsList = [...state.savedItems];
+      updatedItemsList[existingItemIndex] = existingItem; // Replace the updated item in the list
     } else {
-      // Item doesn't exist, push it to the array
-      newSavedCalculationsList = [...newSavedCalculationsList, action.payload];
+      // Add new item
+      updatedItemsList = [...state.savedItems, newItem];
     }
+
     ctx.setState({
       ...state,
-      savedCalculationsList: newSavedCalculationsList
+      savedItems: updatedItemsList,
+      activeItemId: newItem.formData.metaData.address // Optionally set activeItemId to the newly saved item
     });
+
+    // Save to local storage after updating state
+    this.saveSavedItemsToLocalStorage(updatedItemsList);
   }
 
-  @Action(CalculateFigures)
-  calculateFigures(ctx: StateContext<CalculatorStateModel>, action: CalculateFigures) {
-    // Perform calculation logic based on the payload
-    const calculatedFigures = {} as CalculatedFigures; // Assume the calculation logic sets this up
-    ctx.patchState({
-      calculatedResultFigures: calculatedFigures
-    });
+  @Action(LoadItem)
+  loadItem(ctx: StateContext<CalculatorStateModel>, action: LoadItem) {
+    const state = ctx.getState();
+    const selectedItem = state.savedItems.find(item => item.formData.metaData.address?.toLowerCase() === action.payload.toLowerCase());
+
+    if (selectedItem) {
+      ctx.setState({
+        ...state,
+        activeItemId: action.payload
+      });
+    }
+  }
+
+  @Action(LoadSavedItemsFromLocalStorage)
+  loadSavedItems(ctx: StateContext<CalculatorStateModel>) {
+    const savedItems = this.localstorageService.getItem();
+    if (savedItems.length > 0) {
+      ctx.setState({
+        activeItemId: null, // Or set this as needed
+        savedItems: savedItems
+      });
+    }
+  }
+
+  private saveSavedItemsToLocalStorage(savedItemsList: SavedItem[]) {
+    this.localstorageService.saveItem(savedItemsList);
   }
 }

@@ -5,11 +5,11 @@ import { MatDialog } from '@angular/material/dialog';
 
 import { CalculatedFigures, CalculatorForm } from '../../../models/calculator/calculator-form.model';
 import { FloorAreaService } from '../../../services/floor-area-service';
-import { CalculatorStateModel } from '../../../models/calculator/calculator-state.model';
-import { CalculatorStateService } from '../../../services/calculator-state.service';
-import { SavedFiguresItem } from '../../../models/calculator/saved-figures-item.model';
-import { LocalStorageService } from '../../../services/local-storage-service';
+import { SavedItem } from '../../../models/calculator/saved-figures-item.model';
 import { SaveCalculationDialogComponent } from '../save-calculation-dialog/save-calculation-dialog.component';
+import { Store } from '@ngxs/store';
+import { LoadSavedItemsFromLocalStorage, SaveItem } from '../../../actions/calculator.actions';
+import { CalculatorState } from '../../../state/calculator-state';
 
 @Component({
   selector: 'app-calculator',
@@ -19,15 +19,15 @@ import { SaveCalculationDialogComponent } from '../save-calculation-dialog/save-
 export class CalculatorComponent implements OnInit, OnDestroy {
   propertyAddress: string = '';
   propertyForm!: FormGroup;
-  calculatorStateModel: CalculatorStateModel = {} as CalculatorStateModel;
+  formData!: CalculatorForm;
+  figures!: CalculatedFigures;
   subscriptions: Subscription = new Subscription();
 
   constructor(
     private fb: FormBuilder,
     public dialog: MatDialog,
-    private readonly floorAreaService: FloorAreaService,
-    private readonly calculatorStateService: CalculatorStateService,
-    private readonly localStorageService: LocalStorageService) { }
+    private store: Store,
+    private readonly floorAreaService: FloorAreaService) { }
   
   /**
    * Angular lifecycle - component initialisation
@@ -35,8 +35,9 @@ export class CalculatorComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.initialiseForm();
     this.setValueChangeListeners();
-    this.subscriptions.add(this.calculatorStateService.getCurrentPropertyForm()
-      .subscribe((formData: CalculatorForm)=> {
+    this.subscriptions.add(this.store.select(CalculatorState.getActiveItem)
+      .subscribe((savedItem) => {
+        const formData = savedItem?.formData;
         if (typeof formData === 'object' && Object.keys(formData).length > 0) {
           this.propertyForm.setValue(formData);
           this.propertyAddress = formData.metaData.address;
@@ -49,6 +50,7 @@ export class CalculatorComponent implements OnInit, OnDestroy {
           }  
         })
       );
+      this.store.dispatch(new LoadSavedItemsFromLocalStorage());
     // this.floorAreaService.getFloorArea('le9 8fe', '15', 'byron street').subscribe(data => console.log(data));
   }
 
@@ -203,7 +205,7 @@ export class CalculatorComponent implements OnInit, OnDestroy {
    */
   calculateFigures() {
     const values = this.propertyForm.value as CalculatorForm;
-    this.calculatorStateModel.currentCalculatorFormData = values;
+    this.formData = values;
 
     // Exit - BTL calculations
     const totalInvestmentCosts = Number(values.borrowingInformation.dipositAmount!) + Number(values.purchaseInformation.stampDuty) + Number(values.purchaseInformation.legalAndAuctionFees) + Number(values.purchaseInformation.refurbCost);
@@ -224,7 +226,7 @@ export class CalculatorComponent implements OnInit, OnDestroy {
     const profitFromDeal = Number(values.BTSInformation.salePrice) - totalInvestmentCosts - Number(values.borrowingInformation.mortgageAmount) - Number(values.borrowingInformation.mortgageFeeAmount) - totalSellingCosts;
     const roiBTS = (profitFromDeal / totalInvestmentCosts) * 100; 
 
-    this.calculatorStateModel.calculatedResultFigures = {
+    this.figures = {
       exitOptionBTL: {
         totalInvestmentCosts: Number(totalInvestmentCosts.toFixed(2)),
         monthlyCashflow: Number(monthlyCashflow.toFixed(2)),
@@ -249,18 +251,15 @@ export class CalculatorComponent implements OnInit, OnDestroy {
   }
 
   saveCalculation() {
-    const savedFigureItem = { formData: this.calculatorStateModel.currentCalculatorFormData, calculatdFigures: this.calculatorStateModel.calculatedResultFigures} as SavedFiguresItem;
+    const itemToSave = { formData: this.formData, figures: this.figures} as SavedItem;
     const dialogRef = this.dialog.open(SaveCalculationDialogComponent, {
       width: '600px'
     });
-    this.calculatorStateService.setPropertyForm(this.calculatorStateModel.currentCalculatorFormData);
 
     this.subscriptions.add(dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        savedFigureItem.formData.metaData = result;
-        this.localStorageService.saveItem('savedCalculations', savedFigureItem);
-        this.calculatorStateService.saveCalculation(savedFigureItem);
-        this.propertyForm.reset();
+        itemToSave.formData.metaData = result;
+        this.store.dispatch(new SaveItem(itemToSave));
       }
     }));
   }

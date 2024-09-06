@@ -1,8 +1,7 @@
 import { CalculatorForm, CalculatedFigures } from "./calculator-form.model";
-import { SavedFiguresItem } from "./saved-figures-item.model";
+import { SavedItem } from "./saved-figures-item.model";
 
 export interface CalculatorStateModel {
-    currentCalculatorFormData: CalculatorForm;
-    calculatedResultFigures: CalculatedFigures;
-    savedCalculationsList: SavedFiguresItem[];
+    activeItemId: string | null;
+    savedItems: SavedItem[];
   }
