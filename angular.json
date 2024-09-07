@@ -132,6 +132,9 @@
             ],
             "outputDir": "storybook-static"
           }
+        },
+        "deploy": {
+          "builder": "angular-cli-ghpages:deploy"
         }
       }
     }
