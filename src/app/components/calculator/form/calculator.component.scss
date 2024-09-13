@@ -1,6 +1,6 @@
 mat-form-field {
   margin-right: 1rem;
-  width: 18rem;
+  width: 15rem;
 }
 
 mat-card {
@@ -20,14 +20,14 @@ mat-card-header {
 .left {
   display: flex;
   flex-direction: column;
-  flex: 1.5;
+  // flex: 1.5;
   padding-right: 20px;
 }
 
 .right {
   display: flex;
   flex-direction: column;
-  flex: 1;
+  // flex: 1;
 }
 
 .left-margin-1 {
@@ -81,7 +81,7 @@ mat-card-header {
   gap: 15px; // Space between the grid items
   align-items: center; // Vertically center align the items within the grid cells
   margin-bottom: 3rem;
-  font-size: 1rem;
+  // font-size: 1rem;
 }
 
 .figure-title {

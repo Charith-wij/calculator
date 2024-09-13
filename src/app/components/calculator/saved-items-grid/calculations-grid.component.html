@@ -63,6 +63,6 @@
         </ng-container>
     
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row class="hover-row" *matRowDef="let row; columns: displayedColumns;" (click)="onRowClick(row)"></tr>
+        <tr mat-row class="hover-row" *matRowDef="let row; columns: displayedColumns;" (click)="onRowClick(row)"  [ngClass]="{'highlight-row': row.profit > 50000 || row.cashLeftIn < 1000}"></tr>
     </table>
 </div>

@@ -51,6 +51,7 @@ export class CalculatorComponent implements OnInit, OnDestroy {
         })
       );
       this.store.dispatch(new LoadSavedItemsFromLocalStorage());
+    // this.floorAreaService.getFloorArea('B77 5QF', '43', 'Avill Hockley').subscribe(data => console.log(data));
     // this.floorAreaService.getFloorArea('le9 8fe', '15', 'byron street').subscribe(data => console.log(data));
   }
 
