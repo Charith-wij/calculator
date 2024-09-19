@@ -14,7 +14,7 @@ mat-card-header {
 .calculator-container {
   display: flex;
   padding: 20px;
-  background-color: #f7f7f6;
+  background-color: #ffffff;
 }
 
 .left {
@@ -61,11 +61,6 @@ mat-card-header {
   flex: 1;
 }
 
-.figures-card {
-  flex: 1;
-  margin-top: 4rem;
-}
-
 .button-wrapper {
   display: flex;
   margin: auto 1rem 1rem;
@@ -107,4 +102,24 @@ mat-card-header {
   margin-bottom: 3rem;
   font-size: 1rem;
   border: 1px solid #000; 
+}
+
+.mat-mdc-card{
+  box-shadow: none !important;
+}
+
+.figures-card {
+  border-radius: 1rem;
+  background: #ffffff;
+  flex: 1;
+  margin-top: 4rem;
+  box-shadow: rgba(0, 0, 0, 0.10) 0px 1px 10px !important;
+  border-bottom: 4px solid #3557d8;
+}
+
+
+.figure-title{
+  font-size: 0.90rem !important;
+  font-weight: 500;
+  color: #10192e !important;
 }

@@ -5,7 +5,7 @@
             <!-- Purchase Information Card -->
             <mat-card class="input-card">
                 <mat-card-header>
-                    <h3>PURCHASE INFORMATION</h3>
+                    <h3>Purchase Information</h3>
                 </mat-card-header>
                 <mat-card-content>
                     <div formGroupName="purchaseInformation">
@@ -40,7 +40,7 @@
             <!-- Borrowing Information Card -->
             <mat-card class="input-card">
                 <mat-card-header>
-                    <h3>BORROWING</h3>
+                    <h3>Borrowing</h3>
                 </mat-card-header>
                 <mat-card-content>
                     <div formGroupName="borrowingInformation">
@@ -98,7 +98,7 @@
             <!-- BTL Information Card -->
             <mat-card class="input-card">
                 <mat-card-header>
-                    <h3>BTL INFORMATION (if applicable)</h3>
+                    <h3>BTL Information (if applicable)</h3>
                 </mat-card-header>
                 <mat-card-content>
                     <div formGroupName="BTLInformation">
@@ -131,7 +131,7 @@
             <!-- BRR Information Card -->
             <mat-card class="input-card">
                 <mat-card-header>
-                    <h3>BRR INFORMATION (if applicable)</h3>
+                    <h3>BRR Information (if applicable)</h3>
                 </mat-card-header>
                 <mat-card-content>
                     <div formGroupName="BRRInformation">
@@ -179,7 +179,7 @@
             <!-- BTS Information Card -->
             <mat-card class="input-card">
                 <mat-card-header>
-                    <h3>BTS INFORMATION (if applicable)</h3>
+                    <h3>BTS Information (if applicable)</h3>
                 </mat-card-header>
                 <mat-card-content>
                     <div formGroupName="BTSInformation">
@@ -279,7 +279,7 @@
                         </mat-card-content>
                     </ng-container>
                 </ng-container>
-                <hr>
+                <!-- <hr> -->
                 <ng-container *ngIf="formData?.metaData as metaData">
                     <div class="meta-data-grid">
                         <div>Guide Price</div>
@@ -301,8 +301,8 @@
                     </div>
                 </ng-container>
 
-                <div *ngIf="!propertyForm.invalid" class="button-wrapper">
-                    <button mat-raised-button class="button-color left-margin-1" (click)="saveCalculation()">SAVE CALCULATION</button>
+                <div *ngIf="!propertyForm.invalid" class="d-grid button-wrapper">
+                    <button class="btn btn-primary btn-block btn-lg" (click)="saveCalculation()">Save Calculation</button>
                 </div>
             </mat-card>
         </div>

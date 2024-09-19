@@ -1,4 +1,37 @@
 /* You can add global styles to this file, and also import other style files */
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+html,
+body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: "Poppins", sans-serif !important;
+    background: #ffffff !important;
+}
+
+h1,
+h2,
+h3,
+h4,
+p,
+th,
+td,
+label {
+    font-family: "Poppins", sans-serif !important;
+}
+
+h3 {
+    color: #10192e !important;
+    text-transform: capitalize !important;
+    font-size: 0.95rem !important;
+}
+
+label {
+    font-size: 0.85rem !important;
+}
+
+.btn-primary{
+    background: #3557d8 !important;
+}
