@@ -227,63 +227,63 @@
                             <h3 class="figure-title">Exit Option - BTL</h3>
                             <div class="grid-container">
                                 <div>Total Investment Costs:</div>
-                                <div>{{ figures.exitOptionBTL.totalInvestmentCosts | currency: 'GBP'}}</div>
+                                <div class="text-end">{{ figures.exitOptionBTL.totalInvestmentCosts | currency: 'GBP'}}</div>
         
                                 <div>Monthly Cashflow:</div>
-                                <div>{{ figures.exitOptionBTL.monthlyCashflow | currency: 'GBP'}}</div>
+                                <div class="text-end">{{ figures.exitOptionBTL.monthlyCashflow | currency: 'GBP'}}</div>
         
                                 <div>Gross Yield: </div>
-                                <div>{{ figures.exitOptionBTL.grossYield}}%</div>
+                                <div class="text-end">{{ figures.exitOptionBTL.grossYield}}%</div>
         
                                 <div> Net Yield:</div>
-                                <div>{{ figures.exitOptionBTL.netYield }}%</div>
+                                <div class="text-end">{{ figures.exitOptionBTL.netYield }}%</div>
         
                                 <div>Return On Investment:</div>
-                                <div>{{ figures.exitOptionBTL.returnOnInvestment }}%</div>
+                                <div class="text-end">{{ figures.exitOptionBTL.returnOnInvestment }}%</div>
                             </div>
         
                             <h3 class="figure-title">Exit Option - BRR Refinance</h3>
                             <div class="grid-container">
                                 <div>Refinanced Monthly Cashflow:</div>
-                                <div>{{ figures.exitOptionBRR.refinancedMonthlyCashflow | currency: 'GBP'}}</div>
+                                <div class="text-end">{{ figures.exitOptionBRR.refinancedMonthlyCashflow | currency: 'GBP'}}</div>
         
                                 <div>Cash Out From Refinancing:</div>
-                                <div>{{ figures.exitOptionBRR.cashOutFromRefinancing | currency: 'GBP'}}</div>
+                                <div class="text-end">{{ figures.exitOptionBRR.cashOutFromRefinancing | currency: 'GBP'}}</div>
         
                                 <div class="highlighted-cash-left-in">Money Left In Deal: </div>
-                                <div class="highlighted-cash-left-in">{{ figures.exitOptionBRR.moneyLeftInDeal | currency:
+                                <div class="highlighted-cash-left-in text-end">{{ figures.exitOptionBRR.moneyLeftInDeal | currency:
                                     'GBP'}}</div>
         
                                 <div> Months Before No Money Left In:</div>
-                                <div>{{ figures.exitOptionBRR.monthsBeforeNoMoneyLeft }}</div>
+                                <div class="text-end">{{ figures.exitOptionBRR.monthsBeforeNoMoneyLeft }}</div>
         
                                 <div>Return On Investment:</div>
-                                <div>{{ figures.exitOptionBRR.returnOnInvestment }}%</div>
+                                <div class="text-end">{{ figures.exitOptionBRR.returnOnInvestment }}%</div>
                             </div>
         
                             <h3 class="figure-title">Exit Option - BTS</h3>
                             <div class="grid-container">
                                 <div>Total Investment Costs:</div>
-                                <div>{{ figures.exitOptionBTS.totalInvestmentCosts | currency: 'GBP'}}</div>
+                                <div class="text-end">{{ figures.exitOptionBTS.totalInvestmentCosts | currency: 'GBP'}}</div>
         
                                 <div>Total Selling Costs:</div>
-                                <div>{{ figures.exitOptionBTS.totalSellingCosts | currency: 'GBP'}}</div>
+                                <div class="text-end">{{ figures.exitOptionBTS.totalSellingCosts | currency: 'GBP'}}</div>
         
                                 <div class="highlighted-profit">Profit From Deal: </div>
-                                <div class="highlighted-profit">{{ figures.exitOptionBTS.profitFromDeal | currency: 'GBP'}}
+                                <div class="highlighted-profit text-end">{{ figures.exitOptionBTS.profitFromDeal | currency: 'GBP'}}
                                 </div>
         
                                 <div> Return On Investment:</div>
-                                <div>{{ figures.exitOptionBTS.returnOnInvestment }}%</div>
+                                <div class="text-end">{{ figures.exitOptionBTS.returnOnInvestment }}%</div>
                             </div>
                         </mat-card-content>
                     </ng-container>
                 </ng-container>
                 <!-- <hr> -->
                 <ng-container *ngIf="formData?.metaData as metaData">
-                    <div class="meta-data-grid">
+                    <div class="mt-3 p-3 meta-data-grid">
                         <div>Guide Price</div>
-                        <div>
+                        <div class="text-end">
                             {{metaData.guidePrice}}
                         </div>
                         <div>Rightmove Link</div>
