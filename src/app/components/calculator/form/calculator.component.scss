@@ -47,10 +47,6 @@ mat-card-header {
   color: blue !important;
 }
 
-.button-color {
-  background-color: #d6a846 !important;
-}
-
 .spacing-field-half {
   display: flex;
   flex: 0.5;
@@ -72,12 +68,13 @@ mat-card-header {
 
 .grid-container {
   display: grid;
-  grid-template-columns: 300px 1fr; // Fixed width for first column, flexible for second column
+  grid-template-columns: 1fr 1fr; // Fixed width for first column, flexible for second column
   gap: 4px 10px; // Space between the grid items
   align-items: center; // Vertically center align the items within the grid cells
   margin-bottom: 1.5rem;
   font-size: 1rem;
   font-size: 0.84rem;
+  text-wrap: nowrap;
 }
 
 .figure-title {
@@ -86,23 +83,26 @@ mat-card-header {
 }
 
 .highlighted-profit {
-  color: green;
+  color: #3557d8;
   font-weight: bold;
+  font-size: 1rem;
 }
 
 .highlighted-cash-left-in {
-  color: rgb(221, 148, 46);
+  color: #e38d47;
   font-weight: bold;
+  font-size: 1rem;
 }
 
 .meta-data-grid {
   display: grid;
-  grid-template-columns: 300px 1fr; // Fixed width for first column, flexible for second column
+  grid-template-columns: 1fr 1fr; // Fixed width for first column, flexible for second column
   gap: 8px 10px; // Space between the grid items
   align-items: center; // Vertically center align the items within the grid cells
   margin-bottom: 1.5rem;
   font-size: 1rem;
   font-weight: 500;
+  text-wrap: nowrap;
 }
 
 .mat-mdc-card {
@@ -120,8 +120,8 @@ mat-card-header {
 
 
 .figure-title {
-  font-size: 0.90rem !important;
-  font-weight: 500;
+  font-size: 0.88rem !important;
+  font-weight: 600;
   color: #10192e !important;
   margin-bottom: 1rem;
 }
