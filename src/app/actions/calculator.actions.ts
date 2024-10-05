@@ -15,3 +15,8 @@ export class LoadItem {
   static readonly type = '[Calculator] Load Item From State';
   constructor(public payload: string) { }
 }
+
+export class RemoveItem {
+  static readonly type = '[Calculator] Remove Item';
+  constructor(public payload: string) { }
+}

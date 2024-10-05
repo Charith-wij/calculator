@@ -6,7 +6,7 @@ import { SavedItem } from '../../../models/calculator/saved-figures-item.model';
 import { LocalStorageService } from '../../../services/local-storage-service';
 import { Store } from '@ngxs/store';
 import { CalculatorState } from '../../../state/calculator-state';
-import { LoadItem } from 'src/app/actions/calculator.actions';
+import { LoadItem, RemoveItem } from 'src/app/actions/calculator.actions';
 
 @Component({
   selector: 'app-calculations-grid',
@@ -47,16 +47,16 @@ export class CalculationsGridComponent implements OnInit {
     });
   }
 
-  removeRow(index: number) {
-    // const itemToRemove = this.tableDataSource[index];
-    // this.localStorageService.removeItem('savedCalculations', itemToRemove.address);
+  removeRow(index: number, event: any) {
+    const itemToRemove = this.tableDataSource[index];
 
-    // const savedCalculations = this.localStorageService.getItem('savedCalculations');
-
-    // if (savedCalculations.length > 0) {
-    //   this.calculatorStateService.setSavedCalculations(savedCalculations);
-    // }
+    if (itemToRemove != null) {
+      this.store.dispatch(new RemoveItem(itemToRemove.address));
+    }
+    event.stopPropergation();
+    event.preventDefault();
   }
+
   onRowClick(rowElement: CalculationsGridItem) {
     this.store.dispatch(new LoadItem(rowElement.address));
   }

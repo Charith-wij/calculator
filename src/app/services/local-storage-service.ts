@@ -27,7 +27,7 @@ export class LocalStorageService {
     const existingItems = this.getItem() as SavedItem[];
 
     // Filter out the item to remove
-    const updatedItems = existingItems.filter(item => item.formData.metaData.address !== value);
+    const updatedItems = existingItems.filter(item => item.formData.metaData.address.toLowerCase() !== value);
     localStorage.setItem(this.itemKey, JSON.stringify(updatedItems));
   }
 
