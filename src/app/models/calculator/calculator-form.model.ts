@@ -16,6 +16,7 @@ export interface MetaData {
     auctionSiteLink: string;
     notes: string;
     status: GridItemStatus;
+    imageUrl: string;
 }
 
 export interface PurchaseInformation {

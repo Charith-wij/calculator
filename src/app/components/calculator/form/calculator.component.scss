@@ -125,3 +125,11 @@ mat-card-header {
   color: #10192e !important;
   margin-bottom: 1rem;
 }
+
+.image-container {
+  padding: 3rem;
+
+  .image {
+    max-width: 100%;
+  }
+}

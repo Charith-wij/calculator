@@ -24,6 +24,7 @@ export class SaveCalculationDialogComponent implements OnInit, OnDestroy {
         guidePrice: ['', Validators.required],
         rightmoveLink: [''],
         auctionSiteLink: [''],
+        imageUrl: [''],
         notes: ['']
       });
   }
@@ -37,7 +38,7 @@ export class SaveCalculationDialogComponent implements OnInit, OnDestroy {
       .subscribe((savedItem) => {
         const formData = savedItem?.formData;
         if (typeof formData === 'object' && Object.keys(formData).length > 0) {
-          this.saveCalculationForm.setValue(formData.metaData);
+          this.saveCalculationForm.patchValue(formData.metaData);
         }
       }));
   }

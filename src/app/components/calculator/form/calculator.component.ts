@@ -18,6 +18,7 @@ import { GridItemStatus } from '../../../models/calculator/calculations-grid-ite
   styleUrls: ['./calculator.component.scss']
 })
 export class CalculatorComponent implements OnInit, OnDestroy {
+  imageURL: string = ''
   propertyAddress: string = '';
   propertyForm!: FormGroup;
   formData!: CalculatorForm;
@@ -42,6 +43,7 @@ export class CalculatorComponent implements OnInit, OnDestroy {
         if (typeof formData === 'object' && Object.keys(formData).length > 0) {
           this.propertyForm.patchValue(formData);
           this.propertyAddress = formData.metaData.address;
+          this.imageURL = formData.metaData.imageUrl;
         }
       }));
       this.subscriptions.add(
@@ -262,6 +264,7 @@ export class CalculatorComponent implements OnInit, OnDestroy {
       if (result) {
         itemToSave.formData.metaData = result;
         itemToSave.formData.metaData.status = GridItemStatus.newItem;
+        this.imageURL = itemToSave.formData.metaData.imageUrl;
         this.store.dispatch(new SaveItem(itemToSave));
       }
     }));
