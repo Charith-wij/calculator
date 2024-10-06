@@ -36,6 +36,8 @@ import { CalculatorState } from './state/calculator-state';
 import { CalculationsGridComponent } from './components/calculator/saved-items-grid/calculations-grid.component';
 import { LayoutComponent } from './components/calculator/layout/calculator-layout.component';
 import { SaveCalculationDialogComponent } from './components/calculator/save-calculation-dialog/save-calculation-dialog.component';
+import { GridFilterComponent } from './components/calculator/grid-filter/grid-filter.component';
+import { CustomInputComponent } from './components/shared/custom-input/custom-input.component';
 // import { CurrencyFormatDirective } from './directives/currency-format.directive';
 
 @NgModule({
@@ -49,7 +51,9 @@ import { SaveCalculationDialogComponent } from './components/calculator/save-cal
     CalculatorComponent,
     CalculationsGridComponent,
     LayoutComponent,
-    SaveCalculationDialogComponent
+    SaveCalculationDialogComponent,
+    GridFilterComponent,
+    CustomInputComponent
     // CurrencyFormatDirective
   ],
   imports: [

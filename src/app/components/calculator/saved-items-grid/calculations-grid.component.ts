@@ -14,6 +14,7 @@ import { LoadItem, RemoveItem, UpdateStatus } from 'src/app/actions/calculator.a
 })
 export class CalculationsGridComponent implements OnInit {
   tableDataSource: CalculationsGridItem[] = [];
+  filteredTableDataSource: CalculationsGridItem[] = [];
 
   displayedColumns: string[] = ['address', 'guidePrice', 'purchasePrice', 'auctionFees', 'refurbCost', 'MRV', 'profit', 'cashLeftIn', 'notes', 'status', 'remove'];
   statuses: string[] = ['New', 'Active', 'Expired'];
@@ -27,7 +28,10 @@ export class CalculationsGridComponent implements OnInit {
       .pipe(
         map((calculationFormItems: SavedItem[]) => this.mapGridData(calculationFormItems))
       )
-      .subscribe(data => this.tableDataSource = data);
+      .subscribe(data => {
+        this.tableDataSource = data;
+        this.filteredTableDataSource = this.tableDataSource;
+      });
   }
 
   mapGridData(calculationFormItems: SavedItem[]): CalculationsGridItem[] {
@@ -53,7 +57,7 @@ export class CalculationsGridComponent implements OnInit {
     if (itemToRemove != null) {
       this.store.dispatch(new RemoveItem(itemToRemove.address));
     }
-    event.stopPropergation();
+    // event.stopPropergation();
     event.preventDefault();
   }
 
@@ -64,6 +68,15 @@ export class CalculationsGridComponent implements OnInit {
   onStatusChange(element: CalculationsGridItem): void {
     this.store.dispatch(new UpdateStatus(element.address, element.status));
   }
+
+  onFilterStatusChange(selectedStatus: string): void {
+    if (!selectedStatus) {
+      this.filteredTableDataSource = this.tableDataSource;
+    } else {
+      this.filteredTableDataSource = this.tableDataSource.filter(item => item.status === selectedStatus);
+    }
+  }
+
 
   // Function to return color based on status
   getStatusColor(status: string): string {

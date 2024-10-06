@@ -1,0 +1,8 @@
+<div class="custom-input-container">
+    <label for="currencyInput">Refurb Cost*</label>
+    <div class="input-wrapper">
+        <span class="currency-symbol">£</span>
+        <input type="text" id="currencyInput" [(ngModel)]="value" (ngModelChange)="onValueChange($event)"
+            placeholder="0" (keypress)="allowOnlyNumber($event)" class="custom-input" />
+    </div>
+</div>

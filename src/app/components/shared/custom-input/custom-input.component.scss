@@ -1,0 +1,47 @@
+.custom-input-container {
+    position: relative;
+    width: 100%; // Set your desired width
+}
+
+.label {
+    font-size: 14px;
+    color: purple; // Adjust based on your design
+}
+
+.input-wrapper {
+    display: flex;
+    align-items: center;
+    border: 1px solid purple; // Border color
+    border-radius: 4px; // Rounded corners
+    overflow: hidden; // Prevents overflow from child elements
+}
+
+.currency-symbol {
+    padding: 10px; // Space around the symbol
+    background-color: white; // Background color
+    border-right: 1px solid purple; // Divider line
+    color: purple;
+}
+
+.custom-input {
+    border: none; // Remove default border
+    outline: none; // Remove focus outline
+    padding: 10px; // Padding
+    flex: 1; // Take remaining space
+    font-size: 16px; // Font size for input
+}
+
+.mat-form-field-appearance-outline .mat-form-field-infix {
+    padding: 10px;
+ }
+ .mat-form-field-infix {
+      padding:0;
+      border-top: 0;
+ }
+ 
+ //change top and padding-top as per required
+ 
+ .mat-form-field-label-wrapper {
+     top: -0.84375em;
+     padding-top: 0.84375em;
+ }

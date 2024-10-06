@@ -2,7 +2,10 @@
 
 <div class="grid-container">
     <h2>Saved Calculations List </h2>
-    <table mat-table [dataSource]="tableDataSource" class="mat-elevation-z8">
+
+    <app-grid-filter (statusChange)="onFilterStatusChange($event)"></app-grid-filter>
+
+    <table mat-table [dataSource]="filteredTableDataSource" class="mat-elevation-z8">
         <!-- Completion Date Column -->
         <ng-container matColumnDef="address">
             <th mat-header-cell *matHeaderCellDef> Address </th>
