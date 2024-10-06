@@ -1,3 +1,5 @@
+import { GridItemStatus } from "./calculations-grid-item.model";
+
 export interface CalculatorForm {
     metaData: MetaData;
     purchaseInformation: PurchaseInformation;
@@ -13,6 +15,7 @@ export interface MetaData {
     rightmoveLink: string;
     auctionSiteLink: string;
     notes: string;
+    status: GridItemStatus;
 }
 
 export interface PurchaseInformation {

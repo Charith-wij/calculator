@@ -1,3 +1,4 @@
+import { GridItemStatus } from "../models/calculator/calculations-grid-item.model";
 import { CalculatorForm } from "../models/calculator/calculator-form.model";
 import { SavedItem } from "../models/calculator/saved-figures-item.model";
 
@@ -19,4 +20,9 @@ export class LoadItem {
 export class RemoveItem {
   static readonly type = '[Calculator] Remove Item';
   constructor(public payload: string) { }
+}
+
+export class UpdateStatus {
+  static readonly type = '[Calculator] Update Item';
+  constructor(public address: string, public status: GridItemStatus) { }
 }

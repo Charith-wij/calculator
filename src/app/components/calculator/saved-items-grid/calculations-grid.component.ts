@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 
 import { map } from 'rxjs';
-import { CalculationsGridItem } from '../../../models/calculator/calculations-grid-item.model';
+import { CalculationsGridItem, GridItemStatus } from '../../../models/calculator/calculations-grid-item.model';
 import { SavedItem } from '../../../models/calculator/saved-figures-item.model';
-import { LocalStorageService } from '../../../services/local-storage-service';
 import { Store } from '@ngxs/store';
 import { CalculatorState } from '../../../state/calculator-state';
-import { LoadItem, RemoveItem } from 'src/app/actions/calculator.actions';
+import { LoadItem, RemoveItem, UpdateStatus } from 'src/app/actions/calculator.actions';
 
 @Component({
   selector: 'app-calculations-grid',
@@ -16,11 +15,11 @@ import { LoadItem, RemoveItem } from 'src/app/actions/calculator.actions';
 export class CalculationsGridComponent implements OnInit {
   tableDataSource: CalculationsGridItem[] = [];
 
-  displayedColumns: string[] = ['address', 'guidePrice', 'purchasePrice', 'auctionFees', 'refurbCost', 'MRV', 'profit', 'cashLeftIn', 'notes', 'remove'];
+  displayedColumns: string[] = ['address', 'guidePrice', 'purchasePrice', 'auctionFees', 'refurbCost', 'MRV', 'profit', 'cashLeftIn', 'notes', 'status', 'remove'];
+  statuses: string[] = ['New', 'Active', 'Expired'];
 
   constructor(
-    private store: Store,
-    private readonly localStorageService: LocalStorageService) {
+    private store: Store) {
   }
 
   ngOnInit(): void {
@@ -42,7 +41,8 @@ export class CalculationsGridComponent implements OnInit {
         MRV: item.formData.BRRInformation.newMarketValue || 0,
         profit: item.figures.exitOptionBTS.profitFromDeal,
         cashLeftIn: item.figures.exitOptionBRR.moneyLeftInDeal,
-        notes: item.formData.metaData?.notes || ''
+        notes: item.formData.metaData?.notes || '',
+        status: item.formData.metaData?.status
       };
     });
   }
@@ -59,5 +59,23 @@ export class CalculationsGridComponent implements OnInit {
 
   onRowClick(rowElement: CalculationsGridItem) {
     this.store.dispatch(new LoadItem(rowElement.address));
+  }
+
+  onStatusChange(event: any, element: CalculationsGridItem): void {
+    this.store.dispatch(new UpdateStatus(element.address, event.value));
+  }
+
+  // Function to return color based on status
+  getStatusColor(status: string): string {
+    switch (status) {
+      case 'New':
+        return 'black'; // Normal text color
+      case 'Active':
+        return 'orange'; // Amber color
+      case 'Expired':
+        return 'red'; // Red color
+      default:
+        return 'black';
+    }
   }
 }

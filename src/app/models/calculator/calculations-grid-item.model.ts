@@ -8,4 +8,11 @@ export interface CalculationsGridItem {
     profit: number;
     cashLeftIn: number;
     notes: string;
+    status: GridItemStatus;
+}
+
+export enum GridItemStatus {
+    newItem = 'New',
+    activeItem = 'Active',
+    expiredItem = 'Expired'
 }

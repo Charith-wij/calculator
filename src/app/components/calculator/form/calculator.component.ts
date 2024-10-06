@@ -10,6 +10,7 @@ import { SaveCalculationDialogComponent } from '../save-calculation-dialog/save-
 import { Store } from '@ngxs/store';
 import { LoadSavedItemsFromLocalStorage, SaveItem } from '../../../actions/calculator.actions';
 import { CalculatorState } from '../../../state/calculator-state';
+import { GridItemStatus } from '../../../models/calculator/calculations-grid-item.model';
 
 @Component({
   selector: 'app-calculator',
@@ -39,7 +40,7 @@ export class CalculatorComponent implements OnInit, OnDestroy {
       .subscribe((savedItem) => {
         const formData = savedItem?.formData;
         if (typeof formData === 'object' && Object.keys(formData).length > 0) {
-          this.propertyForm.setValue(formData);
+          this.propertyForm.patchValue(formData);
           this.propertyAddress = formData.metaData.address;
         }
       }));
@@ -260,6 +261,7 @@ export class CalculatorComponent implements OnInit, OnDestroy {
     this.subscriptions.add(dialogRef.afterClosed().subscribe(result => {
       if (result) {
         itemToSave.formData.metaData = result;
+        itemToSave.formData.metaData.status = GridItemStatus.newItem;
         this.store.dispatch(new SaveItem(itemToSave));
       }
     }));
