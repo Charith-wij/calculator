@@ -9,7 +9,7 @@
     "test": "ng test",
     "storybook": "ng run investment-planner:storybook",
     "build-storybook": "ng run investment-planner:build-storybook",
-    "deployment-build": "ng build --base-href 'https://charith-wij.github.io/calculator/'",
+    "deployment-build": "ng build --configuration production --base-href 'https://charith-wij.github.io/calculator/'",
     "deploy-publish": "npx angular-cli-ghpages --dir=dist/investment-planner"
   },
   "private": true,
@@ -37,16 +37,7 @@
     "@angular-devkit/build-angular": "^16.2.4",
     "@angular/cli": "^16.2.4",
     "@angular/compiler-cli": "^16.2.0",
-    "@chromatic-com/storybook": "^1.6.1",
     "@compodoc/compodoc": "^1.1.25",
-    "@storybook/addon-docs": "^8.2.1",
-    "@storybook/addon-essentials": "^8.2.1",
-    "@storybook/addon-interactions": "^8.2.1",
-    "@storybook/addon-links": "^8.2.1",
-    "@storybook/addon-onboarding": "^8.2.1",
-    "@storybook/angular": "^8.2.1",
-    "@storybook/blocks": "^8.2.1",
-    "@storybook/test": "^8.2.1",
     "@types/jasmine": "~4.3.0",
     "angular-cli-ghpages": "^2.0.1",
     "jasmine-core": "~4.6.0",
@@ -55,7 +46,6 @@
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
-    "storybook": "^8.2.1",
     "typescript": "~5.1.3"
   }
 }

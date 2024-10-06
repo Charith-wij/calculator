@@ -61,19 +61,19 @@ export class CalculationsGridComponent implements OnInit {
     this.store.dispatch(new LoadItem(rowElement.address));
   }
 
-  onStatusChange(event: any, element: CalculationsGridItem): void {
-    this.store.dispatch(new UpdateStatus(element.address, event.value));
+  onStatusChange(element: CalculationsGridItem): void {
+    this.store.dispatch(new UpdateStatus(element.address, element.status));
   }
 
   // Function to return color based on status
   getStatusColor(status: string): string {
     switch (status) {
       case 'New':
-        return 'black'; // Normal text color
+        return 'black';
       case 'Active':
-        return 'orange'; // Amber color
+        return 'orange';
       case 'Expired':
-        return 'red'; // Red color
+        return 'red';
       default:
         return 'black';
     }
