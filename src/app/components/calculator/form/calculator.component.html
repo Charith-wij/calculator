@@ -227,6 +227,9 @@
                 <ng-container *ngIf="figures">
                     <ng-container *ngIf="propertyForm.valid">
                         <mat-card-content>
+                            <div class="image-container">
+                                <img class="image" [src]="imageURL" alt="photo 1">
+                            </div>
                             <h3 class="figure-title">Exit Option - BTL</h3>
                             <div class="grid-container">
                                 <div>Total Investment Costs:</div>
@@ -302,11 +305,7 @@
                             {{metaData.notes}}
                         </div>
                     </div>
-                    <div class="image-container">
-                        <img class="image" [src]="imageURL" alt="photo 1">
-                    </div>
                 </ng-container>
-
                 <div *ngIf="!propertyForm.invalid" class="d-grid button-wrapper">
                     <button class="btn btn-primary btn-block btn-lg" (click)="saveCalculation()">Save Calculation</button>
                 </div>

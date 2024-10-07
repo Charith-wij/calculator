@@ -5,14 +5,34 @@
   background-color: #ffffff;
 }
 
+.table-outer {
+  max-height: 300px; 
+  overflow-y: auto; 
+  overflow-x: hidden;
+
+  border: 1px solid #a99e9e; // Optional styling for the table container
+
+  table {
+    width: 100%; // Ensures the table takes the full width
+    border-collapse: separate;
+  }
+
+  .mat-mdc-header-cell {
+    position: sticky; // Makes header sticky
+    top: 0; // Stick to the top of the parent container
+    z-index: 1; // Ensures the header is above the rows
+  }
+}
+
 .hover-row {
   cursor: pointer;
 
   &:hover {
-    background-color: #e5e5e5;
+    background-color: #7f7f7f;
+    color: white;
   }
 }
 
 .highlight-row {
-  background-color: #d2e7d2;
+  background-color: #ecffec;
 }
