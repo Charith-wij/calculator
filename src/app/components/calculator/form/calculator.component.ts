@@ -11,6 +11,8 @@ import { Store } from '@ngxs/store';
 import { LoadSavedItemsFromLocalStorage, SaveItem } from '../../../actions/calculator.actions';
 import { CalculatorState } from '../../../state/calculator-state';
 import { GridItemStatus } from '../../../models/calculator/calculations-grid-item.model';
+import html2canvas from 'html2canvas';
+import jsPDF from 'jspdf';
 
 @Component({
   selector: 'app-calculator',
@@ -63,6 +65,42 @@ export class CalculatorComponent implements OnInit, OnDestroy {
    */
   ngOnDestroy(): void {
     this.subscriptions.unsubscribe();
+  }
+
+  exportAsPDF() {
+    // Select the element with the ID "pdf-content"
+    const element = document.getElementById('pdf-content');
+    if (!element) return;
+
+    // Use html2canvas to capture the content area
+    html2canvas(element).then((canvas) => {
+      const imgData = canvas.toDataURL('image/png');
+
+      // Initialize jsPDF
+      const pdf = new jsPDF('p', 'mm', 'a4');
+
+      // Calculate aspect ratio and adjust image size
+      const imgWidth = 210; // A4 width in mm
+      const pageHeight = 295; // A4 height in mm
+      const imgHeight = (canvas.height * imgWidth) / canvas.width;
+      let heightLeft = imgHeight;
+
+      let position = 0;
+
+      // Add image to PDF and handle pagination
+      pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+      heightLeft -= pageHeight;
+
+      while (heightLeft >= 0) {
+        position = heightLeft - imgHeight;
+        pdf.addPage();
+        pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
+        heightLeft -= pageHeight;
+      }
+
+      // Save the PDF with a specific name
+      pdf.save('PropertyDetails.pdf');
+    });
   }
 
   /**
@@ -263,6 +301,8 @@ export class CalculatorComponent implements OnInit, OnDestroy {
     this.subscriptions.add(dialogRef.afterClosed().subscribe(result => {
       if (result) {
         itemToSave.formData.metaData = result;
+
+        // TODO: below is an error the formData status is alwasy not set and we set it to newItem all the time
         itemToSave.formData.metaData.status = GridItemStatus.newItem;
         this.imageURL = itemToSave.formData.metaData.imageUrl;
         this.store.dispatch(new SaveItem(itemToSave));

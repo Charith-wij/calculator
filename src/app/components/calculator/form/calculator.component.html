@@ -1,5 +1,5 @@
 <form [formGroup]="propertyForm" (ngSubmit)="calculateFigures()">
-    <div class="calculator-container row">
+    <div class="calculator-container row" id="pdf-content">
         <div class="col-8 left">
             <h2 class="mt-3"> Property : {{propertyAddress}}</h2>
             <!-- Purchase Information Card -->
@@ -10,8 +10,11 @@
                 <mat-card-content>
                     <div formGroupName="purchaseInformation">
                         <div class="field-row">
-
-                            <!-- <app-custom-input></app-custom-input> -->
+                            <!-- <label for="exampleFormControlInput1" class="form-label">Purchase Price</label> -->
+                            <div class="input-group mb-3">
+                                <span class="input-group-text" id="basic-addon1">£</span>
+                                <input type="text" formControlName="purchasePrice" class="form-control" id="exampleFormControlInput1">
+                            </div>
 
                             <mat-form-field appearance="outline" class="custom-input">
                                 <mat-label>Purchase Price</mat-label>
@@ -294,20 +297,23 @@
                         </div>
                         <div>Rightmove Link</div>
                         <div>
-                            <a [href]="metaData.rightmoveLink" target="_blank">{{metaData.rightmoveLink}}</a>
+                            <a [href]="metaData.rightmoveLink" target="_blank"> Click here to navigate to rigtmove link</a>
                         </div>
                         <div>Auction Link</div>
                         <div>
-                            <a [href]="metaData.auctionSiteLink" target="_blank">{{metaData.auctionSiteLink}}</a>
+                            <a [href]="metaData.auctionSiteLink" target="_blank">Click here to navigate to auction link</a>
                         </div>
                         <div>Notes</div>
                         <div>
-                            {{metaData.notes}}
+                            <textarea readonly="true">
+                                {{metaData.notes}}
+                            </textarea>
                         </div>
                     </div>
                 </ng-container>
                 <div *ngIf="!propertyForm.invalid" class="d-grid button-wrapper">
                     <button class="btn btn-primary btn-block btn-lg" (click)="saveCalculation()">Save Calculation</button>
+                    <!-- <button class="btn btn-primary btn-block btn-lg" (click)="exportAsPDF()">Export Calculation</button> -->
                 </div>
             </mat-card>
         </div>

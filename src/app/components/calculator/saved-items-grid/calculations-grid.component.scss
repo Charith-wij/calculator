@@ -17,6 +17,10 @@
     border-collapse: separate;
   }
 
+  thead {
+    background: #eaeaea;
+  }
+
   .mat-mdc-header-cell {
     position: sticky; // Makes header sticky
     top: 0; // Stick to the top of the parent container
@@ -30,6 +34,10 @@
   &:hover {
     background-color: #7f7f7f;
     color: white;
+  }
+
+  &:focus, &:active {
+    background-color: #d2d1d1;
   }
 }
 
