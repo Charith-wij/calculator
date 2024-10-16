@@ -115,32 +115,40 @@
 
             <!-- BTL Information Card -->
             <div class="card input-card">
+
                 <div class="card-header">
                     <h3 class="mb-0">BTL Information (if applicable)</h3>
                 </div>
+
                 <div class="card-body">
+
                     <div formGroupName="BTLInformation">
-                        <div class="field-row">
-                            <mat-form-field appearance="outline">
-                                <mat-label>Monthly Rent</mat-label>
-                                <input matInput formControlName="monthlyRent" type="number" required>
-                            </mat-form-field>
-                            <mat-form-field appearance="outline">
-                                <mat-label>Letting Agents Fee (%)</mat-label>
-                                <input matInput formControlName="lettingAgentFee" type="number" required>
-                            </mat-form-field>
-                            <mat-form-field appearance="outline">
-                                <mat-label>Monthly Running Costs</mat-label>
-                                <input matInput formControlName="monthlyRunningCosts" type="number" required>
-                            </mat-form-field>
-                        </div>
-                        <!-- <div class="field-row">Clculated</div> -->
-                        <div class="field-row">
-                            <mat-form-field appearance="outline">
-                                <mat-label class="calculated-text-color">Letting Agents Fee Amount</mat-label>
-                                <input class="calculated-text-color" matInput readonly="true"
-                                    formControlName="lettingAgentFeeAmount" type="number" tabindex="-1">
-                            </mat-form-field>
+
+                        <div class="row">
+
+                            <div class="col-auto">
+                                <label for="monthlyRent" class="form-label">Monthly Rent</label>
+                                <input type="number" formControlName="monthlyRent"
+                                    class="form-control" required>
+                            </div>
+
+                            <div class="col-auto">
+                                <label for="lettingAgentFee" class="form-label">Letting Agents Fee (%)</label>
+                                <input type="number" formControlName="lettingAgentFee"
+                                    class="form-control" required>
+                            </div>
+
+                            <div class="col-auto">
+                                <label for="monthlyRunningCosts" class="form-label">Monthly Running Costs</label>
+                                <input type="number" formControlName="monthlyRunningCosts"
+                                    class="form-control" required>
+                            </div>
+
+                            <div class="col-auto">
+                                <label for="lettingAgentFeeAmount" class="form-label">Letting Agents Fee Amount</label>
+                                <input type="number" formControlName="lettingAgentFeeAmount"
+                                    class="form-control calculated-text-color" required>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -152,43 +160,55 @@
                     <h3 class="mb-0">BRR Information (if applicable)</h3>
                 </div>
                 <div class="card-body">
+
                     <div formGroupName="BRRInformation">
-                        <div class="field-row">
-                            <mat-form-field appearance="outline">
-                                <mat-label>New Market Value</mat-label>
-                                <input matInput formControlName="newMarketValue" type="number" required>
-                            </mat-form-field>
-                            <mat-form-field appearance="outline">
-                                <mat-label>Refinanced at (% LTV)</mat-label>
-                                <input matInput formControlName="refinancedLTV" type="number" required>
-                            </mat-form-field>
-                            <mat-form-field appearance="outline">
-                                <mat-label>Mortgage Arrangement Fee (%)</mat-label>
-                                <input matInput formControlName="refinancingArrangementFee" type="number" required>
-                            </mat-form-field>
-                            <mat-form-field appearance="outline">
-                                <mat-label>Mortgage Interest Rate (%)</mat-label>
-                                <input matInput formControlName="refinancingInterestRate" type="number" required>
-                            </mat-form-field>
+
+                        <div class="row">
+
+                            <div class="col-auto">
+                                <label for="newMarketValue" class="form-label">New Market Value</label>
+                                <input type="number" formControlName="newMarketValue"
+                                    class="form-control calculated-text-color" required>
+                            </div>
+
+                            <div class="col-auto">
+                                <label for="refinancedLTV" class="form-label">Refinanced at (% LTV)</label>
+                                <input type="number" formControlName="refinancedLTV"
+                                    class="form-control calculated-text-color" required>
+                            </div>
+
+                            <div class="col-auto">
+                                <label for="refinancingArrangementFee" class="form-label">Mortgage Arrangement Fee (%)</label>
+                                <input type="number" formControlName="refinancingArrangementFee"
+                                    class="form-control calculated-text-color" required>
+                            </div>
+
+                            <div class="col-auto">
+                                <label for="refinancingInterestRate" class="form-label">Mortgage Interest Rate (%)</label>
+                                <input type="number" formControlName="refinancingInterestRate"
+                                    class="form-control calculated-text-color" required>
+                            </div>
                         </div>
                         <!-- <div class="field-row"> Calculated</div> -->
-                        <div class="field-row">
-                            <mat-form-field appearance="outline">
-                                <mat-label class="calculated-text-color">Refinanced LTV Amount</mat-label>
-                                <input class="calculated-text-color" matInput readonly="true"
-                                    formControlName="refinancedLTVAmount" type="number" tabindex="-1">
-                            </mat-form-field>
-                            <!-- <div class="spacing-field-half"></div> -->
-                            <mat-form-field appearance="outline">
-                                <mat-label class="calculated-text-color">Mortgage Fee Amount</mat-label>
-                                <input class="calculated-text-color" matInput readonly="true"
-                                    formControlName="refinanceFeeAmount" type="number" tabindex="-1">
-                            </mat-form-field>
-                            <mat-form-field appearance="outline">
-                                <mat-label class="calculated-text-color">Mortgage Interest Amount</mat-label>
-                                <input class="calculated-text-color" matInput readonly="true"
-                                    formControlName="refinanceInterestAmount" type="number" tabindex="-1">
-                            </mat-form-field>
+                        <div class="row mt-3">
+
+                            <div class="col-auto">
+                                <label for="refinancedLTVAmount" class="form-label">Refinanced LTV Amount</label>
+                                <input type="number" formControlName="refinancedLTVAmount"
+                                    class="form-control calculated-text-color" required>
+                            </div>
+
+                            <div class="col-auto">
+                                <label for="refinanceFeeAmount" class="form-label">Mortgage Fee Amount</label>
+                                <input type="number" formControlName="refinanceFeeAmount"
+                                    class="form-control calculated-text-color" required>
+                            </div>
+
+                            <div class="col-auto">
+                                <label for="refinanceInterestAmount" class="form-label">Mortgage Interest Amount</label>
+                                <input type="number" formControlName="refinanceInterestAmount"
+                                    class="form-control calculated-text-color" required>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -196,34 +216,41 @@
 
             <!-- BTS Information Card -->
             <div class="card input-card">
+
                 <div class="card-header">
                     <h3 class="mb-0">BTS Information (if applicable)</h3>
                 </div>
-                <div class="card-body">
-                    <div formGroupName="BTSInformation">
-                        <div class="field-row">
-                            <mat-form-field appearance="outline">
-                                <mat-label>Sale Price</mat-label>
-                                <!-- <span matPrefix>£</span> -->
-                                <input matInput formControlName="salePrice" type="number" required>
-                            </mat-form-field>
-                            <mat-form-field appearance="outline">
-                                <mat-label>Legal Fees</mat-label>
-                                <input matInput formControlName="legalFeesBTS" type="number" required>
-                            </mat-form-field>
 
-                            <mat-form-field appearance="outline">
-                                <mat-label>Estate Agent Fee (%)</mat-label>
-                                <input matInput formControlName="estateAgentFee" type="number" required>
-                            </mat-form-field>
-                        </div>
-                        <!-- <div class="field-row"> Calculated</div> -->
-                        <div class="field-row">
-                            <mat-form-field appearance="outline">
-                                <mat-label class="calculated-text-color">Estate Agent Fee Amount</mat-label>
-                                <input class="calculated-text-color" matInput readonly="true"
-                                    formControlName="estateAgentFeeAmount" type="number" tabindex="-1">
-                            </mat-form-field>
+                <div class="card-body">
+
+                    <div formGroupName="BTSInformation">
+
+                        <div class="row">
+
+                            <div class="col-auto">
+                                <label for="salePrice" class="form-label">Sale Price</label>
+                                <input type="number" formControlName="salePrice"
+                                    class="form-control" required>
+                            </div>
+
+                            <div class="col-auto">
+                                <label for="legalFeesBTS" class="form-label">Legal Fees</label>
+                                <input type="number" formControlName="legalFeesBTS"
+                                    class="form-control" required>
+                            </div>
+
+                            <div class="col-auto">
+                                <label for="estateAgentFee" class="form-label">Estate Agent Fee (%)</label>
+                                <input type="number" formControlName="estateAgentFee"
+                                    class="form-control" required>
+                            </div>
+
+                            <div class="col-auto">
+                                <label for="estateAgentFeeAmount" class="form-label">Estate Agent Fee Amount</label>
+                                <input type="number" formControlName="estateAgentFeeAmount"
+                                    class="form-control calculated-text-color" readonly>
+                            </div>
+
                         </div>
                     </div>
                 </div>
