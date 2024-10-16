@@ -1,112 +1,124 @@
 <form [formGroup]="propertyForm" (ngSubmit)="calculateFigures()">
     <div class="calculator-container row" id="pdf-content">
         <div class="col-8 left">
-            <h2 class="mt-3"> Property : {{propertyAddress}}</h2>
+            <h2 class="mt-0"> Property : {{propertyAddress}}</h2>
             <!-- Purchase Information Card -->
-            <mat-card class="input-card">
-                <mat-card-header>
-                    <h3>Purchase Information</h3>
-                </mat-card-header>
-                <mat-card-content>
+            <div class="card input-card">
+                <div class="card-header">
+                    <h3 class="mb-0">Purchase Information</h3>
+                </div>
+                <div class="card-body">
                     <div formGroupName="purchaseInformation">
-                        <div class="field-row">
-                            <!-- <label for="exampleFormControlInput1" class="form-label">Purchase Price</label> -->
-                            <div class="input-group mb-3">
-                                <span class="input-group-text" id="basic-addon1">£</span>
-                                <input type="text" formControlName="purchasePrice" class="form-control" id="exampleFormControlInput1">
+                        <div class="row">
+                            <div class="col-auto">
+                                <label for="purchasePrice" class="form-label">Purchase Price</label>
+                                <div class="input-group mb-3">
+                                    <span class="input-group-text" id="basic-addon1">£</span>
+                                    <input type="text" formControlName="purchasePrice" class="form-control"
+                                        id="purchasePrice">
+                                </div>
                             </div>
 
-                            <mat-form-field appearance="outline" class="custom-input">
-                                <mat-label>Purchase Price</mat-label>
-                                <input matInput formControlName="purchasePrice" type="number" required>
-                            </mat-form-field>
+                            <div class="col-auto">
+                                <label for="legalAndAuctionFees" class="form-label">Legal/Auction/Sourcing Fees</label>
+                                <input type="text" formControlName="legalAndAuctionFees" class="form-control" required>
+                            </div>
 
-                            <mat-form-field appearance="outline" class="custom-input">
-                                <mat-label>Legal/Auction/Sourcing Fees</mat-label>
-                                <input matInput formControlName="legalAndAuctionFees" type="number" required>
-                            </mat-form-field>
+                            <div class="col-auto">
+                                <label for="refurbCost" class="form-label">Refurb Cost</label>
+                                <input type="text" formControlName="refurbCost" class="form-control" required>
+                            </div>
 
-                            <mat-form-field appearance="outline" class="custom-input">
-                                <mat-label>Refurb Cost</mat-label>
-                                <input matInput formControlName="refurbCost" type="number" required>
-                            </mat-form-field>
-                        </div>
-                        <!-- <div class="row "> Calculated </div> -->
-                        <div class="field-row">
-                            <mat-form-field appearance="outline" class="custom-input">
-                                <mat-label class="calculated-text-color">Stamp Duty (BTL Res rate)</mat-label>
-                                <input class="calculated-text-color" matInput readonly="true"
-                                    formControlName="stampDuty" type="number" tabindex="-1">
-                            </mat-form-field>
+                            <div class="col-auto">
+                                <label for="refurbCost" class="form-label">Stamp Duty (BTL Res rate)</label>
+                                <input type="text" formControlName="stampDuty"
+                                    class="form-control calculated-text-color" readonly>
+                            </div>
                         </div>
                     </div>
-                </mat-card-content>
-            </mat-card>
+                </div>
+            </div>
 
             <!-- Borrowing Information Card -->
-            <mat-card class="input-card">
-                <mat-card-header>
-                    <h3>Borrowing</h3>
-                </mat-card-header>
-                <mat-card-content>
+            <div class="card input-card">
+                <div class="card-header">
+                    <h3 class="mb-0">Borrowing</h3>
+                </div>
+
+                <div class="card-body">
+
                     <div formGroupName="borrowingInformation">
-                        <div class="field-row">
-                            <mat-form-field appearance="outline">
-                                <mat-label>Deposit (%)</mat-label>
-                                <input matInput formControlName="depositPercentage" type="number" required>
-                            </mat-form-field>
-                            <!-- <div class="spacing-field-one"></div> -->
-                            <mat-form-field appearance="outline">
-                                <mat-label>Months on Bridging</mat-label>
-                                <input matInput formControlName="monthsOnBridging" type="number" required>
-                            </mat-form-field>
-                            <mat-form-field appearance="outline">
-                                <mat-label>Mortgage Arrangement Fee (%)</mat-label>
-                                <input matInput formControlName="mortgageFeePercentage" type="number" required>
-                            </mat-form-field>
-                            <mat-form-field appearance="outline">
-                                <mat-label>Mortgage Interest Rate (%)</mat-label>
-                                <input matInput formControlName="mortgageInterestRate" type="number" required>
-                            </mat-form-field>
+
+                        <div class="row mb-3">
+
+                            <div class="col-auto">
+                                <label for="depositPercentage" class="form-label">Deposit (%)</label>
+                                <input type="number" formControlName="depositPercentage" class="form-control" required>
+                            </div>
+
+                            <div class="col-auto">
+                                <label for="monthsOnBridging" class="form-label">Months on Bridging</label>
+                                <input type="text" formControlName="monthsOnBridging" class="form-control" required>
+                            </div>
+
+                            <div class="col-auto">
+                                <label for="mortgageFeePercentage" class="form-label">Mortgage Arrangement Fee
+                                    (%)</label>
+                                <input type="text" formControlName="mortgageFeePercentage" class="form-control"
+                                    required>
+                            </div>
+
+                            <div class="col-auto">
+                                <label for="mortgageInterestRate" class="form-label">Mortgage Interest Rate (%)</label>
+                                <input type="text" formControlName="mortgageInterestRate" class="form-control" required>
+                            </div>
+
                         </div>
-                        <!-- <div class="field-row"> Calculated </div> -->
-                        <div class="field-row">
-                            <mat-form-field appearance="outline">
-                                <mat-label class="calculated-text-color">Mortgage (%)</mat-label>
-                                <input class="calculated-text-color" matInput readonly="true"
-                                    formControlName="mortgagePercentage" type="number" tabindex="-1">
-                            </mat-form-field>
-                            <mat-form-field appearance="outline">
-                                <mat-label class="calculated-text-color">Deposit Amount</mat-label>
-                                <input class="calculated-text-color" matInput readonly="true"
-                                    formControlName="dipositAmount" type="number" tabindex="-1">
-                            </mat-form-field>
-                            <mat-form-field appearance="outline">
-                                <mat-label class="calculated-text-color">Mortgage Amount</mat-label>
-                                <input class="calculated-text-color" matInput readonly="true"
-                                    formControlName="mortgageAmount" type="number" tabindex="-1">
-                            </mat-form-field>
-                            <mat-form-field appearance="outline">
-                                <mat-label class="calculated-text-color">Mortgage Fee Amount</mat-label>
-                                <input class="calculated-text-color" matInput readonly="true"
-                                    formControlName="mortgageFeeAmount" type="number" tabindex="-1">
-                            </mat-form-field>
-                            <mat-form-field appearance="outline">
-                                <mat-label class="calculated-text-color">Mortgage Interest Amount</mat-label>
-                                <input class="calculated-text-color" matInput readonly="true"
-                                    formControlName="mortgageInterestAmount" type="number" tabindex="-1">
-                            </mat-form-field>
+
+                        <div class="row">
+
+                            <div class="col-auto">
+                                <label for="mortgagePercentage" class="form-label">Mortgage (%)</label>
+                                <input type="number" formControlName="mortgagePercentage"
+                                    class="form-control calculated-text-color" readonly>
+                            </div>
+
+                            <div class="col-auto">
+                                <label for="dipositAmount" class="form-label">Deposit Amount</label>
+                                <input type="text" formControlName="dipositAmount"
+                                    class="form-control calculated-text-color" readonly>
+                            </div>
+
+                            <div class="col-auto">
+                                <label for="mortgageAmount" class="form-label">Mortgage Amount</label>
+                                <input type="text" formControlName="mortgageAmount"
+                                    class="form-control calculated-text-color" required>
+                            </div>
+
+                            <div class="col-auto">
+                                <label for="mortgageFeeAmount" class="form-label">Mortgage Fee Amount</label>
+                                <input type="text" formControlName="mortgageFeeAmount"
+                                    class="form-control calculated-text-color" required>
+                            </div>
+
+                            <div class="col-auto mt-3">
+                                <label for="mortgageInterestAmount" class="form-label">Mortgage Interest Amount</label>
+                                <input type="text" formControlName="mortgageInterestAmount"
+                                    class="form-control calculated-text-color" required>
+                            </div>
+
                         </div>
+
                     </div>
-                </mat-card-content>
-            </mat-card>
+                </div>
+            </div>
 
             <!-- BTL Information Card -->
-            <mat-card class="input-card">
-                <mat-card-header>
-                    <h3>BTL Information (if applicable)</h3>
-                </mat-card-header>
-                <mat-card-content>
+            <div class="card input-card">
+                <div class="card-header">
+                    <h3 class="mb-0">BTL Information (if applicable)</h3>
+                </div>
+                <div class="card-body">
                     <div formGroupName="BTLInformation">
                         <div class="field-row">
                             <mat-form-field appearance="outline">
@@ -131,15 +143,15 @@
                             </mat-form-field>
                         </div>
                     </div>
-                </mat-card-content>
-            </mat-card>
+                </div>
+            </div>
 
             <!-- BRR Information Card -->
-            <mat-card class="input-card">
-                <mat-card-header>
-                    <h3>BRR Information (if applicable)</h3>
-                </mat-card-header>
-                <mat-card-content>
+            <div class="card input-card">
+                <div class="card-header">
+                    <h3 class="mb-0">BRR Information (if applicable)</h3>
+                </div>
+                <div class="card-body">
                     <div formGroupName="BRRInformation">
                         <div class="field-row">
                             <mat-form-field appearance="outline">
@@ -179,15 +191,15 @@
                             </mat-form-field>
                         </div>
                     </div>
-                </mat-card-content>
-            </mat-card>
+                </div>
+            </div>
 
             <!-- BTS Information Card -->
-            <mat-card class="input-card">
-                <mat-card-header>
-                    <h3>BTS Information (if applicable)</h3>
-                </mat-card-header>
-                <mat-card-content>
+            <div class="card input-card">
+                <div class="card-header">
+                    <h3 class="mb-0">BTS Information (if applicable)</h3>
+                </div>
+                <div class="card-body">
                     <div formGroupName="BTSInformation">
                         <div class="field-row">
                             <mat-form-field appearance="outline">
@@ -214,9 +226,9 @@
                             </mat-form-field>
                         </div>
                     </div>
-                </mat-card-content>
-               
-            </mat-card>
+                </div>
+
+            </div>
         </div>
 
         <!-- Calculation Results -->
@@ -236,52 +248,59 @@
                             <h3 class="figure-title">Exit Option - BTL</h3>
                             <div class="grid-container">
                                 <div>Total Investment Costs:</div>
-                                <div class="text-end">{{ figures.exitOptionBTL.totalInvestmentCosts | currency: 'GBP'}}</div>
-        
+                                <div class="text-end">{{ figures.exitOptionBTL.totalInvestmentCosts | currency: 'GBP'}}
+                                </div>
+
                                 <div>Monthly Cashflow:</div>
                                 <div class="text-end">{{ figures.exitOptionBTL.monthlyCashflow | currency: 'GBP'}}</div>
-        
+
                                 <div>Gross Yield: </div>
                                 <div class="text-end">{{ figures.exitOptionBTL.grossYield}}%</div>
-        
+
                                 <div> Net Yield:</div>
                                 <div class="text-end">{{ figures.exitOptionBTL.netYield }}%</div>
-        
+
                                 <div>Return On Investment:</div>
                                 <div class="text-end">{{ figures.exitOptionBTL.returnOnInvestment }}%</div>
                             </div>
-        
+
                             <h3 class="figure-title">Exit Option - BRR Refinance</h3>
                             <div class="grid-container">
                                 <div>Refinanced Monthly Cashflow:</div>
-                                <div class="text-end">{{ figures.exitOptionBRR.refinancedMonthlyCashflow | currency: 'GBP'}}</div>
-        
-                                <div>Cash Out From Refinancing:</div>
-                                <div class="text-end">{{ figures.exitOptionBRR.cashOutFromRefinancing | currency: 'GBP'}}</div>
-        
-                                <div class="highlighted-cash-left-in">Money Left In Deal: </div>
-                                <div class="highlighted-cash-left-in text-end">{{ figures.exitOptionBRR.moneyLeftInDeal | currency:
+                                <div class="text-end">{{ figures.exitOptionBRR.refinancedMonthlyCashflow | currency:
                                     'GBP'}}</div>
-        
+
+                                <div>Cash Out From Refinancing:</div>
+                                <div class="text-end">{{ figures.exitOptionBRR.cashOutFromRefinancing | currency:
+                                    'GBP'}}</div>
+
+                                <div class="highlighted-cash-left-in">Money Left In Deal: </div>
+                                <div class="highlighted-cash-left-in text-end">{{ figures.exitOptionBRR.moneyLeftInDeal
+                                    | currency:
+                                    'GBP'}}</div>
+
                                 <div> Months Before No Money Left In:</div>
                                 <div class="text-end">{{ figures.exitOptionBRR.monthsBeforeNoMoneyLeft }}</div>
-        
+
                                 <div>Return On Investment:</div>
                                 <div class="text-end">{{ figures.exitOptionBRR.returnOnInvestment }}%</div>
                             </div>
-        
+
                             <h3 class="figure-title">Exit Option - BTS</h3>
                             <div class="grid-container">
                                 <div>Total Investment Costs:</div>
-                                <div class="text-end">{{ figures.exitOptionBTS.totalInvestmentCosts | currency: 'GBP'}}</div>
-        
-                                <div>Total Selling Costs:</div>
-                                <div class="text-end">{{ figures.exitOptionBTS.totalSellingCosts | currency: 'GBP'}}</div>
-        
-                                <div class="highlighted-profit">Profit From Deal: </div>
-                                <div class="highlighted-profit text-end">{{ figures.exitOptionBTS.profitFromDeal | currency: 'GBP'}}
+                                <div class="text-end">{{ figures.exitOptionBTS.totalInvestmentCosts | currency: 'GBP'}}
                                 </div>
-        
+
+                                <div>Total Selling Costs:</div>
+                                <div class="text-end">{{ figures.exitOptionBTS.totalSellingCosts | currency: 'GBP'}}
+                                </div>
+
+                                <div class="highlighted-profit">Profit From Deal: </div>
+                                <div class="highlighted-profit text-end">{{ figures.exitOptionBTS.profitFromDeal |
+                                    currency: 'GBP'}}
+                                </div>
+
                                 <div> Return On Investment:</div>
                                 <div class="text-end">{{ figures.exitOptionBTS.returnOnInvestment }}%</div>
                             </div>
@@ -297,11 +316,13 @@
                         </div>
                         <div>Rightmove Link</div>
                         <div>
-                            <a [href]="metaData.rightmoveLink" target="_blank"> Click here to navigate to rigtmove link</a>
+                            <a [href]="metaData.rightmoveLink" target="_blank"> Click here to navigate to rigtmove
+                                link</a>
                         </div>
                         <div>Auction Link</div>
                         <div>
-                            <a [href]="metaData.auctionSiteLink" target="_blank">Click here to navigate to auction link</a>
+                            <a [href]="metaData.auctionSiteLink" target="_blank">Click here to navigate to auction
+                                link</a>
                         </div>
                         <div>Notes</div>
                         <div>
@@ -312,7 +333,8 @@
                     </div>
                 </ng-container>
                 <div *ngIf="!propertyForm.invalid" class="d-grid button-wrapper">
-                    <button class="btn btn-primary btn-block btn-lg" (click)="saveCalculation()">Save Calculation</button>
+                    <button class="btn btn-primary btn-block btn-lg" (click)="saveCalculation()">Save
+                        Calculation</button>
                     <!-- <button class="btn btn-primary btn-block btn-lg" (click)="exportAsPDF()">Export Calculation</button> -->
                 </div>
             </mat-card>
