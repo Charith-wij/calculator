@@ -273,23 +273,36 @@
                                 <img class="image" [src]="imageURL" alt="photo 1">
                             </div>
                             <h3 class="figure-title">Exit Option - BTL</h3>
-                            <div class="grid-container">
-                                <div>Total Investment Costs:</div>
-                                <div class="text-end">{{ figures.exitOptionBTL.totalInvestmentCosts | currency: 'GBP'}}
-                                </div>
 
-                                <div>Monthly Cashflow:</div>
-                                <div class="text-end">{{ figures.exitOptionBTL.monthlyCashflow | currency: 'GBP'}}</div>
+                            <ul class="list-group">
 
-                                <div>Gross Yield: </div>
-                                <div class="text-end">{{ figures.exitOptionBTL.grossYield}}%</div>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    Total Investment Costs:
+                                  <span class="text-primary">{{ figures.exitOptionBTL.totalInvestmentCosts | currency: 'GBP'}}</span>
+                                </li>
 
-                                <div> Net Yield:</div>
-                                <div class="text-end">{{ figures.exitOptionBTL.netYield }}%</div>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    Monthly Cashflow:
+                                  <span class="text-primary">{{ figures.exitOptionBTL.monthlyCashflow | currency: 'GBP'}}</span>
+                                </li>
 
-                                <div>Return On Investment:</div>
-                                <div class="text-end">{{ figures.exitOptionBTL.returnOnInvestment }}%</div>
-                            </div>
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    Gross Yield:
+                                  <span class="text-primary">{{ figures.exitOptionBTL.grossYield}}%</span>
+                                </li>
+
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    Net Yield:
+                                  <span class="text-primary">{{ figures.exitOptionBTL.netYield }}%</span>
+                                </li>
+
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    Return On Investment:
+                                  <span class="text-primary">{{ figures.exitOptionBTL.returnOnInvestment }}%</span>
+                                </li>
+                               
+                              </ul>
+
 
                             <h3 class="figure-title">Exit Option - BRR Refinance</h3>
                             <div class="grid-container">
