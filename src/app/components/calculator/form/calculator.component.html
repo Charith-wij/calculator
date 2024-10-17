@@ -14,25 +14,34 @@
                                 <label for="purchasePrice" class="form-label">Purchase Price</label>
                                 <div class="input-group mb-3">
                                     <span class="input-group-text" id="basic-addon1">£</span>
-                                    <input type="text" formControlName="purchasePrice" class="form-control"
+                                    <input type="number" formControlName="purchasePrice" class="form-control"
                                         id="purchasePrice">
                                 </div>
                             </div>
 
                             <div class="col-auto">
                                 <label for="legalAndAuctionFees" class="form-label">Legal/Auction/Sourcing Fees</label>
-                                <input type="text" formControlName="legalAndAuctionFees" class="form-control" required>
+                                <div class="input-group">
+                                    <span class="input-group-text" id="basic-addon1">£</span>
+                                    <input type="number" formControlName="legalAndAuctionFees" class="form-control" required>
+                                </div>
+                                <!-- <div class="input-group"></div> -->
                             </div>
-
+                            
                             <div class="col-auto">
                                 <label for="refurbCost" class="form-label">Refurb Cost</label>
-                                <input type="text" formControlName="refurbCost" class="form-control" required>
+                                <div class="input-group">
+                                    <span class="input-group-text" id="basic-addon1">£</span>
+                                    <input type="number" formControlName="refurbCost" class="form-control" required>
+                                </div>
                             </div>
-
+                            
                             <div class="col-auto">
                                 <label for="refurbCost" class="form-label">Stamp Duty (BTL Res rate)</label>
-                                <input type="text" formControlName="stampDuty"
-                                    class="form-control calculated-text-color" readonly>
+                                <div class="input-group">
+                                    <span class="input-group-text" id="basic-addon1">£</span>
+                                    <input type="number" formControlName="stampDuty" class="form-control calculated-text-color" readonly>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -85,26 +94,34 @@
 
                             <div class="col-auto">
                                 <label for="dipositAmount" class="form-label">Deposit Amount</label>
-                                <input type="text" formControlName="dipositAmount"
-                                    class="form-control calculated-text-color" readonly>
+                                 <div class="input-group">
+                                    <span class="input-group-text" id="basic-addon1">£</span>
+                                    <input type="text" formControlName="dipositAmount" class="form-control calculated-text-color" readonly>
+                                 </div>
                             </div>
 
                             <div class="col-auto">
                                 <label for="mortgageAmount" class="form-label">Mortgage Amount</label>
-                                <input type="text" formControlName="mortgageAmount"
-                                    class="form-control calculated-text-color" required>
+                                 <div class="input-group">
+                                    <span class="input-group-text" id="basic-addon1">£</span>
+                                    <input type="text" formControlName="mortgageAmount" class="form-control calculated-text-color" required>
+                                 </div>
                             </div>
 
                             <div class="col-auto">
                                 <label for="mortgageFeeAmount" class="form-label">Mortgage Fee Amount</label>
-                                <input type="text" formControlName="mortgageFeeAmount"
-                                    class="form-control calculated-text-color" required>
+                                <div class="input-group">
+                                    <span class="input-group-text" id="basic-addon1">£</span>
+                                    <input type="text" formControlName="mortgageFeeAmount" class="form-control calculated-text-color" required>
+                                </div>
                             </div>
 
-                            <div class="col-auto mt-3">
+                            <div class="col-auto">
                                 <label for="mortgageInterestAmount" class="form-label">Mortgage Interest Amount</label>
-                                <input type="text" formControlName="mortgageInterestAmount"
-                                    class="form-control calculated-text-color" required>
+                                <div class="input-group">
+                                    <span class="input-group-text" id="basic-addon1">£</span>
+                                    <input type="text" formControlName="mortgageInterestAmount" class="form-control calculated-text-color" required>
+                                </div>
                             </div>
 
                         </div>
@@ -128,8 +145,10 @@
 
                             <div class="col-auto">
                                 <label for="monthlyRent" class="form-label">Monthly Rent</label>
-                                <input type="number" formControlName="monthlyRent"
-                                    class="form-control" required>
+                                <div class="input-group">
+                                    <span class="input-group-text" id="basic-addon1">£</span>
+                                    <input type="number" formControlName="monthlyRent" class="form-control" required>
+                                </div>
                             </div>
 
                             <div class="col-auto">
@@ -140,14 +159,18 @@
 
                             <div class="col-auto">
                                 <label for="monthlyRunningCosts" class="form-label">Monthly Running Costs</label>
-                                <input type="number" formControlName="monthlyRunningCosts"
-                                    class="form-control" required>
+                                <div class="input-group">
+                                    <span class="input-group-text" id="basic-addon1">£</span>
+                                    <input type="number" formControlName="monthlyRunningCosts" class="form-control" required>
+                                </div>
                             </div>
 
                             <div class="col-auto">
                                 <label for="lettingAgentFeeAmount" class="form-label">Letting Agents Fee Amount</label>
-                                <input type="number" formControlName="lettingAgentFeeAmount"
-                                    class="form-control calculated-text-color" required>
+                                <div class="input-group">
+                                    <span class="input-group-text" id="basic-addon1">£</span>
+                                    <input type="number" formControlName="lettingAgentFeeAmount" class="form-control calculated-text-color" required>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -167,8 +190,10 @@
 
                             <div class="col-auto">
                                 <label for="newMarketValue" class="form-label">New Market Value</label>
-                                <input type="number" formControlName="newMarketValue"
-                                    class="form-control calculated-text-color" required>
+                                <div class="input-group">
+                                    <span class="input-group-text" id="basic-addon1">£</span>
+                                    <input type="number" formControlName="newMarketValue" class="form-control calculated-text-color" required>
+                                </div>
                             </div>
 
                             <div class="col-auto">
@@ -194,20 +219,29 @@
 
                             <div class="col-auto">
                                 <label for="refinancedLTVAmount" class="form-label">Refinanced LTV Amount</label>
-                                <input type="number" formControlName="refinancedLTVAmount"
-                                    class="form-control calculated-text-color" required>
+                                <div class="input-group">
+                                    <span class="input-group-text" id="basic-addon1">£</span>
+                                    <input type="number" formControlName="refinancedLTVAmount"
+                                        class="form-control calculated-text-color" required>
+                                </div>
                             </div>
 
                             <div class="col-auto">
                                 <label for="refinanceFeeAmount" class="form-label">Mortgage Fee Amount</label>
-                                <input type="number" formControlName="refinanceFeeAmount"
-                                    class="form-control calculated-text-color" required>
+                                <div class="input-group">
+                                    <span class="input-group-text" id="basic-addon1">£</span>
+                                    <input type="number" formControlName="refinanceFeeAmount"
+                                        class="form-control calculated-text-color" required>
+                                </div>
                             </div>
 
                             <div class="col-auto">
                                 <label for="refinanceInterestAmount" class="form-label">Mortgage Interest Amount</label>
-                                <input type="number" formControlName="refinanceInterestAmount"
-                                    class="form-control calculated-text-color" required>
+                                <div class="input-group">
+                                    <span class="input-group-text" id="basic-addon1">£</span>
+                                    <input type="number" formControlName="refinanceInterestAmount"
+                                        class="form-control calculated-text-color" required>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -229,14 +263,20 @@
 
                             <div class="col-auto">
                                 <label for="salePrice" class="form-label">Sale Price</label>
-                                <input type="number" formControlName="salePrice"
-                                    class="form-control" required>
+                                <div class="input-group">
+                                    <span class="input-group-text" id="basic-addon1">£</span>
+                                    <input type="number" formControlName="salePrice"
+                                        class="form-control" required>
+                                </div>
                             </div>
 
                             <div class="col-auto">
                                 <label for="legalFeesBTS" class="form-label">Legal Fees</label>
-                                <input type="number" formControlName="legalFeesBTS"
-                                    class="form-control" required>
+                                <div class="input-group">
+                                    <span class="input-group-text" id="basic-addon1">£</span>
+                                    <input type="number" formControlName="legalFeesBTS"
+                                        class="form-control" required>
+                                </div>
                             </div>
 
                             <div class="col-auto">
@@ -247,8 +287,11 @@
 
                             <div class="col-auto">
                                 <label for="estateAgentFeeAmount" class="form-label">Estate Agent Fee Amount</label>
-                                <input type="number" formControlName="estateAgentFeeAmount"
-                                    class="form-control calculated-text-color" readonly>
+                                <div class="input-group">
+                                    <span class="input-group-text" id="basic-addon1">£</span>
+                                    <input type="number" formControlName="estateAgentFeeAmount"
+                                        class="form-control calculated-text-color" readonly>
+                                </div>
                             </div>
 
                         </div>
@@ -372,7 +415,7 @@
                         </div>
                     </div>
                 </ng-container>
-                <div *ngIf="!propertyForm.invalid" class="d-grid button-wrapper">
+                <div *ngIf="!propertyForm.invalid" class="d-flex button-wrapper">
                     <button class="btn btn-primary btn-block btn-lg" (click)="saveCalculation()">Save
                         Calculation</button>
                     <!-- <button class="btn btn-primary btn-block btn-lg" (click)="exportAsPDF()">Export Calculation</button> -->
