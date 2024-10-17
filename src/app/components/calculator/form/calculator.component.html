@@ -128,20 +128,18 @@
 
                             <div class="col-auto">
                                 <label for="monthlyRent" class="form-label">Monthly Rent</label>
-                                <input type="number" formControlName="monthlyRent"
-                                    class="form-control" required>
+                                <input type="number" formControlName="monthlyRent" class="form-control" required>
                             </div>
 
                             <div class="col-auto">
                                 <label for="lettingAgentFee" class="form-label">Letting Agents Fee (%)</label>
-                                <input type="number" formControlName="lettingAgentFee"
-                                    class="form-control" required>
+                                <input type="number" formControlName="lettingAgentFee" class="form-control" required>
                             </div>
 
                             <div class="col-auto">
                                 <label for="monthlyRunningCosts" class="form-label">Monthly Running Costs</label>
-                                <input type="number" formControlName="monthlyRunningCosts"
-                                    class="form-control" required>
+                                <input type="number" formControlName="monthlyRunningCosts" class="form-control"
+                                    required>
                             </div>
 
                             <div class="col-auto">
@@ -178,13 +176,15 @@
                             </div>
 
                             <div class="col-auto">
-                                <label for="refinancingArrangementFee" class="form-label">Mortgage Arrangement Fee (%)</label>
+                                <label for="refinancingArrangementFee" class="form-label">Mortgage Arrangement Fee
+                                    (%)</label>
                                 <input type="number" formControlName="refinancingArrangementFee"
                                     class="form-control calculated-text-color" required>
                             </div>
 
                             <div class="col-auto">
-                                <label for="refinancingInterestRate" class="form-label">Mortgage Interest Rate (%)</label>
+                                <label for="refinancingInterestRate" class="form-label">Mortgage Interest Rate
+                                    (%)</label>
                                 <input type="number" formControlName="refinancingInterestRate"
                                     class="form-control calculated-text-color" required>
                             </div>
@@ -229,20 +229,17 @@
 
                             <div class="col-auto">
                                 <label for="salePrice" class="form-label">Sale Price</label>
-                                <input type="number" formControlName="salePrice"
-                                    class="form-control" required>
+                                <input type="number" formControlName="salePrice" class="form-control" required>
                             </div>
 
                             <div class="col-auto">
                                 <label for="legalFeesBTS" class="form-label">Legal Fees</label>
-                                <input type="number" formControlName="legalFeesBTS"
-                                    class="form-control" required>
+                                <input type="number" formControlName="legalFeesBTS" class="form-control" required>
                             </div>
 
                             <div class="col-auto">
                                 <label for="estateAgentFee" class="form-label">Estate Agent Fee (%)</label>
-                                <input type="number" formControlName="estateAgentFee"
-                                    class="form-control" required>
+                                <input type="number" formControlName="estateAgentFee" class="form-control" required>
                             </div>
 
                             <div class="col-auto">
@@ -268,107 +265,165 @@
                 </ng-container>
                 <ng-container *ngIf="figures">
                     <ng-container *ngIf="propertyForm.valid">
-                        <mat-card-content>
-                            <div class="image-container">
-                                <img class="image" [src]="imageURL" alt="photo 1">
-                            </div>
-                            <h3 class="figure-title">Exit Option - BTL</h3>
+                        <div class="card border-0">
+                            <div class="card-body">
 
-                            <ul class="list-group">
-
-                                <li class="list-group-item d-flex justify-content-between align-items-center">
-                                    Total Investment Costs:
-                                  <span class="text-primary">{{ figures.exitOptionBTL.totalInvestmentCosts | currency: 'GBP'}}</span>
-                                </li>
-
-                                <li class="list-group-item d-flex justify-content-between align-items-center">
-                                    Monthly Cashflow:
-                                  <span class="text-primary">{{ figures.exitOptionBTL.monthlyCashflow | currency: 'GBP'}}</span>
-                                </li>
-
-                                <li class="list-group-item d-flex justify-content-between align-items-center">
-                                    Gross Yield:
-                                  <span class="text-primary">{{ figures.exitOptionBTL.grossYield}}%</span>
-                                </li>
-
-                                <li class="list-group-item d-flex justify-content-between align-items-center">
-                                    Net Yield:
-                                  <span class="text-primary">{{ figures.exitOptionBTL.netYield }}%</span>
-                                </li>
-
-                                <li class="list-group-item d-flex justify-content-between align-items-center">
-                                    Return On Investment:
-                                  <span class="text-primary">{{ figures.exitOptionBTL.returnOnInvestment }}%</span>
-                                </li>
-                               
-                              </ul>
-
-
-                            <h3 class="figure-title">Exit Option - BRR Refinance</h3>
-                            <div class="grid-container">
-                                <div>Refinanced Monthly Cashflow:</div>
-                                <div class="text-end">{{ figures.exitOptionBRR.refinancedMonthlyCashflow | currency:
-                                    'GBP'}}</div>
-
-                                <div>Cash Out From Refinancing:</div>
-                                <div class="text-end">{{ figures.exitOptionBRR.cashOutFromRefinancing | currency:
-                                    'GBP'}}</div>
-
-                                <div class="highlighted-cash-left-in">Money Left In Deal: </div>
-                                <div class="highlighted-cash-left-in text-end">{{ figures.exitOptionBRR.moneyLeftInDeal
-                                    | currency:
-                                    'GBP'}}</div>
-
-                                <div> Months Before No Money Left In:</div>
-                                <div class="text-end">{{ figures.exitOptionBRR.monthsBeforeNoMoneyLeft }}</div>
-
-                                <div>Return On Investment:</div>
-                                <div class="text-end">{{ figures.exitOptionBRR.returnOnInvestment }}%</div>
-                            </div>
-
-                            <h3 class="figure-title">Exit Option - BTS</h3>
-                            <div class="grid-container">
-                                <div>Total Investment Costs:</div>
-                                <div class="text-end">{{ figures.exitOptionBTS.totalInvestmentCosts | currency: 'GBP'}}
+                                <div class="image-container">
+                                    <img class="image" [src]="imageURL" alt="photo 1">
                                 </div>
 
-                                <div>Total Selling Costs:</div>
-                                <div class="text-end">{{ figures.exitOptionBTS.totalSellingCosts | currency: 'GBP'}}
+                                <div class="mb-4">
+
+                                    <h3 class="figure-title mb-1">Exit Option - BTL</h3>
+
+                                    <ul class="list-group">
+
+                                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                                            Total Investment Costs:
+                                            <span class="text-primary">{{ figures.exitOptionBTL.totalInvestmentCosts |
+                                                currency: 'GBP'}}</span>
+                                        </li>
+
+                                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                                            Monthly Cashflow:
+                                            <span class="text-primary">{{ figures.exitOptionBTL.monthlyCashflow |
+                                                currency: 'GBP'}}</span>
+                                        </li>
+
+                                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                                            Gross Yield:
+                                            <span class="text-primary">{{ figures.exitOptionBTL.grossYield}}%</span>
+                                        </li>
+
+                                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                                            Net Yield:
+                                            <span class="text-primary">{{ figures.exitOptionBTL.netYield }}%</span>
+                                        </li>
+
+                                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                                            Return On Investment:
+                                            <span class="text-primary">{{ figures.exitOptionBTL.returnOnInvestment
+                                                }}%</span>
+                                        </li>
+
+                                    </ul>
                                 </div>
 
-                                <div class="highlighted-profit">Profit From Deal: </div>
-                                <div class="highlighted-profit text-end">{{ figures.exitOptionBTS.profitFromDeal |
-                                    currency: 'GBP'}}
+                                <div class="mb-4">
+
+                                    <h3 class="figure-title mb-1">Exit Option - BRR Refinance</h3>
+
+                                    <ul class="list-group">
+
+                                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                                            Refinanced Monthly Cashflow:
+                                            <span class="text-primary">{{
+                                                figures.exitOptionBRR.refinancedMonthlyCashflow | currency:
+                                                'GBP'}}</span>
+                                        </li>
+
+                                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                                            Cash Out From Refinancing:
+                                            <span class="text-primary">{{ figures.exitOptionBRR.cashOutFromRefinancing |
+                                                currency:
+                                                'GBP'}}</span>
+                                        </li>
+
+                                        <li
+                                            class="list-group-item d-flex justify-content-between align-items-center text-bg-light">
+                                            Money Left In Deal:
+                                            <span class="text-primary fs-5 fw-bold">{{
+                                                figures.exitOptionBRR.moneyLeftInDeal
+                                                | currency:
+                                                'GBP'}}</span>
+                                        </li>
+
+                                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                                            Months Before No Money Left In:
+                                            <span class="text-primary">{{ figures.exitOptionBRR.monthsBeforeNoMoneyLeft
+                                                }}</span>
+                                        </li>
+
+                                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                                            Return On Investment:
+                                            <span class="text-primary">{{ figures.exitOptionBRR.returnOnInvestment
+                                                }}%</span>
+                                        </li>
+
+                                    </ul>
+
                                 </div>
 
-                                <div> Return On Investment:</div>
-                                <div class="text-end">{{ figures.exitOptionBTS.returnOnInvestment }}%</div>
+                                <div class="mb-4">
+
+                                    <h3 class="figure-title mb-1">Exit Option - BTS</h3>
+
+                                    <ul class="list-group">
+
+                                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                                            Total Investment Costs:
+                                            <span class="text-primary">{{ figures.exitOptionBTS.totalInvestmentCosts |
+                                                currency: 'GBP'}}</span>
+                                        </li>
+
+                                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                                            Total Selling Costs:
+                                            <span class="text-primary">{{ figures.exitOptionBTS.totalSellingCosts |
+                                                currency: 'GBP'}}</span>
+                                        </li>
+
+                                        <li
+                                            class="list-group-item d-flex justify-content-between align-items-center text-bg-light">
+                                            Profit From Deal:
+                                            <span class="text-primary fs-5 fw-bold">{{
+                                                figures.exitOptionBTS.profitFromDeal |
+                                                currency: 'GBP'}}</span>
+                                        </li>
+
+                                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                                            Return On Investment:
+                                            <span class="text-primary">{{ figures.exitOptionBTS.returnOnInvestment
+                                                }}%</span>
+                                        </li>
+
+                                    </ul>
+
+                                </div>
+
                             </div>
-                        </mat-card-content>
+                        </div>
                     </ng-container>
                 </ng-container>
                 <!-- <hr> -->
                 <ng-container *ngIf="formData?.metaData as metaData">
-                    <div class="mt-3 p-3 meta-data-grid">
-                        <div>Guide Price</div>
-                        <div class="text-end">
-                            {{metaData.guidePrice}}
-                        </div>
-                        <div>Rightmove Link</div>
-                        <div>
-                            <a [href]="metaData.rightmoveLink" target="_blank"> Click here to navigate to rigtmove
-                                link</a>
-                        </div>
-                        <div>Auction Link</div>
-                        <div>
-                            <a [href]="metaData.auctionSiteLink" target="_blank">Click here to navigate to auction
-                                link</a>
-                        </div>
-                        <div>Notes</div>
-                        <div>
-                            <textarea readonly="true">
-                                {{metaData.notes}}
-                            </textarea>
+                    <div class="card border-0">
+                        <div class="card-body">
+                            <ul class="list-group mb-3">
+
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    Guide Price
+                                    <span class="">{{metaData.guidePrice}}</span>
+                                </li>
+
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    Rightmove Link
+                                    <span class="text-wrap"><a [href]="metaData.rightmoveLink" target="_blank">Click
+                                            here to navigate to rigtmove
+                                            link</a></span>
+                                </li>
+
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    Auction Link
+                                    <span class="text-wrap"><a [href]="metaData.auctionSiteLink" target="_blank">Click
+                                            here to navigate to auction
+                                            link</a></span>
+                                </li>
+
+                            </ul>
+                            <div class="form-floating">
+                                <textarea class="form-control" placeholder="Leave a notes here" id="floatingTextarea"></textarea>
+                                <label for="floatingTextarea">Notes</label>
+                              </div>
                         </div>
                     </div>
                 </ng-container>
