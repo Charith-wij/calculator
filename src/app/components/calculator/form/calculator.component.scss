@@ -59,6 +59,7 @@ mat-card-header {
 
 .button-wrapper {
   margin: auto;
+  padding-bottom: 1rem;
 }
 
 .message-info {
@@ -125,10 +126,12 @@ mat-card-header {
 }
 
 .image-container {
-  padding: 3rem;
+  padding: 0.2rem;
+  display: flex;
+  justify-content: center;
 
   .image {
-    max-width: 100%;
+    max-height: 200px;
   }
 }
 

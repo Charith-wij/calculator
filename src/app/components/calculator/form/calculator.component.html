@@ -312,10 +312,40 @@
                 <ng-container *ngIf="figures">
                     <ng-container *ngIf="propertyForm.valid">
                         <div class="card border-0">
-                            <div class="card-body">
-
-                                <div class="image-container">
-                                    <img [src]="imageURL" class="img-thumbnail" alt="property image">
+                            <div class="card-body pb-0">
+                                <div class="row">
+                                    
+                                    <div class="col">
+                                        <ng-container *ngIf="formData?.metaData as metaData">
+                                            <ul class="list-group mb-3">
+    
+                                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                    Guide Price
+                                                    <span class="">{{metaData.guidePrice}}</span>
+                                                </li>
+                
+                                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                    Rightmove Link
+                                                    <span class="text-wrap"><a [href]="metaData.rightmoveLink" target="_blank">Click
+                                                            here to navigate to rigtmove
+                                                            link</a></span>
+                                                </li>
+                
+                                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                    Auction Link
+                                                    <span class="text-wrap"><a [href]="metaData.auctionSiteLink" target="_blank">Click
+                                                            here to navigate to auction
+                                                            link</a></span>
+                                                </li>
+                
+                                            </ul>
+                                        </ng-container>
+                                    </div>
+                                    <div class="col">
+                                        <div class="image-container">
+                                            <img [src]="imageURL" class="image" alt="property image">
+                                        </div>
+                                    </div>
                                 </div>
 
                                 <div class="mb-4">
@@ -443,38 +473,16 @@
                 <!-- <hr> -->
                 <ng-container *ngIf="formData?.metaData as metaData">
                     <div class="card border-0">
-                        <div class="card-body">
-                            <ul class="list-group mb-3">
-
-                                <li class="list-group-item d-flex justify-content-between align-items-center">
-                                    Guide Price
-                                    <span class="">{{metaData.guidePrice}}</span>
-                                </li>
-
-                                <li class="list-group-item d-flex justify-content-between align-items-center">
-                                    Rightmove Link
-                                    <span class="text-wrap"><a [href]="metaData.rightmoveLink" target="_blank">Click
-                                            here to navigate to rigtmove
-                                            link</a></span>
-                                </li>
-
-                                <li class="list-group-item d-flex justify-content-between align-items-center">
-                                    Auction Link
-                                    <span class="text-wrap"><a [href]="metaData.auctionSiteLink" target="_blank">Click
-                                            here to navigate to auction
-                                            link</a></span>
-                                </li>
-
-                            </ul>
-                            <div class="form-floating">
-                                <textarea class="form-control" placeholder="Leave a notes here" id="floatingTextarea"></textarea>
+                        <div class="card-body pt-0">
+                            <div class="form-floating" formGroupName="metaData">
+                                <textarea formControlName="notes"  class="form-control" placeholder="Leave a notes here" id="floatingTextarea"></textarea>
                                 <label for="floatingTextarea">Notes</label>
                               </div>
                         </div>
                     </div>
                 </ng-container>
                 <div *ngIf="!propertyForm.invalid" class="d-flex button-wrapper">
-                    <button class="btn btn-primary btn-block btn-lg" (click)="saveCalculation()">Save
+                    <button class="btn btn-primary btn-block" (click)="saveCalculation()">Save
                         Calculation</button>
                     <!-- <button class="btn btn-primary btn-block btn-lg" (click)="exportAsPDF()">Export Calculation</button> -->
                 </div>

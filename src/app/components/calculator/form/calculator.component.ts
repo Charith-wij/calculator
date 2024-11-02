@@ -425,22 +425,29 @@ export class CalculatorComponent implements OnInit, OnDestroy {
   }
 
   private getStampDuty(purchasePrice: number): number {
-    // Define the thresholds and rates
-    const thresholds = [125000, 250000, 925000, 1500000];
-    const rates = [0.02, 0.03, 0.05, 0.02];
-
-    // Calculate the sum product part
-    let sumProduct = 0;
-    for (let i = 0; i < thresholds.length; i++) {
-      if (purchasePrice > thresholds[i]) {
-        sumProduct += (purchasePrice - thresholds[i]) * rates[i];
-      }
+    // Threasholds and rates
+    const thresholds = [250000, 925000, 1500000];
+    const rates = [0.05, 0.10, 0.15, 0.17];
+  
+    // Calculate the stamp duty
+    let duty = 0;
+    
+    if (purchasePrice > thresholds[2]) {
+      duty += (purchasePrice - thresholds[2]) * rates[3];
+      purchasePrice = thresholds[2];
     }
-
-    // Calculate the additional fee if amount is >= 40000
-    let additionalFee = purchasePrice >= 40000 ? purchasePrice * 0.03 : 0;
-
-    // Return the total
-    return sumProduct + additionalFee;
+    if (purchasePrice > thresholds[1]) {
+      duty += (purchasePrice - thresholds[1]) * rates[2];
+      purchasePrice = thresholds[1];
+    }
+    if (purchasePrice > thresholds[0]) {
+      duty += (purchasePrice - thresholds[0]) * rates[1];
+      purchasePrice = thresholds[0];
+    }
+    if (purchasePrice > 0) {
+      duty += purchasePrice * rates[0];
+    }
+  
+    return duty;
   }
 }
