@@ -1,6 +1,6 @@
 <form [formGroup]="propertyForm" (ngSubmit)="calculateFigures()">
     <div class="calculator-container row" id="pdf-content">
-        <div class="col-8 left">
+        <div id="left-column" class="col-8 left">
             <h2 class="mt-0"> Property : {{propertyAddress}}</h2>
             <!-- Purchase Information Card -->
             <div class="card input-card">
@@ -302,7 +302,7 @@
         </div>
 
         <!-- Calculation Results -->
-        <div class="col-4 right">
+        <div id="right-column" class="col-4 right">
             <mat-card class="input-card figures-card">
                 <ng-container *ngIf="propertyForm.invalid">
                     <mat-card-content class="message-info">
@@ -343,7 +343,7 @@
                                     </div>
                                     <div class="col">
                                         <div class="image-container">
-                                            <img [src]="imageURL" class="image" alt="property image">
+                                            <img id="remote-image" [src]="imageURL" class="image">
                                         </div>
                                     </div>
                                 </div>
@@ -484,7 +484,7 @@
                 <div *ngIf="!propertyForm.invalid" class="d-flex button-wrapper">
                     <button class="btn btn-primary btn-block" (click)="saveCalculation()">Save
                         Calculation</button>
-                    <!-- <button class="btn btn-primary btn-block btn-lg" (click)="exportAsPDF()">Export Calculation</button> -->
+                    <button class="btn btn-secondary btn-block" (click)="exportAsPDF()">Export Calculation</button>
                 </div>
             </mat-card>
         </div>

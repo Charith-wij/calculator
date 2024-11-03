@@ -32,7 +32,7 @@ export class CalculatorComponent implements OnInit, OnDestroy {
     public dialog: MatDialog,
     private store: Store,
     private readonly floorAreaService: FloorAreaService) { }
-  
+
   /**
    * Angular lifecycle - component initialisation
    */
@@ -48,14 +48,14 @@ export class CalculatorComponent implements OnInit, OnDestroy {
           this.imageURL = formData.metaData.imageUrl;
         }
       }));
-      this.subscriptions.add(
-        this.propertyForm.statusChanges.subscribe((status: string) => {
-          if (status === 'VALID') {
-            this.calculateFigures();
-          }  
-        })
-      );
-      this.store.dispatch(new LoadSavedItemsFromLocalStorage());
+    this.subscriptions.add(
+      this.propertyForm.statusChanges.subscribe((status: string) => {
+        if (status === 'VALID') {
+          this.calculateFigures();
+        }
+      })
+    );
+    this.store.dispatch(new LoadSavedItemsFromLocalStorage());
     // this.floorAreaService.getFloorArea('B77 5QF', '43', 'Avill Hockley').subscribe(data => console.log(data));
     // this.floorAreaService.getFloorArea('le9 8fe', '15', 'byron street').subscribe(data => console.log(data));
   }
@@ -71,36 +71,96 @@ export class CalculatorComponent implements OnInit, OnDestroy {
     // Select the element with the ID "pdf-content"
     const element = document.getElementById('pdf-content');
     if (!element) return;
-
-    // Use html2canvas to capture the content area
-    html2canvas(element).then((canvas) => {
-      const imgData = canvas.toDataURL('image/png');
-
-      // Initialize jsPDF
-      const pdf = new jsPDF('p', 'mm', 'a4');
-
-      // Calculate aspect ratio and adjust image size
-      const imgWidth = 210; // A4 width in mm
-      const pageHeight = 295; // A4 height in mm
-      const imgHeight = (canvas.height * imgWidth) / canvas.width;
-      let heightLeft = imgHeight;
-
-      let position = 0;
-
-      // Add image to PDF and handle pagination
-      pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
-      heightLeft -= pageHeight;
-
-      while (heightLeft >= 0) {
-        position = heightLeft - imgHeight;
-        pdf.addPage();
-        pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
-        heightLeft -= pageHeight;
-      }
-
-      // Save the PDF with a specific name
-      pdf.save('PropertyDetails.pdf');
+  
+    // Get the columns
+    const leftColumn = element.querySelector('.col-8');
+    const rightColumn = element.querySelector('.col-4');
+    if (!leftColumn || !rightColumn) return;
+  
+    // Create separate wrappers for each column
+    const leftWrapper = document.createElement('div');
+    const rightWrapper = document.createElement('div');
+    
+    // Clone the columns
+    const leftClone = leftColumn.cloneNode(true) as HTMLElement;
+    const rightClone = rightColumn.cloneNode(true) as HTMLElement;
+    
+    // Remove column classes and set full width
+    leftClone.classList.remove('col-8');
+    rightClone.classList.remove('col-4');
+    leftClone.classList.add('col-12');
+    rightClone.classList.add('col-12');
+    
+    // Add clones to their respective wrappers
+    leftWrapper.appendChild(leftClone);
+    rightWrapper.appendChild(rightClone);
+    
+    // Set wrapper styles
+    [leftWrapper, rightWrapper].forEach(wrapper => {
+      wrapper.style.width = '1000px';
+      wrapper.style.padding = '20px';
     });
+  
+    // Initialize PDF
+    const pdf = new jsPDF('p', 'mm', 'a4');
+    const pageWidth = 210; // A4 width in mm
+    const pageHeight = 295; // A4 height in mm
+    
+    // Process both columns sequentially
+    Promise.all([
+      this.processColumn(leftWrapper, pdf, pageWidth, pageHeight, 0),
+      this.processColumn(rightWrapper, pdf, pageWidth, pageHeight, 1)
+    ]).then(() => {
+      // Save the PDF
+      pdf.save('PropertyDetails.pdf');
+      
+      // Cleanup
+      [leftWrapper, rightWrapper].forEach(wrapper => {
+        if (wrapper.parentNode) {
+          wrapper.parentNode.removeChild(wrapper);
+        }
+      });
+    });
+  }
+  
+  // Helper function to process each column
+  async processColumn(
+    wrapper: HTMLElement, 
+    pdf: jsPDF, 
+    pageWidth: number, 
+    pageHeight: number, 
+    pageIndex: number
+  ): Promise<void> {
+    // Temporarily add wrapper to body
+    document.body.appendChild(wrapper);
+    
+    try {
+      // Capture the column content
+      const canvas = await html2canvas(wrapper, {
+        scale: 2, // Increase quality
+        useCORS: true,
+        logging: false
+      });
+      
+      // Calculate dimensions
+      const imgWidth = pageWidth;
+      const imgHeight = (canvas.height * imgWidth) / canvas.width;
+      
+      // Add new page if this is the second column
+      if (pageIndex > 0) {
+        pdf.addPage();
+      }
+      
+      // Add image to PDF
+      const imgData = canvas.toDataURL('image/png');
+      pdf.addImage(imgData, 'PNG', 0, 0, imgWidth, Math.min(imgHeight, pageHeight));
+      
+    } finally {
+      // Cleanup
+      if (wrapper.parentNode) {
+        wrapper.parentNode.removeChild(wrapper);
+      }
+    }
   }
 
   /**
@@ -120,8 +180,8 @@ export class CalculatorComponent implements OnInit, OnDestroy {
     // When Purchase Price Change
     this.subscriptions.add(
       this.propertyForm.get('purchaseInformation.purchasePrice')?.valueChanges
-      .subscribe((value: number) => {
-        this.propertyForm.get('purchaseInformation.stampDuty')?.setValue(this.getStampDuty(value));
+        .subscribe((value: number) => {
+          this.propertyForm.get('purchaseInformation.stampDuty')?.setValue(this.getStampDuty(value));
           this.setDepositAndMortgageAmount();
         }));
 
@@ -131,7 +191,7 @@ export class CalculatorComponent implements OnInit, OnDestroy {
         .subscribe((value: number) => {
           this.propertyForm.get('borrowingInformation.mortgagePercentage')?.setValue(this.getMortgagePercentage(value));
           this.setDepositAndMortgageAmount();
-          if (value == 100){
+          if (value == 100) {
             this.propertyForm.get('borrowingInformation.monthsOnBridging')?.setValue(0);
             this.propertyForm.get('borrowingInformation.mortgageFeePercentage')?.setValue(0);
             this.propertyForm.get('borrowingInformation.mortgageInterestRate')?.setValue(0);
@@ -253,7 +313,7 @@ export class CalculatorComponent implements OnInit, OnDestroy {
     const totalInvestmentCosts = Number(values.borrowingInformation.dipositAmount!) + Number(values.purchaseInformation.stampDuty) + Number(values.purchaseInformation.legalAndAuctionFees) + Number(values.purchaseInformation.refurbCost);
     const monthlyCashflow = Number(values.BTLInformation.monthlyRent) - (Number(values.BTLInformation.monthlyRunningCosts) + Number(values.BTLInformation.lettingAgentFee) + Number(values.borrowingInformation.mortgageInterestAmount!));
     const grossYield = ((Number(values.BTLInformation.monthlyRent) * 12) / Number(values.purchaseInformation.purchasePrice)) * 100;
-    const netYield = (monthlyCashflow * 12/ Number(values.purchaseInformation.purchasePrice)) * 100;
+    const netYield = (monthlyCashflow * 12 / Number(values.purchaseInformation.purchasePrice)) * 100;
     const roiBTL = (monthlyCashflow * 12 / totalInvestmentCosts) * 100;
 
     // Exit - BRR calculations
@@ -266,7 +326,7 @@ export class CalculatorComponent implements OnInit, OnDestroy {
     // Exit - BTS calculations
     const totalSellingCosts = (Number(values.borrowingInformation.mortgageInterestAmount) * Number(values.borrowingInformation.monthsOnBridging)) + Number(values.BTSInformation.legalFeesBTS) + Number(values.BTSInformation.estateAgentFeeAmount);
     const profitFromDeal = Number(values.BTSInformation.salePrice) - totalInvestmentCosts - Number(values.borrowingInformation.mortgageAmount) - Number(values.borrowingInformation.mortgageFeeAmount) - totalSellingCosts;
-    const roiBTS = (profitFromDeal / totalInvestmentCosts) * 100; 
+    const roiBTS = (profitFromDeal / totalInvestmentCosts) * 100;
 
     this.figures = {
       exitOptionBTL: {
@@ -293,7 +353,7 @@ export class CalculatorComponent implements OnInit, OnDestroy {
   }
 
   saveCalculation() {
-    const itemToSave = { formData: this.formData, figures: this.figures} as SavedItem;
+    const itemToSave = { formData: this.formData, figures: this.figures } as SavedItem;
     const dialogRef = this.dialog.open(SaveCalculationDialogComponent, {
       width: '600px'
     });
@@ -428,10 +488,10 @@ export class CalculatorComponent implements OnInit, OnDestroy {
     // Threasholds and rates
     const thresholds = [250000, 925000, 1500000];
     const rates = [0.05, 0.10, 0.15, 0.17];
-  
+
     // Calculate the stamp duty
     let duty = 0;
-    
+
     if (purchasePrice > thresholds[2]) {
       duty += (purchasePrice - thresholds[2]) * rates[3];
       purchasePrice = thresholds[2];
@@ -447,7 +507,7 @@ export class CalculatorComponent implements OnInit, OnDestroy {
     if (purchasePrice > 0) {
       duty += purchasePrice * rates[0];
     }
-  
+
     return duty;
   }
 }
