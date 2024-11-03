@@ -13,7 +13,7 @@ mat-card-header {
 
 .calculator-container {
   display: flex;
-  padding: 20px;
+  padding: 30px;
   background-color: #ffffff;
 }
 
@@ -36,7 +36,8 @@ mat-card-header {
 
 .input-card {
   display: flex;
-  margin-bottom: 20px;
+  margin-bottom: 35px;
+  border: 1.3px solid #27245b;
 }
 
 .field-row {
@@ -59,7 +60,7 @@ mat-card-header {
 
 .button-wrapper {
   margin: auto;
-  padding-bottom: 1rem;
+  margin-bottom: 0;
 }
 
 .message-info {
@@ -113,8 +114,7 @@ mat-card-header {
   border-radius: 12px;
   background: #ffffff;
   flex: 1;
-  margin-top: 3rem;
-  border: 1px solid #d9d9d9;
+  border: none;
 }
 
 

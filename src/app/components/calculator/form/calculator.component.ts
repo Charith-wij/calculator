@@ -11,8 +11,7 @@ import { Store } from '@ngxs/store';
 import { LoadSavedItemsFromLocalStorage, SaveItem } from '../../../actions/calculator.actions';
 import { CalculatorState } from '../../../state/calculator-state';
 import { GridItemStatus } from '../../../models/calculator/calculations-grid-item.model';
-import html2canvas from 'html2canvas';
-import jsPDF from 'jspdf';
+import { PdfExportService } from '../../../services/pdf-export.service';
 
 @Component({
   selector: 'app-calculator',
@@ -31,6 +30,7 @@ export class CalculatorComponent implements OnInit, OnDestroy {
     private fb: FormBuilder,
     public dialog: MatDialog,
     private store: Store,
+    private pdfExportService: PdfExportService,
     private readonly floorAreaService: FloorAreaService) { }
 
   /**
@@ -67,99 +67,12 @@ export class CalculatorComponent implements OnInit, OnDestroy {
     this.subscriptions.unsubscribe();
   }
 
-  exportAsPDF() {
-    // Select the element with the ID "pdf-content"
-    const element = document.getElementById('pdf-content');
-    if (!element) return;
-  
-    // Get the columns
-    const leftColumn = element.querySelector('.col-8');
-    const rightColumn = element.querySelector('.col-4');
-    if (!leftColumn || !rightColumn) return;
-  
-    // Create separate wrappers for each column
-    const leftWrapper = document.createElement('div');
-    const rightWrapper = document.createElement('div');
-    
-    // Clone the columns
-    const leftClone = leftColumn.cloneNode(true) as HTMLElement;
-    const rightClone = rightColumn.cloneNode(true) as HTMLElement;
-    
-    // Remove column classes and set full width
-    leftClone.classList.remove('col-8');
-    rightClone.classList.remove('col-4');
-    leftClone.classList.add('col-12');
-    rightClone.classList.add('col-12');
-    
-    // Add clones to their respective wrappers
-    leftWrapper.appendChild(leftClone);
-    rightWrapper.appendChild(rightClone);
-    
-    // Set wrapper styles
-    [leftWrapper, rightWrapper].forEach(wrapper => {
-      wrapper.style.width = '1000px';
-      wrapper.style.padding = '20px';
-    });
-  
-    // Initialize PDF
-    const pdf = new jsPDF('p', 'mm', 'a4');
-    const pageWidth = 210; // A4 width in mm
-    const pageHeight = 295; // A4 height in mm
-    
-    // Process both columns sequentially
-    Promise.all([
-      this.processColumn(leftWrapper, pdf, pageWidth, pageHeight, 0),
-      this.processColumn(rightWrapper, pdf, pageWidth, pageHeight, 1)
-    ]).then(() => {
-      // Save the PDF
-      pdf.save('PropertyDetails.pdf');
-      
-      // Cleanup
-      [leftWrapper, rightWrapper].forEach(wrapper => {
-        if (wrapper.parentNode) {
-          wrapper.parentNode.removeChild(wrapper);
-        }
-      });
-    });
-  }
-  
-  // Helper function to process each column
-  async processColumn(
-    wrapper: HTMLElement, 
-    pdf: jsPDF, 
-    pageWidth: number, 
-    pageHeight: number, 
-    pageIndex: number
-  ): Promise<void> {
-    // Temporarily add wrapper to body
-    document.body.appendChild(wrapper);
-    
+  async exportPdf(): Promise<void> {
     try {
-      // Capture the column content
-      const canvas = await html2canvas(wrapper, {
-        scale: 2, // Increase quality
-        useCORS: true,
-        logging: false
-      });
-      
-      // Calculate dimensions
-      const imgWidth = pageWidth;
-      const imgHeight = (canvas.height * imgWidth) / canvas.width;
-      
-      // Add new page if this is the second column
-      if (pageIndex > 0) {
-        pdf.addPage();
-      }
-      
-      // Add image to PDF
-      const imgData = canvas.toDataURL('image/png');
-      pdf.addImage(imgData, 'PNG', 0, 0, imgWidth, Math.min(imgHeight, pageHeight));
-      
-    } finally {
-      // Cleanup
-      if (wrapper.parentNode) {
-        wrapper.parentNode.removeChild(wrapper);
-      }
+      await this.pdfExportService.exportToPDF();
+    } catch (error) {
+      // Handle error (show toast, notification, etc.)
+      console.error('Failed to export PDF:', error);
     }
   }
 

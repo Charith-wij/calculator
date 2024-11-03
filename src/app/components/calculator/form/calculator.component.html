@@ -1,7 +1,6 @@
 <form [formGroup]="propertyForm" (ngSubmit)="calculateFigures()">
     <div class="calculator-container row" id="pdf-content">
         <div id="left-column" class="col-8 left">
-            <h2 class="mt-0"> Property : {{propertyAddress}}</h2>
             <!-- Purchase Information Card -->
             <div class="card input-card">
                 <div class="card-header">
@@ -10,7 +9,7 @@
                 <div class="card-body">
                     <div formGroupName="purchaseInformation">
                         <div class="row">
-                            <div class="col-3">
+                            <div class="col-2">
                                 <label for="purchasePrice" class="form-label">Purchase Price</label>
                                 <div class="input-group mb-3">
                                     <span class="input-group-text" id="basic-addon1">£</span>
@@ -19,8 +18,8 @@
                                 </div>
                             </div>
 
-                            <div class="col-3">
-                                <label for="legalAndAuctionFees" class="form-label">Legal/Auction/Sourcing Fees</label>
+                            <div class="col-2">
+                                <label for="legalAndAuctionFees" class="form-label">Legal/Auc Fees</label>
                                 <div class="input-group">
                                     <span class="input-group-text" id="basic-addon1">£</span>
                                     <input type="number" formControlName="legalAndAuctionFees" class="form-control" required>
@@ -28,7 +27,7 @@
                                 <!-- <div class="input-group"></div> -->
                             </div>
                             
-                            <div class="col-3">
+                            <div class="col-2">
                                 <label for="refurbCost" class="form-label">Refurb Cost</label>
                                 <div class="input-group">
                                     <span class="input-group-text" id="basic-addon1">£</span>
@@ -36,8 +35,8 @@
                                 </div>
                             </div>
                             
-                            <div class="col-3">
-                                <label for="refurbCost" class="form-label">Stamp Duty (BTL Res rate)</label>
+                            <div class="col-2">
+                                <label for="refurbCost" class="form-label">Stamp Duty</label>
                                 <div class="input-group">
                                     <span class="input-group-text" id="basic-addon1">£</span>
                                     <input type="number" formControlName="stampDuty" class="form-control calculated-text-color" readonly>
@@ -60,25 +59,24 @@
 
                         <div class="row mb-3">
 
-                            <div class="col-auto">
+                            <div class="col-2">
                                 <label for="depositPercentage" class="form-label">Deposit (%)</label>
                                 <input type="number" formControlName="depositPercentage" class="form-control" required>
                             </div>
 
-                            <div class="col-auto">
-                                <label for="monthsOnBridging" class="form-label">Months on Bridging</label>
+                            <div class="col-2">
+                                <label for="monthsOnBridging" class="form-label">Bridging duration</label>
                                 <input type="text" formControlName="monthsOnBridging" class="form-control" required>
                             </div>
 
-                            <div class="col-auto">
-                                <label for="mortgageFeePercentage" class="form-label">Mortgage Arrangement Fee
-                                    (%)</label>
+                            <div class="col-2">
+                                <label for="mortgageFeePercentage" class="form-label">Bridging Fee(%)</label>
                                 <input type="text" formControlName="mortgageFeePercentage" class="form-control"
                                     required>
                             </div>
 
-                            <div class="col-auto">
-                                <label for="mortgageInterestRate" class="form-label">Mortgage Interest Rate (%)</label>
+                            <div class="col-2">
+                                <label for="mortgageInterestRate" class="form-label">Bridging Interest(%)</label>
                                 <input type="text" formControlName="mortgageInterestRate" class="form-control" required>
                             </div>
 
@@ -86,13 +84,13 @@
 
                         <div class="row">
 
-                            <div class="col-auto">
+                            <div class="col-2">
                                 <label for="mortgagePercentage" class="form-label">Mortgage (%)</label>
                                 <input type="number" formControlName="mortgagePercentage"
                                     class="form-control calculated-text-color" readonly>
                             </div>
 
-                            <div class="col-auto">
+                            <div class="col-2">
                                 <label for="dipositAmount" class="form-label">Deposit Amount</label>
                                  <div class="input-group">
                                     <span class="input-group-text" id="basic-addon1">£</span>
@@ -100,7 +98,7 @@
                                  </div>
                             </div>
 
-                            <div class="col-auto">
+                            <div class="col-2">
                                 <label for="mortgageAmount" class="form-label">Mortgage Amount</label>
                                  <div class="input-group">
                                     <span class="input-group-text" id="basic-addon1">£</span>
@@ -108,16 +106,16 @@
                                  </div>
                             </div>
 
-                            <div class="col-auto">
-                                <label for="mortgageFeeAmount" class="form-label">Mortgage Fee Amount</label>
+                            <div class="col-2">
+                                <label for="mortgageFeeAmount" class="form-label">Mortgage Fee</label>
                                 <div class="input-group">
                                     <span class="input-group-text" id="basic-addon1">£</span>
                                     <input type="text" formControlName="mortgageFeeAmount" class="form-control calculated-text-color" required>
                                 </div>
                             </div>
 
-                            <div class="col-auto">
-                                <label for="mortgageInterestAmount" class="form-label">Mortgage Interest Amount</label>
+                            <div class="col-2">
+                                <label for="mortgageInterestAmount" class="form-label">Mortgage Interest</label>
                                 <div class="input-group">
                                     <span class="input-group-text" id="basic-addon1">£</span>
                                     <input type="text" formControlName="mortgageInterestAmount" class="form-control calculated-text-color" required>
@@ -143,7 +141,7 @@
 
                         <div class="row">
 
-                            <div class="col-auto">
+                            <div class="col-2">
                                 <label for="monthlyRent" class="form-label">Monthly Rent</label>
                                 <div class="input-group">
                                     <span class="input-group-text" id="basic-addon1">£</span>
@@ -151,21 +149,21 @@
                                 </div>
                             </div>
 
-                            <div class="col-auto">
-                                <label for="lettingAgentFee" class="form-label">Letting Agents Fee (%)</label>
+                            <div class="col-2">
+                                <label for="lettingAgentFee" class="form-label">Letting Fee(%)</label>
                                 <input type="number" formControlName="lettingAgentFee" class="form-control" required>
                             </div>
 
-                            <div class="col-auto">
-                                <label for="monthlyRunningCosts" class="form-label">Monthly Running Costs</label>
+                            <div class="col-2">
+                                <label for="monthlyRunningCosts" class="form-label">Running Costs(PCM)</label>
                                 <div class="input-group">
                                     <span class="input-group-text" id="basic-addon1">£</span>
                                     <input type="number" formControlName="monthlyRunningCosts" class="form-control" required>
                                 </div>
                             </div>
 
-                            <div class="col-auto">
-                                <label for="lettingAgentFeeAmount" class="form-label">Letting Agents Fee Amount</label>
+                            <div class="col-2">
+                                <label for="lettingAgentFeeAmount" class="form-label">Letting Fee</label>
                                 <div class="input-group">
                                     <span class="input-group-text" id="basic-addon1">£</span>
                                     <input type="number" formControlName="lettingAgentFeeAmount" class="form-control calculated-text-color" required>
@@ -187,7 +185,7 @@
 
                         <div class="row">
 
-                            <div class="col-auto">
+                            <div class="col-2">
                                 <label for="newMarketValue" class="form-label">New Market Value</label>
                                 <div class="input-group">
                                     <span class="input-group-text" id="basic-addon1">£</span>
@@ -195,22 +193,20 @@
                                 </div>
                             </div>
 
-                            <div class="col-auto">
-                                <label for="refinancedLTV" class="form-label">Refinanced at (% LTV)</label>
+                            <div class="col-2">
+                                <label for="refinancedLTV" class="form-label">Refinanced(% LTV)</label>
                                 <input type="number" formControlName="refinancedLTV"
                                     class="form-control calculated-text-color" required>
                             </div>
 
-                            <div class="col-auto">
-                                <label for="refinancingArrangementFee" class="form-label">Mortgage Arrangement Fee
-                                    (%)</label>
+                            <div class="col-2">
+                                <label for="refinancingArrangementFee" class="form-label">Mortgage Fee(%)</label>
                                 <input type="number" formControlName="refinancingArrangementFee"
                                     class="form-control calculated-text-color" required>
                             </div>
 
-                            <div class="col-auto">
-                                <label for="refinancingInterestRate" class="form-label">Mortgage Interest Rate
-                                    (%)</label>
+                            <div class="col-2">
+                                <label for="refinancingInterestRate" class="form-label">Mortgage Interest(%)</label>
                                 <input type="number" formControlName="refinancingInterestRate"
                                     class="form-control calculated-text-color" required>
                             </div>
@@ -218,8 +214,8 @@
                         <!-- <div class="field-row"> Calculated</div> -->
                         <div class="row mt-3">
 
-                            <div class="col-auto">
-                                <label for="refinancedLTVAmount" class="form-label">Refinanced LTV Amount</label>
+                            <div class="col-2">
+                                <label for="refinancedLTVAmount" class="form-label">Refinanced LTV</label>
                                 <div class="input-group">
                                     <span class="input-group-text" id="basic-addon1">£</span>
                                     <input type="number" formControlName="refinancedLTVAmount"
@@ -227,8 +223,8 @@
                                 </div>
                             </div>
 
-                            <div class="col-auto">
-                                <label for="refinanceFeeAmount" class="form-label">Mortgage Fee Amount</label>
+                            <div class="col-2">
+                                <label for="refinanceFeeAmount" class="form-label">Mortgage Fee</label>
                                 <div class="input-group">
                                     <span class="input-group-text" id="basic-addon1">£</span>
                                     <input type="number" formControlName="refinanceFeeAmount"
@@ -236,8 +232,8 @@
                                 </div>
                             </div>
 
-                            <div class="col-auto">
-                                <label for="refinanceInterestAmount" class="form-label">Mortgage Interest Amount</label>
+                            <div class="col-2">
+                                <label for="refinanceInterestAmount" class="form-label">Mortgage Interest</label>
                                 <div class="input-group">
                                     <span class="input-group-text" id="basic-addon1">£</span>
                                     <input type="number" formControlName="refinanceInterestAmount"
@@ -262,7 +258,7 @@
 
                         <div class="row">
 
-                            <div class="col-auto">
+                            <div class="col-2">
                                 <label for="salePrice" class="form-label">Sale Price</label>
                                 <div class="input-group">
                                     <span class="input-group-text" id="basic-addon1">£</span>
@@ -271,7 +267,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-auto">
+                            <div class="col-2">
                                 <label for="legalFeesBTS" class="form-label">Legal Fees</label>
                                 <div class="input-group">
                                     <span class="input-group-text" id="basic-addon1">£</span>
@@ -280,13 +276,13 @@
                                 </div>
                             </div>
 
-                            <div class="col-auto">
+                            <div class="col-2">
                                 <label for="estateAgentFee" class="form-label">Estate Agent Fee (%)</label>
                                 <input type="number" formControlName="estateAgentFee" class="form-control" required>
                             </div>
 
-                            <div class="col-auto">
-                                <label for="estateAgentFeeAmount" class="form-label">Estate Agent Fee Amount</label>
+                            <div class="col-2">
+                                <label for="estateAgentFeeAmount" class="form-label">Estate Agent Fee</label>
                                 <div class="input-group">
                                     <span class="input-group-text" id="basic-addon1">£</span>
                                     <input type="number" formControlName="estateAgentFeeAmount"
@@ -312,13 +308,14 @@
                 <ng-container *ngIf="figures">
                     <ng-container *ngIf="propertyForm.valid">
                         <div class="card border-0">
-                            <div class="card-body pb-0">
+                            <div class="card-body pb-0 pt-0">
                                 <div class="row">
                                     
                                     <div class="col">
                                         <ng-container *ngIf="formData?.metaData as metaData">
                                             <ul class="list-group mb-3">
-    
+                                                <h2 class="mt-0">{{propertyAddress}}</h2>
+
                                                 <li class="list-group-item d-flex justify-content-between align-items-center">
                                                     Guide Price
                                                     <span class="">{{metaData.guidePrice}}</span>
@@ -326,16 +323,16 @@
                 
                                                 <li class="list-group-item d-flex justify-content-between align-items-center">
                                                     Rightmove Link
-                                                    <span class="text-wrap"><a [href]="metaData.rightmoveLink" target="_blank">Click
-                                                            here to navigate to rigtmove
-                                                            link</a></span>
+                                                    <span class="text-wrap">
+                                                        <a [href]="metaData.rightmoveLink" target="_blank">Click here</a>
+                                                    </span>
                                                 </li>
                 
                                                 <li class="list-group-item d-flex justify-content-between align-items-center">
                                                     Auction Link
-                                                    <span class="text-wrap"><a [href]="metaData.auctionSiteLink" target="_blank">Click
-                                                            here to navigate to auction
-                                                            link</a></span>
+                                                    <span class="text-wrap">
+                                                        <a [href]="metaData.auctionSiteLink" target="_blank">Click here </a>
+                                                    </span>
                                                 </li>
                 
                                             </ul>
@@ -482,9 +479,9 @@
                     </div>
                 </ng-container>
                 <div *ngIf="!propertyForm.invalid" class="d-flex button-wrapper">
-                    <button class="btn btn-primary btn-block" (click)="saveCalculation()">Save
+                    <button class="btn btn-outline-primary btn-block" (click)="saveCalculation()">Save
                         Calculation</button>
-                    <button class="btn btn-secondary btn-block" (click)="exportAsPDF()">Export Calculation</button>
+                    <button class="btn btn-outline-secondary ms-2 btn-block" (click)="exportPdf()">Export Calculation</button>
                 </div>
             </mat-card>
         </div>
