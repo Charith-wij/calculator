@@ -50,46 +50,35 @@
             <!-- Borrowing Information Card -->
             <div class="card input-card">
                 <div class="card-header">
-                    <h3 class="mb-0">Borrowing</h3>
+                    <h3 class="mb-0">Bridging</h3>
                 </div>
-
                 <div class="card-body">
-
                     <div formGroupName="borrowingInformation">
-
                         <div class="row mb-3">
-
                             <div class="col-2">
                                 <label for="depositPercentage" class="form-label">Deposit (%)</label>
                                 <input type="number" formControlName="depositPercentage" class="form-control" required>
                             </div>
-
                             <div class="col-2">
                                 <label for="monthsOnBridging" class="form-label">Bridging duration</label>
                                 <input type="text" formControlName="monthsOnBridging" class="form-control" required>
                             </div>
-
                             <div class="col-2">
                                 <label for="mortgageFeePercentage" class="form-label">Bridging Fee(%)</label>
                                 <input type="text" formControlName="mortgageFeePercentage" class="form-control"
                                     required>
                             </div>
-
                             <div class="col-2">
                                 <label for="mortgageInterestRate" class="form-label">Bridging Interest(%)</label>
                                 <input type="text" formControlName="mortgageInterestRate" class="form-control" required>
                             </div>
-
                         </div>
-
                         <div class="row">
-
                             <div class="col-2">
                                 <label for="mortgagePercentage" class="form-label">Mortgage (%)</label>
                                 <input type="number" formControlName="mortgagePercentage"
                                     class="form-control calculated-text-color" readonly>
                             </div>
-
                             <div class="col-2">
                                 <label for="dipositAmount" class="form-label">Deposit Amount</label>
                                  <div class="input-group">
@@ -97,7 +86,6 @@
                                     <input type="text" formControlName="dipositAmount" class="form-control calculated-text-color" readonly>
                                  </div>
                             </div>
-
                             <div class="col-2">
                                 <label for="mortgageAmount" class="form-label">Mortgage Amount</label>
                                  <div class="input-group">
@@ -105,7 +93,6 @@
                                     <input type="text" formControlName="mortgageAmount" class="form-control calculated-text-color" required>
                                  </div>
                             </div>
-
                             <div class="col-2">
                                 <label for="mortgageFeeAmount" class="form-label">Mortgage Fee</label>
                                 <div class="input-group">
@@ -113,7 +100,6 @@
                                     <input type="text" formControlName="mortgageFeeAmount" class="form-control calculated-text-color" required>
                                 </div>
                             </div>
-
                             <div class="col-2">
                                 <label for="mortgageInterestAmount" class="form-label">Mortgage Interest</label>
                                 <div class="input-group">
@@ -121,9 +107,7 @@
                                     <input type="text" formControlName="mortgageInterestAmount" class="form-control calculated-text-color" required>
                                 </div>
                             </div>
-
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -314,7 +298,9 @@
                                     <div class="col">
                                         <ng-container *ngIf="formData?.metaData as metaData">
                                             <ul class="list-group mb-3">
-                                                <h2 class="mt-0">{{propertyAddress}}</h2>
+                                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                    <h2 class="mt-0">{{propertyAddress}}</h2>
+                                                </li>
 
                                                 <li class="list-group-item d-flex justify-content-between align-items-center">
                                                     Guide Price
