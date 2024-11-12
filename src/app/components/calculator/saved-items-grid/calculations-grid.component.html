@@ -20,21 +20,33 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <th>Hertfordshire</th>
-                <td>£345,678.00 </td>
-                <td>£345.00</td>
-                <td>£3,456.00 </td>
-                <td>£2,333,455.00</td>
-                <td>£72,981,272.16</td>
-                <td>£37,920,402.30 </td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
+            <ng-container *ngFor="let item of filteredTableDataSource; let i = index">
+                <tr class="hover-row" [ngClass]="{'highlight-row': item.profit > 50000 || item.cashLeftIn < 1000}"  (click)="onRowClick(item)">
+                    <td>{{ item.address }}</td>
+                    <td>{{ item.guidePrice | currency:'GBP' }}</td>
+                    <td>{{ item.purchasePrice | currency:'GBP' }}</td>
+                    <td>{{ item.auctionFees | currency:'GBP' }}</td>
+                    <td>{{ item.refurbCost | currency:'GBP' }}</td>
+                    <td>{{ item.MRV | currency:'GBP' }}</td>
+                    <td>{{ item.profit | currency:'GBP' }}</td>
+                    <td>{{ item.cashLeftIn | currency:'GBP' }}</td>
+                    <td>{{ item.notes }}</td>
+                    <td>
+                        <select [(ngModel)]="item.status" [ngStyle]="{'color': getStatusColor(item.status)}"
+                            (click)="$event.stopPropagation()" (change)="onStatusChange(item)">
+                            <option *ngFor="let status of statuses" [value]="status">{{ status }}</option>
+                        </select>
+                    </td>
+                    <td>
+                      <button mat-icon-button color="warn" (click)="removeRow(i, $event)">
+                        <mat-icon>close</mat-icon>
+                    </button>
+                    </td>
+                  </tr>
+            </ng-container>
         </tbody>
     </table>
+
 
     <div class="table table-bordered">
         <table mat-table [dataSource]="filteredTableDataSource" class="mat-elevation-z8">
