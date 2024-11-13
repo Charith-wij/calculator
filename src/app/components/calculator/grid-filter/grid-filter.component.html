@@ -1,7 +1,18 @@
-<mat-form-field>
+<!-- <mat-form-field>
     <mat-label>Filter by Status</mat-label>
     <mat-select (selectionChange)="onStatusChange($event.value)">
       <mat-option value="">All</mat-option>
       <mat-option *ngFor="let status of statuses" [value]="status">{{ status }}</mat-option>
     </mat-select>
-  </mat-form-field>
+  </mat-form-field> -->
+
+  <div class="dropdown">
+    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+      Dropdown button
+    </button>
+    <ul class="dropdown-menu">
+      <li><a class="dropdown-item" href="#">Action</a></li>
+      <li><a class="dropdown-item" href="#">Another action</a></li>
+      <li><a class="dropdown-item" href="#">Something else here</a></li>
+    </ul>
+  </div>
