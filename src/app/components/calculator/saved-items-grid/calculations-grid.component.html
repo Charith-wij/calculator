@@ -32,11 +32,11 @@
                     <td class="align-middle">{{ item.cashLeftIn | currency:'GBP' }}</td>
                     <td class="align-middle">{{ item.notes }}</td>
                     <td class="align-middle">
-                        <!-- <select [(ngModel)]="item.status" [ngStyle]="{'color': getStatusColor(item.status)}"
+                        <select [(ngModel)]="item.status" [ngStyle]="{'color': getStatusColor(item.status)}"
                             (click)="$event.stopPropagation()" (change)="onStatusChange(item)">
                             <option *ngFor="let status of statuses" [value]="status">{{ status }}</option>
-                        </select> -->
-                        <div class="dropdown">
+                        </select>
+                        <!-- <div class="dropdown">
                             <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                               Dropdown button
                             </button>
@@ -45,7 +45,7 @@
                               <li><a class="dropdown-item" href="#">Another action</a></li>
                               <li><a class="dropdown-item" href="#">Something else here</a></li>
                             </ul>
-                          </div>
+                          </div> -->
                     </td>
                     <td class="text-center">
                       <button class="btn btn-sm p-0" (click)="removeRow(i, $event)">
