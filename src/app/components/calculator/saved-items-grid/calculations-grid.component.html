@@ -32,7 +32,7 @@
                     <td class="align-middle">{{ item.cashLeftIn | currency:'GBP' }}</td>
                     <td class="align-middle">{{ item.notes }}</td>
                     <td class="align-middle">
-                        <select [(ngModel)]="item.status" [ngStyle]="{'color': getStatusColor(item.status)}"
+                        <select class="form-select" [(ngModel)]="item.status" [ngStyle]="{'color': getStatusColor(item.status)}"
                             (click)="$event.stopPropagation()" (change)="onStatusChange(item)">
                             <option *ngFor="let status of statuses" [value]="status">{{ status }}</option>
                         </select>
