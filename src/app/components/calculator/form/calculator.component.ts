@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subscription, merge } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 
@@ -65,6 +65,36 @@ export class CalculatorComponent implements OnInit, OnDestroy {
    */
   ngOnDestroy(): void {
     this.subscriptions.unsubscribe();
+  }
+
+  isPurchasePriceInvalid(): boolean | null {
+    const control = this.propertyForm.get('purchaseInformation.purchasePrice');
+
+    return control && control.invalid; //&& control.touched
+  }
+
+  isRefurbCostInvalid(): boolean | null {
+    const control = this.propertyForm.get('purchaseInformation.refurbCost');
+
+    return control && control.invalid; //&& control.touched
+  }
+
+  isMonthlyRentInvalid(): boolean | null {
+    const control = this.propertyForm.get('BTLInformation.monthlyRent');
+
+    return control && control.invalid; //&& control.touched
+  }
+
+  isNewMarketValueInvalid(): boolean | null {
+    const control = this.propertyForm.get('BRRInformation.newMarketValue');
+
+    return control && control.invalid; //&& control.touched
+  }
+
+  isSalePriceInvalid(): boolean | null {
+    const control = this.propertyForm.get('BTSInformation.salePrice');
+
+    return control && control.invalid; //&& control.touched
   }
 
   async exportPdf(): Promise<void> {
@@ -133,6 +163,7 @@ export class CalculatorComponent implements OnInit, OnDestroy {
     //  When New Market Value and Refinanced LTV Changed
     this.subscriptions.add(newMarketValue$?.subscribe(() => {
       this.setRefinancedLTV();
+      this.setrefinanceFeeAmount();
       this.setRefinanceInterestAmount();
     }));
     this.subscriptions.add(refinancedLTV$?.subscribe(() => {
@@ -175,40 +206,40 @@ export class CalculatorComponent implements OnInit, OnDestroy {
         notes: []
       }),
       purchaseInformation: this.fb.group({
-        purchasePrice: [],
+        purchasePrice: ["", Validators.required],
         stampDuty: [],
-        legalAndAuctionFees: [],
-        refurbCost: []
+        legalAndAuctionFees: [4500],
+        refurbCost: ["", Validators.required]
       }),
       borrowingInformation: this.fb.group({
-        depositPercentage: [],
+        depositPercentage: [25],
         dipositAmount: [],
-        mortgagePercentage: [],
+        mortgagePercentage: [75],
         mortgageAmount: [],
         monthsOnBridging: [6],
-        mortgageFeePercentage: [],
-        mortgageFeeAmount: [0],
-        mortgageInterestRate: [],
-        mortgageInterestAmount: [0]
+        mortgageFeePercentage: [2],
+        mortgageFeeAmount: [],
+        mortgageInterestRate: [10.8],
+        mortgageInterestAmount: []
       }),
       BTLInformation: this.fb.group({
-        monthlyRent: [],
-        lettingAgentFee: [],
+        monthlyRent: ["", Validators.required],
+        lettingAgentFee: [0],
         lettingAgentFeeAmount: [],
-        monthlyRunningCosts: []
+        monthlyRunningCosts: [50]
       }),
       BRRInformation: this.fb.group({
         newMarketValue: [],
         refinancedLTV: [75],
         refinancedLTVAmount: [],
-        refinancingArrangementFee: [],
+        refinancingArrangementFee: [2],
         refinanceFeeAmount: [],
-        refinancingInterestRate: [],
+        refinancingInterestRate: [5.3],
         refinanceInterestAmount: []
       }),
       BTSInformation: this.fb.group({
         salePrice: [],
-        legalFeesBTS: [],
+        legalFeesBTS: [1500],
         estateAgentFee: [1],
         estateAgentFeeAmount: []
       })

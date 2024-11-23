@@ -13,7 +13,7 @@ mat-card-header {
 
 .calculator-container {
   display: flex;
-  padding: 30px;
+  padding: 20px;
   background-color: #ffffff;
 }
 
@@ -137,4 +137,12 @@ mat-card-header {
 
 .form-label{
   font-size: 0.75rem !important;
+}
+
+.text-red {
+  color: red;
+}
+
+.text-grey {
+  color: #9c9b9b;
 }

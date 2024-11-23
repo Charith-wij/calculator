@@ -5,6 +5,13 @@
       <mat-option *ngFor="let status of statuses" [value]="status">{{ status }}</mat-option>
     </mat-select>
   </mat-form-field>
+
+<!-- <select class="form-select" [(ngModel)]="item.status"
+  (click)="$event.stopPropagation()" (change)="onStatusChange(value)">
+  <option  [value]="">All</option>
+  <option *ngFor="let status of statuses" [value]="status">{{ status }}</option>
+</select> -->
+
 <!-- 
   <div class="dropdown">
     <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">

@@ -1,16 +1,17 @@
 <form [formGroup]="propertyForm" (ngSubmit)="calculateFigures()" class="container-fluid">
-    <div class="row" id="pdf-content">
+    <div class="row" id="pdf-content" class="calculator-container">
         <div id="left-column" class="col-8 left">
             <!-- Purchase Information Card -->
             <div class="card input-card">
-                <div class="card-header">
+                <div class="card-header d-flex">
                     <h3 class="mb-0">Purchase Information</h3>
+                    <h4 class="mb-0 mt-auto text-grey" *ngIf="isPurchasePriceInvalid() || isRefurbCostInvalid()"> &nbsp;- fill in the missing purchase information</h4>
                 </div>
                 <div class="card-body">
                     <div formGroupName="purchaseInformation">
                         <div class="row">
                             <div class="col-2">
-                                <label for="purchasePrice" class="form-label">Purchase Price</label>
+                                <label for="purchasePrice" class="form-label" [ngClass]="{'text-red': isPurchasePriceInvalid()}">Purchase Price</label>
                                 <div class="input-group mb-3">
                                     <span class="input-group-text" id="basic-addon1">£</span>
                                     <input type="number" formControlName="purchasePrice" class="form-control"
@@ -28,7 +29,7 @@
                             </div>
                             
                             <div class="col-2">
-                                <label for="refurbCost" class="form-label">Refurb Cost</label>
+                                <label for="refurbCost" class="form-label" [ngClass]="{'text-red': isRefurbCostInvalid()}">Refurb Cost</label>
                                 <div class="input-group">
                                     <span class="input-group-text" id="basic-addon1">£</span>
                                     <input type="number" formControlName="refurbCost" class="form-control" required>
@@ -115,8 +116,9 @@
             <!-- BTL Information Card -->
             <div class="card input-card">
 
-                <div class="card-header">
+                <div class="card-header d-flex">
                     <h3 class="mb-0">BTL Information (if applicable)</h3>
+                    <h4 class="mb-0 mt-auto text-grey" *ngIf="isMonthlyRentInvalid()"> &nbsp;- fill in the missing BTL information</h4>
                 </div>
 
                 <div class="card-body">
@@ -126,7 +128,7 @@
                         <div class="row">
 
                             <div class="col-2">
-                                <label for="monthlyRent" class="form-label">Monthly Rent</label>
+                                <label for="monthlyRent" class="form-label" [ngClass]="{'text-red': isMonthlyRentInvalid()}">Monthly Rent</label>
                                 <div class="input-group">
                                     <span class="input-group-text" id="basic-addon1">£</span>
                                     <input type="number" formControlName="monthlyRent" class="form-control" required>
@@ -160,8 +162,9 @@
 
             <!-- BRR Information Card -->
             <div class="card input-card">
-                <div class="card-header">
+                <div class="card-header d-flex">
                     <h3 class="mb-0">BRR Information (if applicable)</h3>
+                    <h4 class="mb-0 mt-auto text-grey" *ngIf="isNewMarketValueInvalid()"> &nbsp;- fill in the missing BRR information</h4>
                 </div>
                 <div class="card-body">
 
@@ -170,7 +173,7 @@
                         <div class="row">
 
                             <div class="col-2">
-                                <label for="newMarketValue" class="form-label">New Market Value</label>
+                                <label for="newMarketValue" class="form-label" [ngClass]="{'text-red': isNewMarketValueInvalid()}">New Market Value</label>
                                 <div class="input-group">
                                     <span class="input-group-text" id="basic-addon1">£</span>
                                     <input type="number" formControlName="newMarketValue" class="form-control calculated-text-color" required>
@@ -232,8 +235,9 @@
             <!-- BTS Information Card -->
             <div class="card input-card">
 
-                <div class="card-header">
+                <div class="card-header d-flex">
                     <h3 class="mb-0">BTS Information (if applicable)</h3>
+                    <h4 class="mb-0 mt-auto text-grey" *ngIf="isSalePriceInvalid()"> &nbsp;- fill in the missing BTS information</h4>
                 </div>
 
                 <div class="card-body">
@@ -243,7 +247,7 @@
                         <div class="row">
 
                             <div class="col-2">
-                                <label for="salePrice" class="form-label">Sale Price</label>
+                                <label for="salePrice" class="form-label" [ngClass]="{'text-red': isSalePriceInvalid()}" >Sale Price</label>
                                 <div class="input-group">
                                     <span class="input-group-text" id="basic-addon1">£</span>
                                     <input type="number" formControlName="salePrice"
