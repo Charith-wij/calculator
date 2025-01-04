@@ -4,6 +4,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { ForecastLayoutComponent } from './components/forecast/main-layout/forecast-layout.component';
 import { LayoutComponent } from './components/calculator/layout/calculator-layout.component';
 import { LoginComponent } from './components/login/login.component';
+import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
   {
@@ -17,15 +18,18 @@ const routes: Routes = [
   },
   {
     path: 'forecast',
-    component: ForecastLayoutComponent
+    component: ForecastLayoutComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'calculator',
-    component: LayoutComponent
+    component: LayoutComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'saved-calculations',
-    component: LayoutComponent
+    component: LayoutComponent,
+    canActivate: [AuthGuard]
   }
 ];
 

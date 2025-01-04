@@ -42,6 +42,10 @@ import { HeaderComponent } from './components/shared/header/header.component';
 import { LoginComponent } from './components/login/login.component';
 // import { CurrencyFormatDirective } from './directives/currency-format.directive';
 
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+import { environment } from './environment';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -71,7 +75,9 @@ import { LoginComponent } from './components/login/login.component';
     NgxsLoggerPluginModule.forRoot(),
     NgxsReduxDevtoolsPluginModule.forRoot(),
     MatDialogModule, MatButtonModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatDatepickerModule, MatNativeDateModule, MatTableModule, MatCardModule,
-    MatIconModule, MatListModule, MatGridListModule, MatTabsModule
+    MatIconModule, MatListModule, MatGridListModule, MatTabsModule,
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireAuthModule
   ],
   providers: [CurrencyPipe],
   bootstrap: [AppComponent]
