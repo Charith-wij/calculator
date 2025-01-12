@@ -4,6 +4,7 @@ export interface CalculatorForm {
     metaData: MetaData;
     purchaseInformation: PurchaseInformation;
     borrowingInformation: BorrowingInformation;
+    comparables: ComparableItem[];
     BTLInformation: BTLInformation;
     BRRInformation: BRRInformation;
     BTSInformation: BTSInformation;
@@ -12,6 +13,7 @@ export interface CalculatorForm {
 export interface MetaData {
     address: string;
     guidePrice: number;
+    floorArea: number;
     rightmoveLink: string;
     auctionSiteLink: string;
     notes: string;
@@ -38,6 +40,16 @@ export interface BorrowingInformation {
     mortgageInterestAmount: number | null;
 }
 
+export interface ComparableItem {
+    propertyAddress: string;
+    salePrice: number;
+    bedsBaths?: string;
+    condition?: string;
+    sqMetre: number;
+    pricePerSqm: number;
+    link: string;
+  }
+  
 export interface BTLInformation {
     monthlyRent: number;
     lettingAgentFee: number;

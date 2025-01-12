@@ -5,7 +5,8 @@ import { CalculationsGridItem, GridItemStatus } from '../../../models/calculator
 import { SavedItem } from '../../../models/calculator/saved-figures-item.model';
 import { Store } from '@ngxs/store';
 import { CalculatorState } from '../../../state/calculator-state';
-import { LoadItem, RemoveItem, UpdateStatus } from 'src/app/actions/calculator.actions';
+import { SetActiveItemIdInState, RemoveItem, UpdateStatus } from 'src/app/actions/calculator.actions';
+import { TabManagerService } from '../../../services/tab-manager.service';
 
 @Component({
   selector: 'app-calculations-grid',
@@ -20,7 +21,8 @@ export class CalculationsGridComponent implements OnInit {
   statuses: string[] = ['New', 'Active', 'Expired'];
 
   constructor(
-    private store: Store) {
+    private store: Store,
+    private tabManagerService: TabManagerService) {
   }
 
   ngOnInit(): void {
@@ -32,6 +34,11 @@ export class CalculationsGridComponent implements OnInit {
         this.tableDataSource = data;
         this.filteredTableDataSource = this.tableDataSource;
       });
+  }
+
+  onStartNewClculation() {
+    this.store.dispatch(new SetActiveItemIdInState(''));
+    this.tabManagerService.setActiveTab(2);
   }
 
   mapGridData(calculationFormItems: SavedItem[]): CalculationsGridItem[] {
@@ -62,7 +69,8 @@ export class CalculationsGridComponent implements OnInit {
   }
 
   onRowClick(rowElement: CalculationsGridItem) {
-    this.store.dispatch(new LoadItem(rowElement.address));
+    this.store.dispatch(new SetActiveItemIdInState(rowElement.address));
+    this.tabManagerService.setActiveTab(2);
   }
 
   onStatusChange(element: CalculationsGridItem): void {

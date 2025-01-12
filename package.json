@@ -28,6 +28,7 @@
     "@ngxs/devtools-plugin": "^18.0.0",
     "@ngxs/logger-plugin": "^18.0.0",
     "@ngxs/store": "^18.0.0",
+    "bootstrap": "^5.3.3",
     "express": "^4.19.2",
     "firebase": "^11.1.0",
     "html2canvas": "^1.4.1",

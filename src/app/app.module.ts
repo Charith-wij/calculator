@@ -19,6 +19,9 @@ import { MatCardModule } from '@angular/material/card';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatTabsModule } from '@angular/material/tabs';
 
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+
 import { NgxsModule } from '@ngxs/store';
 import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
 import { NgxsReduxDevtoolsPluginModule } from '@ngxs/devtools-plugin';
@@ -42,9 +45,8 @@ import { HeaderComponent } from './components/shared/header/header.component';
 import { LoginComponent } from './components/login/login.component';
 // import { CurrencyFormatDirective } from './directives/currency-format.directive';
 
-import { AngularFireModule } from '@angular/fire/compat';
-import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { environment } from './environment';
+import { ComparablesDialogComponent } from './components/calculator/comparables-dialog/comparables-dialog.component';
 
 @NgModule({
   declarations: [
@@ -61,7 +63,8 @@ import { environment } from './environment';
     GridFilterComponent,
     CustomInputComponent,
     HeaderComponent,
-    LoginComponent
+    LoginComponent,
+    ComparablesDialogComponent
     // CurrencyFormatDirective
   ],
   imports: [

@@ -12,7 +12,7 @@ export class LoginComponent {
   loginForm: FormGroup;
   showPassword = false;
   isLoading = false;
-  errorMessage = '';
+  errorMessage = null;
 
   constructor(
     private fb: FormBuilder,
@@ -21,6 +21,10 @@ export class LoginComponent {
       username: ['', [Validators.required]],
       password: ['', [Validators.required]],
       remember: [false]
+    });
+
+    this.loginForm.valueChanges.subscribe(() => {
+      this.errorMessage = null;
     });
   }
 
@@ -31,7 +35,6 @@ export class LoginComponent {
   async onSubmit() {
     if (this.loginForm.valid) {
       this.isLoading = true;
-      this.errorMessage = '';
 
       try {
         await this.authService.login(
@@ -39,7 +42,7 @@ export class LoginComponent {
           this.loginForm.value.password
         );
       } catch (error: any) {
-        this.errorMessage = error.message;
+        this.errorMessage = error.message.replace('Firebase: ', '');
       } finally {
         this.isLoading = false;
       }

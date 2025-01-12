@@ -3,7 +3,7 @@ import { CalculatorForm } from "../models/calculator/calculator-form.model";
 import { SavedItem } from "../models/calculator/saved-figures-item.model";
 
 export class SaveItem {
-  static readonly type = '[Calculator] Save Calculation';
+  static readonly type = '[Calculator] Save Item';
   constructor(public payload: SavedItem) { }
 }
 
@@ -12,7 +12,7 @@ export class LoadSavedItemsFromLocalStorage {
   constructor() { }
 }
 
-export class LoadItem {
+export class SetActiveItemIdInState {
   static readonly type = '[Calculator] Load Item From State';
   constructor(public payload: string) { }
 }

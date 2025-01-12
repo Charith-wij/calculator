@@ -1,9 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subscription, merge } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
 
-import { CalculatedFigures, CalculatorForm } from '../../../models/calculator/calculator-form.model';
+import { CalculatedFigures, CalculatorForm, ComparableItem } from '../../../models/calculator/calculator-form.model';
 import { FloorAreaService } from '../../../services/floor-area-service';
 import { SavedItem } from '../../../models/calculator/saved-figures-item.model';
 import { SaveCalculationDialogComponent } from '../save-calculation-dialog/save-calculation-dialog.component';
@@ -12,6 +12,60 @@ import { LoadSavedItemsFromLocalStorage, SaveItem } from '../../../actions/calcu
 import { CalculatorState } from '../../../state/calculator-state';
 import { GridItemStatus } from '../../../models/calculator/calculations-grid-item.model';
 import { PdfExportService } from '../../../services/pdf-export.service';
+import { PropertyFormInitialValues } from '../../../models/calculator/form-values.interface';
+import { ComparablesDialogComponent } from '../comparables-dialog/comparables-dialog.component';
+
+// Define initial values
+const PROPERTY_FORM_INITIAL_VALUES: PropertyFormInitialValues = {
+  metaData: {
+    address: '',
+    guidePrice: null,
+    floorArea: null,
+    rightmoveLink: '',
+    auctionSiteLink: '',
+    notes: '',
+    status: GridItemStatus.newItem
+  },
+  purchaseInformation: {
+    purchasePrice: "",
+    stampDuty: null,
+    legalAndAuctionFees: 4500,
+    refurbCost: ""
+  },
+  borrowingInformation: {
+    depositPercentage: 25,
+    dipositAmount: null,
+    mortgagePercentage: 75,
+    mortgageAmount: null,
+    monthsOnBridging: 6,
+    mortgageFeePercentage: 2,
+    mortgageFeeAmount: null,
+    mortgageInterestRate: 10.8,
+    mortgageInterestAmount: null
+  },
+  comparables: [],
+  BTLInformation: {
+    monthlyRent: "",
+    lettingAgentFee: 0,
+    lettingAgentFeeAmount: null,
+    monthlyRunningCosts: 50
+  },
+  BRRInformation: {
+    newMarketValue: null,
+    refinancedLTV: 75,
+    refinancedLTVAmount: null,
+    refinancingArrangementFee: 2,
+    refinanceFeeAmount: null,
+    refinancingInterestRate: 5.3,
+    refinanceInterestAmount: null
+  },
+  BTSInformation: {
+    salePrice: null,
+    legalFeesBTS: 1500,
+    estateAgentFee: 1,
+    estateAgentFeeAmount: null
+  }
+};
 
 @Component({
   selector: 'app-calculator',
@@ -21,10 +75,12 @@ import { PdfExportService } from '../../../services/pdf-export.service';
 export class CalculatorComponent implements OnInit, OnDestroy {
   imageURL: string = ''
   propertyAddress: string = '';
+  averagePricePerSqm: number = -1;
   propertyForm!: FormGroup;
   formData!: CalculatorForm;
   figures!: CalculatedFigures;
   subscriptions: Subscription = new Subscription();
+  modal: any;
 
   constructor(
     private fb: FormBuilder,
@@ -33,6 +89,10 @@ export class CalculatorComponent implements OnInit, OnDestroy {
     private pdfExportService: PdfExportService,
     private readonly floorAreaService: FloorAreaService) { }
 
+  get comparables(): FormArray {
+    return this.propertyForm.get('comparables') as FormArray;
+  }
+  
   /**
    * Angular lifecycle - component initialisation
    */
@@ -40,10 +100,17 @@ export class CalculatorComponent implements OnInit, OnDestroy {
     this.initialiseForm();
     this.setValueChangeListeners();
     this.subscriptions.add(this.store.select(CalculatorState.getActiveItem)
-      .subscribe((savedItem) => {
-        const formData = savedItem?.formData;
+      .subscribe((activeItemData) => {
+        if (activeItemData == null) {
+          this.resetFormAndCalculationData();
+          this.focusOnPurchasePrice();
+        }
+
+        const formData = activeItemData?.formData;
+
         if (typeof formData === 'object' && Object.keys(formData).length > 0) {
           this.propertyForm.patchValue(formData);
+          this.updateComparables(formData.comparables);
           this.propertyAddress = formData.metaData.address;
           this.imageURL = formData.metaData.imageUrl;
         }
@@ -58,6 +125,36 @@ export class CalculatorComponent implements OnInit, OnDestroy {
     this.store.dispatch(new LoadSavedItemsFromLocalStorage());
     // this.floorAreaService.getFloorArea('B77 5QF', '43', 'Avill Hockley').subscribe(data => console.log(data));
     // this.floorAreaService.getFloorArea('le9 8fe', '15', 'byron street').subscribe(data => console.log(data));
+  }
+
+  openComparablesDialog(): void {
+    const dialogRef = this.dialog.open(ComparablesDialogComponent, {
+      data: {
+        comparables: this.propertyForm.get('comparables')?.value || [],
+        floorArea: this.propertyForm.get('metaData.floorArea')?.value 
+      },
+      disableClose: false,
+      maxWidth: '1250px',
+      maxHeight: '100vh',
+      height: 'auto',
+      width: '95%',
+      autoFocus: false,
+      restoreFocus: true
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.updateComparables(result.comparables);
+        this.averagePricePerSqm = Number(result.averagePricePerSqm);
+        const floorArea = Number(result.floorArea);
+
+        if (this.averagePricePerSqm > 0 && floorArea > 0) {
+          this.propertyForm.get('BRRInformation.newMarketValue')?.setValue(this.averagePricePerSqm * floorArea);
+          this.propertyForm.get('BTSInformation.salePrice')?.setValue(this.averagePricePerSqm * floorArea);
+          this.propertyForm.get('metaData.floorArea')?.setValue(floorArea);
+        }
+      }
+    });
   }
 
   /**
@@ -198,51 +295,13 @@ export class CalculatorComponent implements OnInit, OnDestroy {
    */
   private initialiseForm() {
     this.propertyForm = this.fb.group({
-      metaData: this.fb.group({
-        address: [],
-        guidePrice: [],
-        rightmoveLink: [],
-        auctionSiteLink: [],
-        notes: []
-      }),
-      purchaseInformation: this.fb.group({
-        purchasePrice: ["", Validators.required],
-        stampDuty: [],
-        legalAndAuctionFees: [4500],
-        refurbCost: ["", Validators.required]
-      }),
-      borrowingInformation: this.fb.group({
-        depositPercentage: [25],
-        dipositAmount: [],
-        mortgagePercentage: [75],
-        mortgageAmount: [],
-        monthsOnBridging: [6],
-        mortgageFeePercentage: [2],
-        mortgageFeeAmount: [],
-        mortgageInterestRate: [10.8],
-        mortgageInterestAmount: []
-      }),
-      BTLInformation: this.fb.group({
-        monthlyRent: ["", Validators.required],
-        lettingAgentFee: [0],
-        lettingAgentFeeAmount: [],
-        monthlyRunningCosts: [50]
-      }),
-      BRRInformation: this.fb.group({
-        newMarketValue: [],
-        refinancedLTV: [75],
-        refinancedLTVAmount: [],
-        refinancingArrangementFee: [2],
-        refinanceFeeAmount: [],
-        refinancingInterestRate: [5.3],
-        refinanceInterestAmount: []
-      }),
-      BTSInformation: this.fb.group({
-        salePrice: [],
-        legalFeesBTS: [1500],
-        estateAgentFee: [1],
-        estateAgentFeeAmount: []
-      })
+      metaData: this.fb.group(PROPERTY_FORM_INITIAL_VALUES.metaData),
+      purchaseInformation: this.fb.group(PROPERTY_FORM_INITIAL_VALUES.purchaseInformation),
+      borrowingInformation: this.fb.group(PROPERTY_FORM_INITIAL_VALUES.borrowingInformation),
+      comparables: this.fb.array(PROPERTY_FORM_INITIAL_VALUES.comparables),
+      BTLInformation: this.fb.group(PROPERTY_FORM_INITIAL_VALUES.BTLInformation),
+      BRRInformation: this.fb.group(PROPERTY_FORM_INITIAL_VALUES.BRRInformation),
+      BTSInformation: this.fb.group(PROPERTY_FORM_INITIAL_VALUES.BTSInformation)
     });
   }
 
@@ -304,10 +363,13 @@ export class CalculatorComponent implements OnInit, OnDestroy {
 
     this.subscriptions.add(dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        itemToSave.formData.metaData = result;
+        itemToSave.formData.metaData = {
+          ...itemToSave.formData.metaData,
+          ...result
+        };
 
         // TODO: below is an error the formData status is alwasy not set and we set it to newItem all the time
-        itemToSave.formData.metaData.status = GridItemStatus.newItem;
+        // itemToSave.formData.metaData.status = GridItemStatus.newItem;
         this.imageURL = itemToSave.formData.metaData.imageUrl;
         this.store.dispatch(new SaveItem(itemToSave));
       }
@@ -454,4 +516,50 @@ export class CalculatorComponent implements OnInit, OnDestroy {
 
     return duty;
   }
+
+  private resetFormAndCalculationData() {
+    this.propertyForm.reset(PROPERTY_FORM_INITIAL_VALUES);
+    this.propertyForm.markAsPristine();
+    this.propertyForm.markAsUntouched();
+    this.propertyAddress = '';
+    this.imageURL = '';
+  }
+
+  private focusOnPurchasePrice() {
+    setTimeout(() => {
+      const firstControl = 'purchasePrice';
+      const parentGroup = 'purchaseInformation';
+      const element = document.querySelector(`[formGroupName="${parentGroup}"] [formControlName="${firstControl}"]`) as HTMLElement;
+      element?.focus();
+    });
+  }
+
+  private updateComparables(comparables: ComparableItem[]): void {
+    if (comparables == null) {
+      return;
+    }
+
+    const comparablesArray = this.propertyForm.get('comparables') as FormArray;
+    
+    // Clear existing values
+    while (comparablesArray.length) {
+      comparablesArray.removeAt(0);
+    }
+    
+    // Add new values
+    comparables.forEach(comparable => {
+      comparablesArray.push(
+        this.fb.group({
+          propertyAddress: [comparable.propertyAddress],
+          salePrice: [comparable.salePrice],
+          bedsBaths: [comparable.bedsBaths],
+          condition: [comparable.condition],
+          sqMetre: [comparable.sqMetre],
+          pricePerSqm: [comparable.pricePerSqm],
+          link: [comparable.link]
+        })
+      );
+    });
+  }
+  
 }

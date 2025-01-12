@@ -160,6 +160,12 @@
                 </div>
             </div>
 
+            <div class="d-flex mb-4">
+                <button type="button" class="btn btn-primary" (click)="openComparablesDialog()">
+                <i class="bi bi-plus-circle me-2"></i>Comparables
+                </button>
+            </div>
+
             <!-- BRR Information Card -->
             <div class="card input-card">
                 <div class="card-header d-flex">
@@ -458,22 +464,26 @@
                     </ng-container>
                 </ng-container>
                 <!-- <hr> -->
-                <ng-container *ngIf="formData?.metaData as metaData">
-                    <div class="card border-0">
-                        <div class="card-body pt-0">
-                            <div class="form-floating" formGroupName="metaData">
-                                <textarea readonly formControlName="notes"  class="form-control" placeholder="Leave a notes here" id="floatingTextarea"></textarea>
-                                <label for="floatingTextarea">Notes</label>
-                              </div>
+                <ng-container *ngIf="propertyAddress !== ''">
+                    <ng-container *ngIf="formData?.metaData as metaData">
+                        <div class="card border-0">
+                            <div class="card-body pt-0">
+                                <div class="form-floating" formGroupName="metaData">
+                                    <textarea readonly formControlName="notes"  class="form-control" placeholder="Leave a notes here" id="floatingTextarea"></textarea>
+                                    <label for="floatingTextarea">Notes</label>
+                                  </div>
+                            </div>
                         </div>
-                    </div>
+                    </ng-container>
                 </ng-container>
-                <div *ngIf="!propertyForm.invalid" class="d-flex button-wrapper">
-                    <button class="btn btn-outline-primary btn-block" (click)="saveCalculation()">Save
-                        Calculation</button>
-                    <button class="btn btn-outline-secondary ms-2 btn-block" (click)="exportPdf()">Export Calculation</button>
-                </div>
+               
             </mat-card>
         </div>
+    </div>
+    <div *ngIf="!propertyForm.invalid" class="d-flex button-wrapper">
+        <button class="btn btn-outline-primary btn-block" (click)="saveCalculation()">
+            <i class="bi bi-save me-2"></i>Save Calculation</button>
+        <button class="btn btn-outline-secondary ms-2 btn-block" (click)="exportPdf()">
+            <i class="bi bi-share me-2"></i>Export Calculation</button>
     </div>
 </form>

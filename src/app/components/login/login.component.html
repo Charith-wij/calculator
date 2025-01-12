@@ -77,6 +77,10 @@
             </button>
           </div>
 
+          <div class="text-danger text-center mt-3" *ngIf="errorMessage">
+            {{ errorMessage }}
+          </div>
+
           <div class="text-center mt-4">
             <a href="#" class="text-decoration-none d-block mb-2">Forgot password?</a>
             <a href="#" class="text-decoration-none">Create new account</a>

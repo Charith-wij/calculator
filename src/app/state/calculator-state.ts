@@ -1,7 +1,7 @@
 import { State, Action, StateContext, Selector } from '@ngxs/store';
 
 import { CalculatorStateModel } from '../models/calculator/calculator-state.model';
-import { LoadItem, LoadSavedItemsFromLocalStorage, RemoveItem, SaveItem, UpdateStatus } from '../actions/calculator.actions';
+import { SetActiveItemIdInState, LoadSavedItemsFromLocalStorage, RemoveItem, SaveItem, UpdateStatus } from '../actions/calculator.actions';
 import { SavedItem } from '../models/calculator/saved-figures-item.model';
 import { LocalStorageService } from '../services/local-storage-service';
 import { Injectable } from '@angular/core';
@@ -64,8 +64,8 @@ export class CalculatorState {
     this.saveSavedItemsToLocalStorage(updatedItemsList);
   }
 
-  @Action(LoadItem)
-  loadItem(ctx: StateContext<CalculatorStateModel>, action: LoadItem) {
+  @Action(SetActiveItemIdInState)
+  setActiveItemIdInState(ctx: StateContext<CalculatorStateModel>, action: SetActiveItemIdInState) {
     const state = ctx.getState();
     const selectedItem = state.savedItems.find(item => item.formData.metaData.address?.toLowerCase() === action.payload.toLowerCase());
 
@@ -73,6 +73,12 @@ export class CalculatorState {
       ctx.setState({
         ...state,
         activeItemId: action.payload
+      });
+    }
+    else {
+      ctx.setState({
+        ...state,
+        activeItemId: null
       });
     }
   }

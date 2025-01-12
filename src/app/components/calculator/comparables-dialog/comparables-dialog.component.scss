@@ -1,0 +1,22 @@
+.table {
+    font-size: 0.9rem;
+
+    th {
+        font-weight: 500;
+    }
+}
+
+.table input,
+.table select {
+    font-size: 0.9rem;
+    padding: 0.25rem 0.5rem;
+}
+
+.table td {
+    vertical-align: middle;
+}
+
+.dialog-title-container {
+    background-color: #eeeeee;
+    height: 62px;
+}
