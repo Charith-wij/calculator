@@ -1,0 +1,30 @@
+<div class="container mt-4">
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Shared Property Data</h5>
+
+            <div *ngIf="loading" class="text-center py-4">
+                <div class="spinner-border text-primary" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+                <p class="mt-2">Loading shared property data...</p>
+            </div>
+
+            <div *ngIf="error" class="alert alert-danger">
+                {{ error }}
+            </div>
+
+            <div *ngIf="propertyData && !loading">
+                <div class="alert alert-success">
+                    <i class="bi bi-check-circle me-2"></i>
+                    Property data loaded successfully!
+                </div>
+
+                <button class="btn btn-primary" (click)="loadIntoCalculator()">
+                    <i class="bi bi-calculator me-2"></i>
+                    Open in Calculator
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

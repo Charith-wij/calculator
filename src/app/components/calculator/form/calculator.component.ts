@@ -14,6 +14,9 @@ import { GridItemStatus } from '../../../models/calculator/calculations-grid-ite
 import { PdfExportService } from '../../../services/pdf-export.service';
 import { PropertyFormInitialValues } from '../../../models/calculator/form-values.interface';
 import { ComparablesDialogComponent } from '../comparables-dialog/comparables-dialog.component';
+import { PropertySharingService } from '../../../services/property-sharing.service';
+import { ShareDialogComponent } from '../share-dialog/share-dialog.component';
+import { Router } from '@angular/router';
 
 // Define initial values
 const PROPERTY_FORM_INITIAL_VALUES: PropertyFormInitialValues = {
@@ -37,10 +40,10 @@ const PROPERTY_FORM_INITIAL_VALUES: PropertyFormInitialValues = {
     dipositAmount: null,
     mortgagePercentage: 75,
     mortgageAmount: null,
-    monthsOnBridging: 6,
+    monthsOnBridging: 9,
     mortgageFeePercentage: 2,
     mortgageFeeAmount: null,
-    mortgageInterestRate: 10.8,
+    mortgageInterestRate: 12,
     mortgageInterestAmount: null
   },
   comparables: [],
@@ -81,39 +84,46 @@ export class CalculatorComponent implements OnInit, OnDestroy {
   figures!: CalculatedFigures;
   subscriptions: Subscription = new Subscription();
   modal: any;
+  loadSharedPropertyData: any;
 
   constructor(
     private fb: FormBuilder,
     public dialog: MatDialog,
     private store: Store,
+    private router: Router,
     private pdfExportService: PdfExportService,
-    private readonly floorAreaService: FloorAreaService) { }
+    private sharingService: PropertySharingService,
+    private readonly floorAreaService: FloorAreaService) {
+
+      const navigation = this.router.getCurrentNavigation();
+      const state = navigation?.extras?.state as { propertyData: any };
+     
+      if (state?.propertyData) {
+        console.log('Received shared property data:', state.propertyData);
+        this.loadSharedPropertyData = state.propertyData;
+      }
+      
+  }
 
   get comparables(): FormArray {
     return this.propertyForm.get('comparables') as FormArray;
   }
-  
+
   /**
    * Angular lifecycle - component initialisation
    */
   ngOnInit(): void {
     this.initialiseForm();
+
+    if (this.loadSharedPropertyData != null) {
+      this.calculateFigures();
+      this.updatePageWithActiveItemData(this.loadSharedPropertyData);
+    }
+
     this.setValueChangeListeners();
     this.subscriptions.add(this.store.select(CalculatorState.getActiveItem)
       .subscribe((activeItemData) => {
-        if (activeItemData == null) {
-          this.resetFormAndCalculationData();
-          this.focusOnPurchasePrice();
-        }
-
-        const formData = activeItemData?.formData;
-
-        if (typeof formData === 'object' && Object.keys(formData).length > 0) {
-          this.propertyForm.patchValue(formData);
-          this.updateComparables(formData.comparables);
-          this.propertyAddress = formData.metaData.address;
-          this.imageURL = formData.metaData.imageUrl;
-        }
+        this.updatePageWithActiveItemData(activeItemData);
       }));
     this.subscriptions.add(
       this.propertyForm.statusChanges.subscribe((status: string) => {
@@ -122,16 +132,54 @@ export class CalculatorComponent implements OnInit, OnDestroy {
         }
       })
     );
-    this.store.dispatch(new LoadSavedItemsFromLocalStorage());
+    
     // this.floorAreaService.getFloorArea('B77 5QF', '43', 'Avill Hockley').subscribe(data => console.log(data));
     // this.floorAreaService.getFloorArea('le9 8fe', '15', 'byron street').subscribe(data => console.log(data));
+  }
+
+  private updatePageWithActiveItemData(activeItemData: SavedItem | undefined){
+    if (activeItemData == null) {
+      this.resetFormAndCalculationData();
+      this.focusOnPurchasePrice();
+      this.updateComparables([]);
+    }
+
+    const formData = activeItemData?.formData;
+
+    if (typeof formData === 'object' && Object.keys(formData).length > 0) {
+      this.propertyForm.patchValue(formData);
+      this.updateComparables(formData.comparables);
+      this.propertyAddress = formData.metaData.address;
+      this.imageURL = formData.metaData.imageUrl;
+    }
+  }
+
+  async shareCalculation() {
+    try {
+      const itemToShare = this.store.selectSnapshot(CalculatorState.getActiveItem) as SavedItem;
+
+      // Generate share link
+      const shareLink = await this.sharingService.shareProperty(itemToShare);
+
+      this.openShareDialog(shareLink);
+    } 
+    catch (error) {
+      console.error('Error sharing property:', error);
+    }
+  }
+
+  openShareDialog(shareLink: string) {
+    // Create a dialog showing the share link and copy button
+    const dialogRef = this.dialog.open(ShareDialogComponent, {
+      data: { shareLink }
+    });
   }
 
   openComparablesDialog(): void {
     const dialogRef = this.dialog.open(ComparablesDialogComponent, {
       data: {
         comparables: this.propertyForm.get('comparables')?.value || [],
-        floorArea: this.propertyForm.get('metaData.floorArea')?.value 
+        floorArea: this.propertyForm.get('metaData.floorArea')?.value
       },
       disableClose: false,
       maxWidth: '1250px',
@@ -535,17 +583,18 @@ export class CalculatorComponent implements OnInit, OnDestroy {
   }
 
   private updateComparables(comparables: ComparableItem[]): void {
-    if (comparables == null) {
-      return;
-    }
-
     const comparablesArray = this.propertyForm.get('comparables') as FormArray;
-    
+
     // Clear existing values
     while (comparablesArray.length) {
       comparablesArray.removeAt(0);
     }
-    
+
+    if (comparables == null) {
+
+      return;
+    }
+
     // Add new values
     comparables.forEach(comparable => {
       comparablesArray.push(
@@ -561,5 +610,10 @@ export class CalculatorComponent implements OnInit, OnDestroy {
       );
     });
   }
-  
+
+  private initializeFormWithData(data: any) {
+    // Update your form with the received data
+    this.propertyForm.patchValue(data);
+  }
+
 }

@@ -109,14 +109,10 @@
 </mat-dialog-content>
 
 <mat-dialog-actions align="end" class="mb-3 me-3">
-  <button type="button" 
-              class="btn btn-outline-secondary btn-block" 
-              (click)="dialogRef.close()">
-        <i class="bi bi-x-circle me-2"></i>Close
-      </button>
-      <button type="button" 
-              class="btn btn-outline-primary btn-block ms-2" 
-              (click)="calculateAndSave()">
-        <i class="bi bi-calculator me-2"></i>Calculate MRV
-      </button>
+  <button type="button" class="btn btn-outline-secondary btn-block" (click)="dialogRef.close()">
+    <i class="bi bi-x-circle me-2"></i>Close
+  </button>
+  <button type="button" class="btn btn-outline-primary btn-block ms-2" (click)="calculateAndSave()">
+    <i class="bi bi-calculator me-2"></i>Calculate MRV
+  </button>
 </mat-dialog-actions>

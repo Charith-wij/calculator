@@ -1,0 +1,27 @@
+<div class="d-flex justify-content-between dialog-title-container pe-3">
+    <h2 mat-dialog-title>Share Property Analysis</h2>
+    <button type="button" class="btn-close mt-auto ms-auto mb-auto" (click)="dialogRef.close()"></button>
+</div>
+
+<mat-dialog-content>
+    <div class="modal-body">
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" [value]="data.shareLink" readonly #shareInput>
+            <button class="btn btn-outline-primary" (click)="copyLink(shareInput)">
+                <i class="bi bi-clipboard"></i> Copy
+            </button>
+        </div>
+    
+        <div class="alert alert-info">
+            <i class="bi bi-info-circle me-2"></i>
+            Share this link with other users to let them view and load this property analysis.
+        </div>
+    </div>
+    
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary btn-block" (click)="dialogRef.close()">
+            <i class="bi bi-x-circle me-2"></i>Close
+          </button>
+    </div>
+</mat-dialog-content>
+

@@ -21,6 +21,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 
 import { NgxsModule } from '@ngxs/store';
 import { NgxsLoggerPluginModule } from '@ngxs/logger-plugin';
@@ -47,6 +48,8 @@ import { LoginComponent } from './components/login/login.component';
 
 import { environment } from './environment';
 import { ComparablesDialogComponent } from './components/calculator/comparables-dialog/comparables-dialog.component';
+import { ShareDialogComponent } from './components/calculator/share-dialog/share-dialog.component';
+import { LoadSharedPropertyComponent } from './components/calculator/load-shared-property/load-shared-property.component';
 
 @NgModule({
   declarations: [
@@ -64,7 +67,9 @@ import { ComparablesDialogComponent } from './components/calculator/comparables-
     CustomInputComponent,
     HeaderComponent,
     LoginComponent,
-    ComparablesDialogComponent
+    ComparablesDialogComponent,
+    ShareDialogComponent,
+    LoadSharedPropertyComponent
     // CurrencyFormatDirective
   ],
   imports: [
@@ -80,7 +85,8 @@ import { ComparablesDialogComponent } from './components/calculator/comparables-
     MatDialogModule, MatButtonModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatDatepickerModule, MatNativeDateModule, MatTableModule, MatCardModule,
     MatIconModule, MatListModule, MatGridListModule, MatTabsModule,
     AngularFireModule.initializeApp(environment.firebase),
-    AngularFireAuthModule
+    AngularFireAuthModule,
+    AngularFirestoreModule
   ],
   providers: [CurrencyPipe],
   bootstrap: [AppComponent]

@@ -117,10 +117,11 @@ export class CalculatorState {
 
   @Action(LoadSavedItemsFromLocalStorage)
   loadSavedItems(ctx: StateContext<CalculatorStateModel>) {
+    const state = ctx.getState();
     const savedItems = this.localstorageService.getItem();
     if (savedItems.length > 0) {
       ctx.setState({
-        activeItemId: null, // Or set this as needed
+        ...state,
         savedItems: savedItems
       });
     }
