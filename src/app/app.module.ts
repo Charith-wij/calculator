@@ -50,6 +50,8 @@ import { environment } from './environment';
 import { ComparablesDialogComponent } from './components/calculator/comparables-dialog/comparables-dialog.component';
 import { ShareDialogComponent } from './components/calculator/share-dialog/share-dialog.component';
 import { LoadSharedPropertyComponent } from './components/calculator/load-shared-property/load-shared-property.component';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { PropertyRoiChartComponent } from "./components/property-roi-chart/property-roi-chart.component";
 
 @NgModule({
   declarations: [
@@ -86,8 +88,10 @@ import { LoadSharedPropertyComponent } from './components/calculator/load-shared
     MatIconModule, MatListModule, MatGridListModule, MatTabsModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
-    AngularFirestoreModule
-  ],
+    AngularFirestoreModule,
+    NgxChartsModule,
+    PropertyRoiChartComponent
+],
   providers: [CurrencyPipe],
   bootstrap: [AppComponent]
 })

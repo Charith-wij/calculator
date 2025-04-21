@@ -9,8 +9,8 @@
         </div>
     </div>
 
-    <table class="table table-bordered table-hover">
-        <thead>
+    <table class="table table-striped table-bordered table-hover">
+        <thead class="thead-dark">
             <tr>
                 <th class="fw-normal text-secondary">Address</th>
                 <th class="fw-normal text-secondary">Guide Price</th>
@@ -42,16 +42,6 @@
                             (click)="$event.stopPropagation()" (change)="onStatusChange(item)">
                             <option *ngFor="let status of statuses" [value]="status">{{ status }}</option>
                         </select>
-                        <!-- <div class="dropdown">
-                            <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                              Dropdown button
-                            </button>
-                            <ul class="dropdown-menu">
-                              <li><a class="dropdown-item" href="#">Action</a></li>
-                              <li><a class="dropdown-item" href="#">Another action</a></li>
-                              <li><a class="dropdown-item" href="#">Something else here</a></li>
-                            </ul>
-                          </div> -->
                     </td>
                     <td class="text-center">
                       <button class="btn btn-sm p-0" (click)="removeRow(i, $event)">
@@ -62,4 +52,52 @@
             </ng-container>
         </tbody>
     </table>
+
+    <!-- <div class="table-responsive">
+        <table class="table table-bordered table-hover">
+          <thead class="table-light">
+            <tr>
+              <th class="fw-normal text-secondary col-3">Address</th>
+              <th class="fw-normal text-secondary">Guide Price</th>
+              <th class="fw-normal text-secondary">Purchase Price</th>
+              <th class="fw-normal text-secondary">Auction Fees</th>
+              <th class="fw-normal text-secondary">Refurb Cost</th>
+              <th class="fw-normal text-secondary">MRV</th>
+              <th class="fw-normal text-secondary">Profit From Sale</th>
+              <th class="fw-normal text-secondary">Cash Left In</th>
+              <th class="fw-normal text-secondary col-2">Notes</th>
+              <th class="fw-normal text-secondary col-2">Status</th>
+              <th class="fw-normal text-secondary">Remove</th>
+            </tr>
+          </thead>
+          <tbody>
+            <ng-container *ngFor="let item of filteredTableDataSource; let i = index">
+              <tr class="hover-row" [ngClass]="{'table-success': item.profit > 50000 || item.cashLeftIn < 1000}" (click)="onRowClick(item)">
+                <td class="align-middle text-truncate">{{ item.address }}</td>
+                <td class="align-middle">{{ item.guidePrice | currency:'GBP' }}</td>
+                <td class="align-middle">{{ item.purchasePrice | currency:'GBP' }}</td>
+                <td class="align-middle">{{ item.auctionFees | currency:'GBP' }}</td>
+                <td class="align-middle">{{ item.refurbCost | currency:'GBP' }}</td>
+                <td class="align-middle">{{ item.MRV | currency:'GBP' }}</td>
+                <td class="align-middle">{{ item.profit | currency:'GBP' }}</td>
+                <td class="align-middle">{{ item.cashLeftIn | currency:'GBP' }}</td>
+                <td class="align-middle text-truncate">{{ item.notes }}</td>
+                <td class="align-middle">
+                  <select class="form-select form-select-sm" [(ngModel)]="item.status" 
+                          [ngStyle]="{'color': getStatusColor(item.status)}"
+                          (click)="$event.stopPropagation()" 
+                          (change)="onStatusChange(item)">
+                    <option *ngFor="let status of statuses" [value]="status">{{ status }}</option>
+                  </select>
+                </td>
+                <td class="text-center align-middle">
+                  <button class="btn btn-link p-0" (click)="removeRow(i, $event)">
+                    <i class="bi bi-x-circle text-danger"></i>
+                  </button>
+                </td>
+              </tr>
+            </ng-container>
+          </tbody>
+        </table>
+      </div> -->
 </div>

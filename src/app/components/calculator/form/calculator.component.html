@@ -10,7 +10,7 @@
                 <div class="card-body">
                     <div formGroupName="purchaseInformation">
                         <div class="row">
-                            <div class="col-2">
+                            <div class="col-3">
                                 <label for="purchasePrice" class="form-label" [ngClass]="{'text-red': isPurchasePriceInvalid()}">Purchase Price</label>
                                 <div class="input-group mb-3">
                                     <span class="input-group-text" id="basic-addon1">£</span>
@@ -19,7 +19,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-2">
+                            <div class="col-3">
                                 <label for="legalAndAuctionFees" class="form-label">Legal/Auc Fees</label>
                                 <div class="input-group">
                                     <span class="input-group-text" id="basic-addon1">£</span>
@@ -28,7 +28,7 @@
                                 <!-- <div class="input-group"></div> -->
                             </div>
                             
-                            <div class="col-2">
+                            <div class="col-3">
                                 <label for="refurbCost" class="form-label" [ngClass]="{'text-red': isRefurbCostInvalid()}">Refurb Cost</label>
                                 <div class="input-group">
                                     <span class="input-group-text" id="basic-addon1">£</span>
@@ -36,7 +36,7 @@
                                 </div>
                             </div>
                             
-                            <div class="col-2">
+                            <div class="col-3">
                                 <label for="refurbCost" class="form-label">Stamp Duty</label>
                                 <div class="input-group">
                                     <span class="input-group-text" id="basic-addon1">£</span>
@@ -56,20 +56,20 @@
                 <div class="card-body">
                     <div formGroupName="borrowingInformation">
                         <div class="row mb-3">
-                            <div class="col-2">
+                            <div class="col-3">
                                 <label for="depositPercentage" class="form-label">Deposit (%)</label>
                                 <input type="number" formControlName="depositPercentage" class="form-control" required>
                             </div>
-                            <div class="col-2">
+                            <div class="col-3">
                                 <label for="monthsOnBridging" class="form-label">Bridging duration</label>
                                 <input type="text" formControlName="monthsOnBridging" class="form-control" required>
                             </div>
-                            <div class="col-2">
+                            <div class="col-3">
                                 <label for="mortgageFeePercentage" class="form-label">Bridging Fee(%)</label>
                                 <input type="text" formControlName="mortgageFeePercentage" class="form-control"
                                     required>
                             </div>
-                            <div class="col-2">
+                            <div class="col-3">
                                 <label for="mortgageInterestRate" class="form-label">Bridging Interest(%)</label>
                                 <input type="text" formControlName="mortgageInterestRate" class="form-control" required>
                             </div>
@@ -80,14 +80,14 @@
                                 <input type="number" formControlName="mortgagePercentage"
                                     class="form-control calculated-text-color" readonly>
                             </div>
-                            <div class="col-2">
+                            <div class="col-3">
                                 <label for="dipositAmount" class="form-label">Deposit Amount</label>
                                  <div class="input-group">
                                     <span class="input-group-text" id="basic-addon1">£</span>
                                     <input type="text" formControlName="dipositAmount" class="form-control calculated-text-color" readonly>
                                  </div>
                             </div>
-                            <div class="col-2">
+                            <div class="col-3">
                                 <label for="mortgageAmount" class="form-label">Mortgage Amount</label>
                                  <div class="input-group">
                                     <span class="input-group-text" id="basic-addon1">£</span>
@@ -127,7 +127,7 @@
 
                         <div class="row">
 
-                            <div class="col-2">
+                            <div class="col-3">
                                 <label for="monthlyRent" class="form-label" [ngClass]="{'text-red': isMonthlyRentInvalid()}">Monthly Rent</label>
                                 <div class="input-group">
                                     <span class="input-group-text" id="basic-addon1">£</span>
@@ -135,12 +135,12 @@
                                 </div>
                             </div>
 
-                            <div class="col-2">
+                            <div class="col-3">
                                 <label for="lettingAgentFee" class="form-label">Letting Fee(%)</label>
                                 <input type="number" formControlName="lettingAgentFee" class="form-control" required>
                             </div>
 
-                            <div class="col-2">
+                            <div class="col-3">
                                 <label for="monthlyRunningCosts" class="form-label">Running Costs(PCM)</label>
                                 <div class="input-group">
                                     <span class="input-group-text" id="basic-addon1">£</span>
@@ -148,7 +148,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-2">
+                            <div class="col-3">
                                 <label for="lettingAgentFeeAmount" class="form-label">Letting Fee</label>
                                 <div class="input-group">
                                     <span class="input-group-text" id="basic-addon1">£</span>
@@ -178,7 +178,7 @@
 
                         <div class="row">
 
-                            <div class="col-2">
+                            <div class="col-3">
                                 <label for="newMarketValue" class="form-label" [ngClass]="{'text-red': isNewMarketValueInvalid()}">New Market Value</label>
                                 <div class="input-group">
                                     <span class="input-group-text" id="basic-addon1">£</span>
@@ -186,19 +186,19 @@
                                 </div>
                             </div>
 
-                            <div class="col-2">
+                            <div class="col-3">
                                 <label for="refinancedLTV" class="form-label">Refinanced(% LTV)</label>
                                 <input type="number" formControlName="refinancedLTV"
                                     class="form-control calculated-text-color" required>
                             </div>
 
-                            <div class="col-2">
+                            <div class="col-3">
                                 <label for="refinancingArrangementFee" class="form-label">Mortgage Fee(%)</label>
                                 <input type="number" formControlName="refinancingArrangementFee"
                                     class="form-control calculated-text-color" required>
                             </div>
 
-                            <div class="col-2">
+                            <div class="col-3">
                                 <label for="refinancingInterestRate" class="form-label">Mortgage Interest(%)</label>
                                 <input type="number" formControlName="refinancingInterestRate"
                                     class="form-control calculated-text-color" required>
@@ -207,7 +207,7 @@
                         <!-- <div class="field-row"> Calculated</div> -->
                         <div class="row mt-3">
 
-                            <div class="col-2">
+                            <div class="col-3">
                                 <label for="refinancedLTVAmount" class="form-label">Refinanced LTV</label>
                                 <div class="input-group">
                                     <span class="input-group-text" id="basic-addon1">£</span>
@@ -216,7 +216,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-2">
+                            <div class="col-3">
                                 <label for="refinanceFeeAmount" class="form-label">Mortgage Fee</label>
                                 <div class="input-group">
                                     <span class="input-group-text" id="basic-addon1">£</span>
@@ -225,7 +225,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-2">
+                            <div class="col-3">
                                 <label for="refinanceInterestAmount" class="form-label">Mortgage Interest</label>
                                 <div class="input-group">
                                     <span class="input-group-text" id="basic-addon1">£</span>
@@ -252,7 +252,7 @@
 
                         <div class="row">
 
-                            <div class="col-2">
+                            <div class="col-3">
                                 <label for="salePrice" class="form-label" [ngClass]="{'text-red': isSalePriceInvalid()}" >Sale Price</label>
                                 <div class="input-group">
                                     <span class="input-group-text" id="basic-addon1">£</span>
@@ -261,7 +261,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-2">
+                            <div class="col-3">
                                 <label for="legalFeesBTS" class="form-label">Legal Fees</label>
                                 <div class="input-group">
                                     <span class="input-group-text" id="basic-addon1">£</span>
@@ -270,12 +270,12 @@
                                 </div>
                             </div>
 
-                            <div class="col-2">
+                            <div class="col-3">
                                 <label for="estateAgentFee" class="form-label">Estate Agent Fee (%)</label>
                                 <input type="number" formControlName="estateAgentFee" class="form-control" required>
                             </div>
 
-                            <div class="col-2">
+                            <div class="col-3">
                                 <label for="estateAgentFeeAmount" class="form-label">Estate Agent Fee</label>
                                 <div class="input-group">
                                     <span class="input-group-text" id="basic-addon1">£</span>
