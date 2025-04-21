@@ -9,6 +9,8 @@
     "test": "ng test",
     "storybook": "ng run investment-planner:storybook",
     "build-storybook": "ng run investment-planner:build-storybook",
+    "deploy": "node deploy.js",
+    "build-deploy": "npm run deployment-build-propertydealcalc && npm run deploy",
     "deployment-build-githubpage": "ng build --configuration production --base-href 'https://charith-wij.github.io/calculator/'",
     "deployment-build-propertydealcalc": "ng build --configuration production --base-href 'https://propertydealcalc.com'",
     "deploy-publish": "npx angular-cli-ghpages --dir=dist/investment-planner"
@@ -52,6 +54,7 @@
     "@types/d3-transition": "^3.0.9",
     "@types/jasmine": "~4.3.0",
     "angular-cli-ghpages": "^2.0.1",
+    "ftp-deploy": "^2.4.7",
     "jasmine-core": "~4.6.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.2.0",
